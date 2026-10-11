@@ -15,5 +15,8 @@
   "FUN_0001332c": {"name": "SoundVoice_Worker", "desc": "Worker voce chiamato 4x da SoundVoices_Update. DA LEGGERE.", "conf": "med"},
   "FUN_00009ea4": {"name": "StateDispatch", "desc": "Dispatcher stato gioco (byte $128A8 + tabella $123D2, JSR assoluta a UtilCluster, far-call, comandi D4). 294B.", "conf": "med"},
   "FUN_0000a4a2": {"name": "FlagDispatch", "desc": "Dispatcher su flag $123CB + comandi D4 ($70-$73), JSR assoluta a UtilCluster. 116B.", "conf": "med"},
-  "FUN_000138f2": {"name": "UtilCluster", "desc": "Chiamata per indirizzo assoluto dai dispatcher; chiama helper tiny (d340/13a7e/13aa0/13abc). 280B.", "conf": "med"}
+  "FUN_000138f2": {"name": "UtilCluster", "desc": "Chiamata per indirizzo assoluto dai dispatcher; chiama helper tiny (d340/13a7e/13aa0/13abc). 280B.", "conf": "med"},
+  "FUN_00009ae4": {"name": "DrawText_Tables", "desc": "Stampa testo/numeri da tabelle ($12087/$120A3, addi $30=ASCII) via helper; ricorsione interna. Chiamato da daac. 174B.", "conf": "low"},
+  "FUN_0000d4f4": {"name": "Seq5_Helpers", "desc": "Chiama 5 helper (d538/da48/da8e/db30/d994) alternando flag $1286A/$BB92. 68B.", "conf": "low"},
+  "FUN_000085ec": {"name": "PrintTableCounts", "desc": "Conta tab $123CA, stampa cifre via helper, stessi flag di Seq5. Chiamato da daac. 158B.", "conf": "low"}
 }
