@@ -68,6 +68,45 @@ def load_units(target_dir, build_dir, units_file):
     return units
 
 
+def hunk_unit_payload(data: bytes):
+    """Estrae i byte CODE/DATA da un oggetto Hunk (vc/vasm -Fhunk).
+
+    Ritorna i payload concatenati, o None se non e' Hunk (file raw).
+    Necessario perche' gli oggetti hanno header: il confronto per il
+    matching va fatto sui payload, non sui file interi.
+    """
+    import struct
+    if len(data) < 4:
+        return None
+    if struct.unpack_from(">I", data, 0)[0] & 0x3FFFFFFF != 0x3E7:
+        return None  # non HUNK_UNIT -> raw
+    out = bytearray()
+    pos, n = 4, len(data)
+    while pos + 8 <= n:
+        tag = struct.unpack_from(">I", data, pos)[0] & 0x3FFFFFFF
+        if tag in (0x3E9, 0x3EA):  # CODE / DATA
+            nlongs = struct.unpack_from(">I", data, pos + 4)[0]
+            out += data[pos + 8:pos + 8 + nlongs * 4]
+            pos += 8 + nlongs * 4
+        else:
+            pos += 4
+    return bytes(out) if out else None
+
+
+def _payload(data: bytes):
+    p = hunk_unit_payload(data)
+    return p if p is not None else data
+
+
+def _rstrip_pad(payload: bytes, target_len: int):
+    """Toglie il padding di allineamento sezione (NOP 4E71 / zeri) in coda
+    al payload oltre la lunghezza target. vasm allinea le sezioni a 4 byte.
+    Non tocca mai i primi target_len byte."""
+    while len(payload) > target_len and payload[-2:] in (b"\x4e\x71", b"\x00\x00"):
+        payload = payload[:-2]
+    return payload
+
+
 def compare_bytes(target: bytes, base: bytes):
     """Ritorna (matched_bytes, total, fuzzy_percent).
 
@@ -111,11 +150,16 @@ def measure_unit(u):
         print(f"warning: target mancante, skip unit '{u['name']}' ({tp})",
               file=sys.stderr)
         return None
+    # gli oggetti Hunk (vc/vasm) si confrontano sui payload CODE/DATA
+    t = _payload(t)
+    b = _payload(b) if b is not None else None
     if b is None:
         b = b""  # target c'e', base manca = funzione non ancora decompilata: 0%
+    else:
+        b = _rstrip_pad(b, len(t))
 
     matched, total, fuzzy = compare_bytes(t, b)
-    full_match = (t == b) and len(t) > 0
+    full_match = (matched == total and total > 0)
     if u["complete"] and t is not None and b is None:
         full_match = True  # convenzione objdiff: complete senza base = 100%
 
@@ -197,6 +241,7 @@ def build_report(units):
 
 
 def self_test():
+    import struct
     import tempfile
     print("== diff_m68k.py self-test ==")
     # 1. byte-identici -> 100%
@@ -207,6 +252,19 @@ def self_test():
     m, t, f = compare_bytes(b"\x4e\x71\x4e\x75", b"\x4e\x71\x4e\x71")
     assert m == 3 and t == 4, (m, t)
     print("  [ok] 1 byte diff -> matched 3/4")
+    # 2b. Hunk UNIT sintetico -> payload
+    unit = (struct.pack(">I", 0x3E7) + struct.pack(">I", 0)      # UNIT, nome vuoto
+            + struct.pack(">II", 0x3E9, 1) + bytes.fromhex("4e714e75")
+            + struct.pack(">I", 0x3F2))
+    assert hunk_unit_payload(unit) == bytes.fromhex("4e714e75"), \
+        hunk_unit_payload(unit)
+    assert hunk_unit_payload(bytes.fromhex("4e714e75")) is None
+    print("  [ok] payload Hunk UNIT estratto, raw invariato")
+    # 2c. padding di sezione (4E71/00) oltre il target non penalizza
+    assert _rstrip_pad(bytes.fromhex("4e754e71"), 2) == bytes.fromhex("4e75")
+    assert _rstrip_pad(bytes.fromhex("4e750000"), 2) == bytes.fromhex("4e75")
+    assert _rstrip_pad(bytes.fromhex("4e71"), 2) == bytes.fromhex("4e71")
+    print("  [ok] tolleranza padding di allineamento")
     # 3. report end-to-end con file temporanei
     with tempfile.TemporaryDirectory() as d:
         od, bd = os.path.join(d, "orig"), os.path.join(d, "build")

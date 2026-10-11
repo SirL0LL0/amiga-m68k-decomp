@@ -3,8 +3,9 @@
 
 /* Offset vettori Exec (A6) per chiamate AmigaOS.
  * Generato da tools/symbols_to_units.py <- amiga_data.json.
- * Sottoinsieme comune: ricontrollare contro NDK3.x
- * include/lvo/exec_lib.i prima del matching byte-perfect. */
+ * Verificati contro NDK (exec_lib.fd dell'estensione ghidra-amiga).
+ * Per altre librerie (dos/graphics/intuition) usare i .fd in
+ * <ghidra-amiga>/data/fd/ allo stesso modo. */
 
 #define _LVOAbortIO -480
 #define _LVOAddHead -240

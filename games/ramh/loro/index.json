@@ -1,0 +1,648 @@
+{
+ "GAP_008000": [
+  "08100_avvio.c"
+ ],
+ "CALL_008366": [
+  "08466_inizializza_gioco_e_attendi_input.c",
+  "08466_inizializza_gioco_principale.c"
+ ],
+ "CALL_0083C4": [
+  "084c4_inizializza_stato_gioco.c"
+ ],
+ "CALL_0083C4 (sub)": [
+  "084c8_inizializza_stato_gioco_completo.c"
+ ],
+ "NON_MAPPATI": [
+  "085c6_avvia_partita_livello_avanzato.c",
+  "085c6_gestisci_avvio_partita_livello_alto.c",
+  "0932e_inizializza_schermata_e_audio.c",
+  "09356_gestisci_transizione_testo_modale.c",
+  "09934_attesa_temporizzata_12895.c",
+  "09bda_aggiorna_interfaccia_e_grafica_base_2.c",
+  "0b498_imposta_parametro_bf68.c",
+  "0bf0a_effetto_sfumatura_colori_su.c",
+  "0bf3e_imposta_colori_copper_1.c",
+  "0bf46_imposta_colori_copper_2.c",
+  "0bf4c_imposta_colori_copper_3.c",
+  "0c0a0_disegna_singolo_elemento_mascherato.c",
+  "0c0f4_prepara_finestra_elemento.c",
+  "0c31e_schermata_testo_con_transizione.c",
+  "0c31e_schermata_testo_con_transizione_e_timer.c",
+  "0d24c_gestisci_classifica_punteggi_attiva.c",
+  "0d24c_gestisci_classifica_punteggi_condizionale.c",
+  "1305a_esegui_sequenza_audio_intro_hamster.c",
+  "1305a_esegui_sequenza_audio_visualizzata.c",
+  "13158_carica_e_decomprime_immagine.c",
+  "131a8_gestisce_sfumatura_colori_testo_bitplane.c",
+  "137a4_avvia_sequenza_audio_testo_lungo.c",
+  "13868_azzera_buffer_testo.c",
+  "13880_copia_stringa_512_byte.c",
+  "1388a_copia_stringa_1024_byte.c",
+  "138f2_avvia_sequenza_audio_buffer_ausiliario.c",
+  "139ce_gestisci_input_e_carica_rock.c",
+  "13c22_azzera_buffer_2ab44.c",
+  "13c3a_copia_512_byte_in_buffer_ausiliario.c",
+  "13c44_copia_1024_byte_in_buffer_ausiliario.c"
+ ],
+ "FUN_0000859a": [
+  "0869a_somma_bcd_8_cifre.c"
+ ],
+ "FUN_000085e2": [
+  "086e2_aggiorna_interfaccia_e_grafica_base.c"
+ ],
+ "FUN_000085ec": [
+  "086ec_disegna_valore_soldi_bcd.c",
+  "086ec_visualizza_valore_soldi_formattato.c"
+ ],
+ "FUN_00008694": [
+  "08794_azzera_buffer_8_byte_soldi.c"
+ ],
+ "FUN_0000869a": [
+  "0879a_azzera_buffer_8_byte.c"
+ ],
+ "FUN_0000869a (sub)": [
+  "0879c_azzera_memoria_d4_byte.c",
+  "0879e_riempi_memoria_byte_d6.c"
+ ],
+ "FUN_000086aa": [
+  "087aa_sottrai_soldi_gestisci_underflow.c"
+ ],
+ "FUN_000086c6": [
+  "087c6_verifica_e_aggiorna_saldo_soldi.c"
+ ],
+ "FUN_000086ea": [
+  "087ea_sottrazione_bcd_8_cifre.c"
+ ],
+ "FUN_00008742": [
+  "08842_processa_elenco_stringhe.c"
+ ],
+ "FUN_000087a8": [
+  "088a8_gestisci_input_menu_con_validazione.c",
+  "088a8_gestisci_input_testo_menu_validato.c"
+ ],
+ "GAP_008818": [
+  "08918_elabora_input_e_stringhe_ff.c"
+ ],
+ "FUN_00008854": [
+  "08954_copia_e_processa_stringhe_ff.c"
+ ],
+ "GAP_0088AA": [
+  "089aa_elabora_scelta_menu_principale.c",
+  "089aa_gestisci_selezione_menu_principale.c"
+ ],
+ "CALL_0088E6": [
+  "089e6_configura_controlli_input.c"
+ ],
+ "CALL_0088E6 (sub)": [
+  "08c3e_ritardo_ciclo_d0.c"
+ ],
+ "CALL_008B48": [
+  "08c48_inizializza_menu_principale.c",
+  "08c48_inizializza_menu_principale_controlli.c"
+ ],
+ "CALL_008B48 (sub)": [
+  "08c64_somma_bcd_ripetuta.c",
+  "08c84_esegui_tre_somme_bcd.c",
+  "08cf0_esegui_somma_bcd_ripetuta.c"
+ ],
+ "FUN_00008c08": [
+  "08d08_azzera_tre_buffer_8_byte.c"
+ ],
+ "GAP_008C28": [
+  "08d28_gestisci_menu_principale.c",
+  "08d28_gestisci_menu_principale_soldi.c"
+ ],
+ "CALL_008CEC": [
+  "08dec_gestisci_menu_principale_2.c",
+  "08dec_gestisci_stato_principale_gioco.c"
+ ],
+ "CALL_008CEC (sub)": [
+  "08ecc_inizializza_schermo_attendi_mouse.c",
+  "08eea_aggiorna_schermo_gioco_condizionale.c",
+  "08eea_aggiorna_schermo_menu_con_animazione.c",
+  "08f88_gestisci_click_area_interattiva.c",
+  "08f88_gestisci_click_menu_principale.c",
+  "0915c_incrementa_valore_128ce.c"
+ ],
+ "CALL_009074": [
+  "09174_decrementa_valore_128ce.c"
+ ],
+ "FUN_0000908c": [
+  "0918c_incrementa_valore_128cd.c"
+ ],
+ "CALL_0090BC": [
+  "091bc_incrementa_livello_129c3.c"
+ ],
+ "FUN_000090ce": [
+  "091ce_decrementa_livello_129c3.c"
+ ],
+ "GAP_0090E0": [
+  "091e0_esegui_ciclo_concerti_registrazioni.c",
+  "091e0_esegui_ciclo_principale_rock.c"
+ ],
+ "CALL_0091CE": [
+  "092ce_avvia_sequenza_intro_completa.c"
+ ],
+ "CALL_0091CE (sub)": [
+  "092f6_inizializza_schermo_attesa_fuoco.c",
+  "092f6_inizializza_schermo_e_attendi_fuoco.c"
+ ],
+ "CALL_00921E": [
+  "0931e_avvia_sequenza_intro_senza_audio_attivo.c",
+  "0931e_avvia_sequenza_intro_senza_audio_iniziale.c"
+ ],
+ "CALL_009238": [
+  "09338_avvia_sequenza_intro_con_audio_attivo.c",
+  "09338_avvia_sequenza_intro_con_audio_iniziale.c"
+ ],
+ "CALL_0092B4": [
+  "093b4_aggiorna_maschera_128ce.c"
+ ],
+ "CALL_0092C8": [
+  "093c8_aggiorna_ciclo_principale_gioco.c",
+  "093c8_aggiorna_loop_principale_gioco.c"
+ ],
+ "CALL_009340": [
+  "09440_ciclo_principale_gioco.c",
+  "09440_ciclo_principale_gioco_menu.c"
+ ],
+ "FUN_000095cc": [
+  "096cc_carica_record_tabella_tesi.c"
+ ],
+ "GAP_0095FC (sub)": [
+  "096fe_resetta_configurazione_input.c"
+ ],
+ "CALL_00962A": [
+  "0972a_inizializza_stato_gioco_default.c",
+  "0972a_inizializza_stato_gioco_predefinito.c"
+ ],
+ "CALL_00967A": [
+  "0977a_gestisci_turno_giocatore_acquisto.c",
+  "0977a_gestisci_turno_giocatore_soldi.c"
+ ],
+ "CALL_009732": [
+  "09832_calcola_aggiorna_soldi.c"
+ ],
+ "CALL_009732 (sub)": [
+  "09910_pausa_ciclo_12895.c"
+ ],
+ "FUN_0000983c": [
+  "0993c_attendi_rilascio_pulsante_mouse.c"
+ ],
+ "FUN_00009844": [
+  "09944_menu_attendi_scelta.c"
+ ],
+ "FUN_0000988e": [
+  "0998e_attesa_rilascio_tasto_destro_mouse.c"
+ ],
+ "GAP_0098BC": [
+  "099bc_esegui_ciclo_principale_gioco.c",
+  "099bc_esegui_flusso_principale_gioco.c"
+ ],
+ "FUN_00009ac8": [
+  "09bc8_seleziona_font_ripetuto.c"
+ ],
+ "FUN_00009ae4": [
+  "09be4_inizializza_seleziona_font.c"
+ ],
+ "FUN_00009b92": [
+  "09c92_aggiorna_stato_ciclo_gioco_principale.c",
+  "09c92_aggiorna_stato_gioco_principale.c"
+ ],
+ "CALL_009CFA": [
+  "09dfa_aggiorna_contatori_e_indicatori_grafici.c",
+  "09dfa_aggiorna_contatori_fine_turno.c"
+ ],
+ "FUN_00009ea4": [
+  "09fa4_ciclo_input_menu_nuova_partita.c",
+  "09fa4_ciclo_principale_input_menu_sequenza.c"
+ ],
+ "FUN_00009fcc": [
+  "0a0cc_pausa_ciclo_d6.c"
+ ],
+ "GAP_009FEA": [
+  "0a0ea_avvia_nuova_partita_da_menu.c"
+ ],
+ "CALL_00A148": [
+  "0a248_gestisci_eventi_audio_slot_band.c",
+  "0a248_processa_stato_slot_audio.c"
+ ],
+ "CALL_00A148 (sub)": [
+  "0a2e0_gestisci_evento_audio_con_addebito.c",
+  "0a2e0_gestisci_evento_audio_sottrattivo.c",
+  "0a324_gestisci_evento_audio_flag2.c",
+  "0a324_gestisci_evento_audio_flag_2.c",
+  "0a346_gestisci_ritorno_menu_audio.c",
+  "0a346_gestisci_stato_audio_menu_ritorno.c"
+ ],
+ "CALL_00A296": [
+  "0a396_visualizza_menu_formattato_joystick.c",
+  "0a396_visualizza_menu_testo_formattato_joystick.c"
+ ],
+ "FUN_0000a486": [
+  "0a586_somma_valore_tabella_128ba.c"
+ ],
+ "FUN_0000a4a2": [
+  "0a5a2_esegue_sequenza_avvio_partita.c",
+  "0a5a2_gestisci_sequenza_speciale_gioco.c"
+ ],
+ "FUN_0000a516": [
+  "0a616_addebita_somma_con_underflow.c"
+ ],
+ "GAP_00A530": [
+  "0a630_gestisci_menu_controllo_band.c",
+  "0a630_gestisci_menu_membri_band.c"
+ ],
+ "GAP_00A530 (sub)": [
+  "0a870_incrementa_contatori_129b7.c",
+  "0a874_decrementa_contatori_129b7.c",
+  "0a8a6_trova_minimo_array_4_elementi.c"
+ ],
+ "FUN_0000a800": [
+  "0a900_prepara_copia_stringhe_ff.c"
+ ],
+ "GAP_00A826": [
+  "0a926_elabora_animazioni_timer_30_frame.c",
+  "0a926_elabora_sequenza_animazioni_timer.c"
+ ],
+ "GAP_00A826 (sub)": [
+  "0a9a8_carica_buffer_da_1201c.c"
+ ],
+ "FUN_0000a8cc": [
+  "0a9cc_renderizza_messaggio_completo.c"
+ ],
+ "GAP_00A952": [
+  "0aa52_riempi_blocco_memoria.c"
+ ],
+ "CALL_00A978": [
+  "0aa78_scorri_elementi_buffer_dati.c"
+ ],
+ "CALL_00AA12": [
+  "0ab12_aggiorna_animazioni_buffer_ciclico.c"
+ ],
+ "FUN_0000aafc": [
+  "0abfc_inizializza_buffer_ciclico_timer_cia.c",
+  "0abfc_inizializza_buffer_schermo_timer.c"
+ ],
+ "GAP_00AB94": [
+  "0ac94_processa_eventi_fine_turno_classifiche.c",
+  "0ac94_processa_fine_turno_classifiche.c"
+ ],
+ "GAP_00AB94 (sub)": [
+  "0ad10_mostra_schermata_classifica.c",
+  "0ad1a_gestisci_classifiche_e_transizione.c",
+  "0ade6_inserisci_in_classifica.c"
+ ],
+ "CALL_00AD30": [
+  "0ae30_ciclo_principale_rendering_gioco.c",
+  "0ae30_renderizza_ciclo_principale_grafico_testo.c"
+ ],
+ "FUN_0000ae8a": [
+  "0af8a_disegna_carattere_grafico.c"
+ ],
+ "FUN_0000af24": [
+  "0b024_disegna_simbolo_grafico.c"
+ ],
+ "CALL_00AF70": [
+  "0b070_esegue_transizione_schermo_con_render.c"
+ ],
+ "CALL_00B012": [
+  "0b112_gestisci_input_doppio_buffer.c"
+ ],
+ "CALL_00B012 (sub)": [
+  "0b16e_pausa_attesa_d6_1.c",
+  "0b1d8_pausa_attesa_d6_2.c"
+ ],
+ "FUN_0000b0f6": [
+  "0b1f6_calcola_posizione_cursore_menu.c"
+ ],
+ "CALL_00B25A": [
+  "0b35a_aggiorna_scorrimento_buffer_dati.c"
+ ],
+ "FUN_0000b3a4": [
+  "0b4a4_attendi_passaggio_pennello.c"
+ ],
+ "FUN_0000b3be": [
+  "0b4be_attendi_riga_zero.c"
+ ],
+ "FUN_0000b3d4": [
+  "0b4d4_esegui_sfondamento_colori_copper.c"
+ ],
+ "FUN_0000b432": [
+  "0b532_sfonda_colori_e_pulisci_schermo.c"
+ ],
+ "FUN_0000b432 (sub)": [
+  "0b534_pulisci_schermo_4_bitplane.c"
+ ],
+ "CALL_00B452": [
+  "0b552_riempi_schermo_colore_7.c"
+ ],
+ "CALL_00B47A": [
+  "0b57a_riempi_schermo_colore_2.c"
+ ],
+ "FUN_0000b4a2": [
+  "0b5a2_attendi_mezzoframe.c"
+ ],
+ "FUN_0000b4b0": [
+  "0b5b0_calcola_indirizzo_video.c"
+ ],
+ "FUN_0000b4ce": [
+  "0b5ce_maschera_byte_superiore_d4.c"
+ ],
+ "FUN_0000b4d0": [
+  "0b5d0_indirizzo_schermo.c"
+ ],
+ "FUN_0000b510": [
+  "0b610_disegna_immagine_4_bitplane.c"
+ ],
+ "FUN_0000b51a": [
+  "0b61a_disegna_rettangolo_grafico.c"
+ ],
+ "FUN_0000b57e": [
+  "0b67e_disegna_bitmap_mascherata.c"
+ ],
+ "FUN_0000b588": [
+  "0b688_disegna_grafica_mascherata.c"
+ ],
+ "FUN_0000b616": [
+  "0b716_seleziona_font.c"
+ ],
+ "FUN_0000b68e": [
+  "0b78e_disegna_glifo.c"
+ ],
+ "FUN_0000b710": [
+  "0b810_disegna_area_invertita_bitplane.c"
+ ],
+ "FUN_0000b782": [
+  "0b882_attendi_timer_ciaa.c"
+ ],
+ "FUN_0000b78a": [
+  "0b88a_disegna_sfondo_carattere.c"
+ ],
+ "FUN_0000b84a": [
+  "0b94a_pausa_breve.c"
+ ],
+ "FUN_0000b85a": [
+  "0b95a_irq_livello2.c"
+ ],
+ "FUN_0000bb76": [
+  "0bc76_leggi_input_joystick_fuoco.c"
+ ],
+ "CALL_00BC3E": [
+  "0bd3e_attendi_pressione_fuoco.c"
+ ],
+ "FUN_0000bc54": [
+  "0bd54_aggiorna_scorrimento_tavolozza.c"
+ ],
+ "FUN_0000bcea": [
+  "0bdea_aggiorna_bitplane_e_grafica.c"
+ ],
+ "FUN_0000bd5a": [
+  "0be5a_copia_bitplane_2_in_1.c"
+ ],
+ "FUN_0000bd8e": [
+  "0be8e_carica_tavolozza_schermo_1.c"
+ ],
+ "FUN_0000bdc4": [
+  "0bec4_carica_tavolozza_schermo_2.c"
+ ],
+ "GAP_00BDD6": [
+  "0bed6_effetto_sfumatura_colori_giu.c"
+ ],
+ "FUN_0000be52": [
+  "0bf52_imposta_colori_copper_4.c"
+ ],
+ "FUN_0000bf0c": [
+  "0c00c_renderizza_schermo_completo_con_colori.c"
+ ],
+ "FUN_0000bf28": [
+  "0c028_disegna_elementi_controllo_mascherati.c"
+ ],
+ "FUN_0000c00e": [
+  "0c10e_attiva_stato_audio.c"
+ ],
+ "FUN_0000c01c": [
+  "0c11c_resetta_stato_audio.c"
+ ],
+ "FUN_0000c020": [
+  "0c120_inizializza_schermo_audio_e_renderizza.c"
+ ],
+ "FUN_0000c046": [
+  "0c146_aggiorna_scena_grafica_base.c",
+  "0c146_aggiorna_schermo_base_grafica.c"
+ ],
+ "FUN_0000c054": [
+  "0c154_cancella_indicatori_schermo.c"
+ ],
+ "GAP_00C102": [
+  "0c202_esegui_sequenza_transizione_testo_audio.c",
+  "0c202_esegui_transizione_testo_audio.c"
+ ],
+ "GAP_00C102 (sub)": [
+  "0c310_decrementa_timer_attesa.c"
+ ],
+ "CALL_00C226": [
+  "0c326_renderizza_bitmap_testo_e_copia_schermo.c"
+ ],
+ "CALL_00C276": [
+  "0c376_schermata_menu_controllo_testo.c"
+ ],
+ "CALL_00C276 (sub)": [
+  "0c37e_visualizza_schermata_testo_con_grafica.c",
+  "0c428_esegue_transizione_schermo_con_testo.c",
+  "0c428_esegue_transizione_schermo_testo_bitmap.c",
+  "0c4f4_visualizza_testo_con_font_attivo.c",
+  "0c4f4_visualizza_testo_con_font_selezionato.c",
+  "0c50e_renderizza_testo_da_tabella.c",
+  "0c550_inizializza_elemento_controllo_attivo.c"
+ ],
+ "FUN_0000c464": [
+  "0c564_trova_elemento_e_imposta_finestra.c"
+ ],
+ "FUN_0000c4cc": [
+  "0c5cc_disegna_elementi_tabella_mascherati.c"
+ ],
+ "FUN_0000c52a": [
+  "0c62a_disegna_interfaccia_tipo_controllo.c"
+ ],
+ "GAP_00C5D8": [
+  "0c6d8_disegna_sequenza_elementi_mascherati.c"
+ ],
+ "CALL_00C61C": [
+  "0c71c_sequenza_intro_gioco_completa.c"
+ ],
+ "FUN_0000cf84": [
+  "0d084_gestisci_input_testo_riquadro_menu.c",
+  "0d084_processa_input_testo_riquadro_menu.c"
+ ],
+ "FUN_0000d024": [
+  "0d124_inizializza_buffer_spazi.c"
+ ],
+ "GAP_00D038": [
+  "0d138_processa_acquisto_modalita_testo_soldi.c",
+  "0d138_processa_acquisto_testo_soldi.c"
+ ],
+ "FUN_0000d23a": [
+  "0d33a_attiva_flag_128b1.c"
+ ],
+ "FUN_0000d244": [
+  "0d344_disattiva_flag_128b1.c"
+ ],
+ "FUN_0000d248": [
+  "0d348_attendi_input_gioco_con_timeout.c",
+  "0d348_attendi_input_gioco_con_timeout_59_frame.c"
+ ],
+ "FUN_0000d24c": [
+  "0d34c_pausa_messaggio.c"
+ ],
+ "GAP_00D2A6": [
+  "0d3a6_confronta_sequenza_mastermind.c"
+ ],
+ "GAP_00D2A6 (sub)": [
+  "0d3ba_confronta_carattere_mastermind.c"
+ ],
+ "FUN_0000d340": [
+  "0d440_gestisci_timer_attesa_ciclica.c"
+ ],
+ "FUN_0000d34a": [
+  "0d44a_gestisci_tempo_attesa_ciaa.c"
+ ],
+ "FUN_0000d38e": [
+  "0d48e_stampa_testo.c"
+ ],
+ "FUN_0000d486": [
+  "0d586_disegna_sfondo_area_testo.c"
+ ],
+ "FUN_0000d498": [
+  "0d598_cancella_resto_riga.c"
+ ],
+ "FUN_0000d4ca": [
+  "0d5ca_avanza_puntatore_stringhe_ff.c"
+ ],
+ "FUN_0000d4de": [
+  "0d5de_avanza_puntatore_stringhe_bit7.c"
+ ],
+ "FUN_0000d4f4": [
+  "0d5f4_inizializza_schermo_gioco_completo.c",
+  "0d5f4_inizializza_schermo_principale_completo.c"
+ ],
+ "FUN_0000d538": [
+  "0d638_processa_e_visualizza_testo_formattato.c"
+ ],
+ "FUN_0000d63e": [
+  "0d73e_formatta_e_copia_stringa_in_buffer.c"
+ ],
+ "FUN_0000d6e4": [
+  "0d7e4_leggi_valore_tabella_4byte.c"
+ ],
+ "FUN_0000d714": [
+  "0d814_routine_vuota.c"
+ ],
+ "FUN_0000d716": [
+  "0d816_aggiorna_riquadro_menu_con_grafica.c",
+  "0d816_aggiorna_riquadro_menu_e_grafica.c"
+ ],
+ "FUN_0000d76c": [
+  "0d86c_pulisci_bordi_riquadro.c"
+ ],
+ "FUN_0000d84a": [
+  "0d94a_ciclo_principale_menu_joystick.c"
+ ],
+ "FUN_0000d928": [
+  "0da28_disegna_strati_grafici_mascherati.c"
+ ],
+ "FUN_0000d994": [
+  "0da94_renderizza_strati_grafici_con_ritardo.c"
+ ],
+ "FUN_0000d9a6": [
+  "0daa6_ritardo_ciclo_contatore.c"
+ ],
+ "FUN_0000d9d2": [
+  "0dad2_renderizza_scena_condizionale.c"
+ ],
+ "FUN_0000da48": [
+  "0db48_copia_grafica_5c70a_su_schermo.c"
+ ],
+ "FUN_0000da5a": [
+  "0db5a_copia_interleaved_bitplane_custom.c"
+ ],
+ "FUN_0000da70": [
+  "0db70_copia_grafica_6f8c6_in_buffer_video.c"
+ ],
+ "FUN_0000da8e": [
+  "0db8e_copia_parziale_grafica_6f8c6.c"
+ ],
+ "FUN_0000daac": [
+  "0dbac_aggiorna_interfaccia_gioco_completa.c",
+  "0dbac_renderizza_interfaccia_gioco_completa.c"
+ ],
+ "FUN_0000dad6": [
+  "0dbd6_disegna_rettangoli_stato_attivo.c"
+ ],
+ "FUN_0000db12": [
+  "0dc12_copia_grafica_707c6_in_buffer_video.c"
+ ],
+ "FUN_0000db30": [
+  "0dc30_salva_area_memoria_video.c"
+ ],
+ "FUN_0000db62": [
+  "0dc62_copia_schermo_intero_in_buffer.c"
+ ],
+ "GAP_00DB78": [
+  "0dc78_esegui_sequenza_intro_avvio.c",
+  "0dc78_esegui_sequenza_intro_hamster.c"
+ ],
+ "GAP_00DB78 (sub)": [
+  "0dcac_decomprime_e_riorganizza_immagine.c",
+  "0dce6_converti_bitplane_schermo.c"
+ ],
+ "FUN_0000dc2a": [
+  "0dd2a_attendi_tasto.c"
+ ],
+ "FUN_0001313c": [
+  "1323c_inizializza_e_avvia_audio.c"
+ ],
+ "FUN_000131ea": [
+  "132ea_irq_vblank.c"
+ ],
+ "FUN_00013206": [
+  "13306_inizializza_driver_audio.c"
+ ],
+ "FUN_000132a4": [
+  "133a4_disattiva_audio_dma.c"
+ ],
+ "FUN_000132c6": [
+  "133c6_aggiorna_pitch_audio_vblank.c"
+ ],
+ "FUN_0001332c": [
+  "1342c_aggiorna_pitch_canale_audio.c"
+ ],
+ "FUN_000133fe": [
+  "134fe_aggiorna_riproduzione_audio.c"
+ ],
+ "FUN_00013554": [
+  "13654_elabora_comando_canale_audio.c"
+ ],
+ "GAP_013684": [
+  "13784_copia_memoria_indietro.c"
+ ],
+ "CALL_0137A4": [
+  "138a4_esegui_intro_hamster_attendi_fuoco.c",
+  "138a4_esegui_sequenza_audio_attendi_fuoco.c"
+ ],
+ "FUN_000138f2 (sub)": [
+  "13a30_avvia_sequenza_musicale_rock5.c"
+ ],
+ "FUN_00013a7e": [
+  "13b7e_pausa_cicli_d4.c"
+ ],
+ "FUN_00013aa0": [
+  "13ba0_pausa_cicli_d6.c"
+ ],
+ "FUN_00013abc": [
+  "13bbc_copia_blocco_dati_512.c"
+ ],
+ "FUN_00013ae6": [
+  "13be6_trasponi_e_copia_dati_traccia.c"
+ ]
+}

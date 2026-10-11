@@ -1,0 +1,2619 @@
+{
+  "$comment": "Mappa FUN_xxx -> nomi/desc. Gli ID FUN_ restano stabili ovunque (file, unit, Ghidra); qui il livello umano. Verificati byte-level salvo nota.",
+  "FUN_0000b3be": {
+    "name": "WaitRaster0",
+    "desc": "Attende riga raster 0 (VHPOSR basso==0), base CUSTOM in A5.",
+    "loro_addr": "0x0b4be",
+    "loro_nome": "attendi_riga_zero",
+    "loro_desc": "aspetta finche' il byte basso di VHPOSR e' 0 (riga 0 o 256)",
+    "loro_fonte": "manuale",
+    "loro_chiama": [],
+    "conf": "high"
+  },
+  "FUN_0000b3a4": {
+    "name": "Delay6Frames",
+    "desc": "6x bsr a WaitRaster0 (0x1A oltre slice): delay ~6 frame.",
+    "loro_addr": "0x0b4a4",
+    "loro_nome": "attendi_passaggio_pennello",
+    "loro_desc": "attesa base del gioco: aspetta che il pennello passi per la riga 0/256 (circa mezzo quadro); corretta da patch_velocita.py",
+    "loro_fonte": "manuale",
+    "loro_chiama": [
+      "0xb3be"
+    ],
+    "conf": "med"
+  },
+  "FUN_0000b3d4": {
+    "name": "CopperFadeStep",
+    "desc": "Step fade palette su copper list: nibble alto -0x10, basso -1, per 16 colori.",
+    "loro_addr": "0x0b4d4",
+    "loro_nome": "esegui_sfondamento_colori_copper",
+    "loro_desc": "Riduce progressivamente la luminosita' dei 16 registri colore Copper su 15 mezzi frame per effetto fade.",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb4a2"
+    ],
+    "conf": "med"
+  },
+  "FUN_0000b432": {
+    "name": "FadeStepWait",
+    "desc": "Chiama CopperFadeStep, setup A0/D0, cade in WaitRaster0 (no RTS). Frammento 14B.",
+    "loro_addr": "0x0b532",
+    "loro_nome": "sfonda_colori_e_pulisci_schermo",
+    "loro_desc": "Esegue fade-out colori copper su 15 mezzi frame poi azzera tutta la memoria video (4 bitplane, 8000 byte)",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb3d4"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x0b534",
+        "off": 2,
+        "nome": "pulisci_schermo_4_bitplane",
+        "desc": "Azzera i 32000 byte della memoria video dei 4 bitplane della schermata.",
+        "conf": "da-verificare"
+      }
+    ],
+    "conf": "med"
+  },
+  "FUN_0000b85a": {
+    "name": "IrqHandler_Keyboard",
+    "desc": "Handler IRQ livello 3: test INTENAR/INTREQR, delay, ack INTREQ=$8, decode scancode CIA, matrice $BB66, menu keys, RTE. 508B.",
+    "loro_addr": "0x0b95a",
+    "loro_nome": "irq_livello2",
+    "loro_desc": "gestore interrupt livello 2 (vettore $68): tastiera via CIA-A SDR, spazio = pausa ($bb64)",
+    "loro_fonte": "manuale",
+    "loro_chiama": [],
+    "conf": "high"
+  },
+  "FUN_000131ea": {
+    "name": "IrqHandler_Ack",
+    "desc": "Handler IRQ: salva tutto, chiama worker, ack INTREQ=$74, RTE.",
+    "loro_addr": "0x132ea",
+    "loro_nome": "irq_vblank",
+    "loro_desc": "gestore interrupt livello 3 (vettore $6c), vertical blank",
+    "loro_fonte": "manuale",
+    "loro_chiama": [
+      "0x132c6"
+    ],
+    "conf": "high"
+  },
+  "FUN_0001313c": {
+    "name": "Audio_InitAndStart",
+    "desc": "Init audio: flag 128CE=2, 2AAC2=2, 2AAC5=0, chiama worker, 13CEA=1, INTENA 3FF7/8020/C008, wait CIA BFE001, restore+worker.",
+    "loro_addr": "0x1323c",
+    "loro_nome": "inizializza_e_avvia_audio",
+    "loro_desc": "Inizializza il driver audio, avvia la riproduzione e attende interruzione pattern o pressione tasto fuoco per fermarsi.",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x13206",
+      "0x132a4"
+    ],
+    "conf": "med"
+  },
+  "FUN_000132a4": {
+    "name": "MuteAudio",
+    "desc": "Volumi audio a 0 + DMACON=$F (ferma DMA audio).",
+    "loro_addr": "0x133a4",
+    "loro_nome": "disattiva_audio_dma",
+    "loro_desc": "Azzera i volumi e disabilita i canali DMA audio del chip Paula.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "conf": "high"
+  },
+  "FUN_00013206": {
+    "name": "Audio_InitDriver",
+    "desc": "Trova max in tabella 128B, costruisce 15 ptr (base+idx*0x400+600), azzera 15 long, mute audio, init vars.",
+    "loro_addr": "0x13306",
+    "loro_nome": "inizializza_driver_audio",
+    "loro_desc": "Inizializza le tabelle dei canali audio e azzera i volumi dei registri Paula.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "conf": "med"
+  },
+  "FUN_00013554": {
+    "name": "Audio_ChannelCmd",
+    "desc": "Processa comando canale audio via struct A6 (lookup tabelle, far-call, switch B-F: slide/copy/flag/motor/select).",
+    "loro_addr": "0x13654",
+    "loro_nome": "elabora_comando_canale_audio",
+    "loro_desc": "Elabora la nota e i comandi del canale audio configurando i registri Paula.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "conf": "med"
+  },
+  "FUN_000133fe": {
+    "name": "Audio_UpdatePlayback",
+    "desc": "Tick sonoro: 4 voci via Audio_ChannelCmd, delay, DMACON=8000|flags, start voci AUDxLCH/LEN, avanza posizione/loop.",
+    "loro_addr": "0x134fe",
+    "loro_nome": "aggiorna_riproduzione_audio",
+    "loro_desc": "Elabora i 4 canali audio per il tick corrente, aggiorna i puntatori DMA Paula e gestisce il loop del pattern musicale.",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x13554"
+    ],
+    "conf": "med"
+  },
+  "FUN_000132c6": {
+    "name": "FUN_000132c6",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare",
+    "loro_addr": "0x133c6",
+    "loro_nome": "aggiorna_pitch_audio_vblank",
+    "loro_desc": "Aggiorna pitch dei 4 canali audio durante VBlank ciclando effetti pitch",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x1332c",
+      "0x133fe"
+    ]
+  },
+  "FUN_0001332c": {
+    "name": "SoundVoice_Worker",
+    "desc": "Worker voce chiamato 4x da SoundVoices_Update. DA LEGGERE.",
+    "conf": "med",
+    "loro_addr": "0x1342c",
+    "loro_nome": "aggiorna_pitch_canale_audio",
+    "loro_desc": "Calcola e aggiorna il periodo di intonazione (pitch) per un canale audio Paula.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": []
+  },
+  "FUN_00009ea4": {
+    "name": "StateDispatch",
+    "desc": "Dispatcher stato gioco (byte $128A8 + tabella $123D2, JSR assoluta a UtilCluster, far-call, comandi D4). 294B.",
+    "conf": "med",
+    "loro_addr": "0x09fa4",
+    "loro_nome": "ciclo_input_menu_nuova_partita",
+    "loro_desc": "Gestisce timer, input mouse, caricamento risorse, stringhe FF e validazione menu in loop",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x87a8",
+      "0x8854",
+      "0x983c",
+      "0x9fcc",
+      "0xc00e",
+      "0xc01c",
+      "0xd248",
+      "0xd340",
+      "0xd4f4",
+      "0x138ce"
+    ]
+  },
+  "FUN_0000a4a2": {
+    "name": "FlagDispatch",
+    "desc": "Dispatcher su flag $123CB + comandi D4 ($70-$73), JSR assoluta a UtilCluster. 116B.",
+    "conf": "med",
+    "loro_addr": "0x0a5a2",
+    "loro_nome": "esegue_sequenza_avvio_partita",
+    "loro_desc": "Esegue sequenza inizializzazione schermo/audio per nuova partita in modalita speciale",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x983c",
+      "0x9b92",
+      "0xa516",
+      "0xc00e",
+      "0xc020",
+      "0xc046",
+      "0xd248",
+      "0xd4f4",
+      "0x137f2"
+    ]
+  },
+  "FUN_000138f2": {
+    "name": "UtilCluster",
+    "desc": "Chiamata per indirizzo assoluto dai dispatcher; chiama helper tiny (d340/13a7e/13aa0/13abc). 280B.",
+    "conf": "med",
+    "loro_sub": [
+      {
+        "addr": "0x13a30",
+        "off": 62,
+        "nome": "avvia_sequenza_musicale_rock5",
+        "desc": "Su input joystick+fuoco, prepara e avvia brano 'rock5' copiando e trasponendo dati audio su canali.",
+        "conf": "da-verificare"
+      }
+    ]
+  },
+  "FUN_00009ae4": {
+    "name": "DrawText_Tables",
+    "desc": "Stampa testo/numeri da tabelle ($12087/$120A3, addi $30=ASCII) via helper; ricorsione interna. Chiamato da daac. 174B.",
+    "conf": "low",
+    "loro_addr": "0x09be4",
+    "loro_nome": "inizializza_seleziona_font",
+    "loro_desc": "Configura sequenza di selezione font ripetuta con parametri variabili, alterna flag di stato e chiama selezione glifi",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x9ac8",
+      "0xb616"
+    ]
+  },
+  "FUN_0000d4f4": {
+    "name": "Seq5_Helpers",
+    "desc": "Chiama 5 helper (d538/da48/da8e/db30/d994) alternando flag $1286A/$BB92. 68B.",
+    "conf": "low",
+    "loro_addr": "0x0d5f4",
+    "loro_nome": "inizializza_schermo_principale_completo",
+    "loro_desc": "Inizializzazione completa schermo gioco: copia grafica base, renderizza strati con ritardo, testo senza sfondo, salva area video, copia grafica parziale",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xd538",
+      "0xd994",
+      "0xda48",
+      "0xda8e",
+      "0xdb30"
+    ]
+  },
+  "FUN_000085ec": {
+    "name": "PrintTableCounts",
+    "desc": "Conta tab $123CA, stampa cifre via helper, stessi flag di Seq5. Chiamato da daac. 158B.",
+    "conf": "low",
+    "loro_addr": "0x086ec",
+    "loro_nome": "disegna_valore_soldi_bcd",
+    "loro_desc": "Visualizza il valore dei soldi in BCD sullo schermo, saltando zeri iniziali e selezionando font per ogni cifra significativa",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb616",
+      "0xd538"
+    ]
+  },
+  "FUN_0000daac": {
+    "name": "DrawDataSeq",
+    "desc": "Setup ptr $5E50A/$707C6 + D0=$45F, chiama 6 helper draw/testo (85ec/9ae4/c054/c52a/da5a/dad6). 42B.",
+    "conf": "low",
+    "loro_addr": "0x0dbac",
+    "loro_nome": "renderizza_interfaccia_gioco_completa",
+    "loro_desc": "Renderizza interfaccia completa: copia bitplane interleaved, cancella indicatori, disegna rettangoli stato, font, soldi e controllo",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x85ec",
+      "0x9ae4",
+      "0xc054",
+      "0xc52a",
+      "0xda5a",
+      "0xdad6"
+    ]
+  },
+  "GAP_008000": {
+    "name": "SystemTakeover_Entry",
+    "desc": "ENTRY RSTAR: trap#0, SR=$2700, stack $80000, INTENA/DMACON off, COLOR00, CIA, copper/display init ($82D6/$3981/$1C1/$4200), vettore $68. 470B.",
+    "conf": "high",
+    "loro_addr": "0x08100",
+    "loro_nome": "avvio",
+    "loro_desc": "ingresso del gioco: prende la macchina (trap #0), spegne il sistema, imposta vettori, copper e DMA, entra nel ciclo principale",
+    "loro_fonte": "manuale",
+    "loro_chiama": [
+      "0x8366",
+      "0x83c4",
+      "0x83c8",
+      "0x8b48",
+      "0x8cec",
+      "0x91ce",
+      "0x91f6",
+      "0x921e",
+      "0x922e",
+      "0x9238",
+      "0x92c8",
+      "0x9340",
+      "0x95fe",
+      "0x962a",
+      "0x983c",
+      "0xa826",
+      "0xb398",
+      "0xb432",
+      "0xc01c",
+      "0xd4f4",
+      "0xd714",
+      "0xdaac",
+      "0xdb78",
+      "0x13684"
+    ]
+  },
+  "GAP_00A530": {
+    "name": "MenuUI_Select",
+    "desc": "Menu/UI su selettore D6 (flag $1286F/$12889/$128AF, cifre ASCII a $E972/$E9F0, dispatch D4). 720B.",
+    "conf": "med",
+    "loro_addr": "0x0a630",
+    "loro_nome": "gestisci_menu_membri_band",
+    "loro_desc": "Menu gestione 4 slot musicisti: assunzione/licenziamento con costi BCD, stati slot attivi, transizioni schermo e aggiornamento interfaccia",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x86c6",
+      "0x8c08",
+      "0x92b4",
+      "0x983c",
+      "0xa148",
+      "0xa774",
+      "0xa7a6",
+      "0xbf0c",
+      "0xbf28",
+      "0xc00e",
+      "0xc276",
+      "0xd248",
+      "0xd340",
+      "0xd4f4",
+      "0xd714"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x0a870",
+        "off": 576,
+        "nome": "incrementa_contatori_129b7",
+        "desc": "Incrementa di 1 i valori non nulli e diversi da 255 nei 4 byte dell'array 129b7.",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0a874",
+        "off": 580,
+        "nome": "decrementa_contatori_129b7",
+        "desc": "Decrementa di 1 i valori non nulli e diversi da 255 nei 4 byte dell'array 129b7.",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0a8a6",
+        "off": 630,
+        "nome": "trova_minimo_array_4_elementi",
+        "desc": "Trova l'elemento attivo con valore minimo nell'array 129b7 e ne salva l'indice.",
+        "conf": "da-verificare"
+      }
+    ]
+  },
+  "FUN_0000d538": {
+    "name": "ScriptInterp",
+    "desc": "Interprete bytecode via A3 (flag bit D/E/F su opcode word, tabelle, dispatch a d340/d486/d4ca/d4de/d63e/8742). 262B.",
+    "conf": "low",
+    "loro_addr": "0x0d638",
+    "loro_nome": "processa_e_visualizza_testo_formattato",
+    "loro_desc": "Interpreta script con codici controllo (0x20/0x40/0x80), formatta valori BCD, gestisce timer, disegna sfondo e stampa testo finale",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x8742",
+      "0xd340",
+      "0xd38e",
+      "0xd486",
+      "0xd4ca",
+      "0xd4de",
+      "0xd63e"
+    ]
+  },
+  "CALL_008366": {
+    "loro_addr": "0x08466",
+    "loro_nome": "inizializza_gioco_e_attendi_input",
+    "loro_desc": "Inizializza schermo, audio e attende input fuoco giocatore in sequenza per avviare la partita",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xbf0c",
+      "0xc00e",
+      "0xc01c",
+      "0xd248",
+      "0xd24c",
+      "0xd714",
+      "0xd716",
+      "0xdb30"
+    ],
+    "name": "inizializza_gioco_e_attendi_input",
+    "desc": "Inizializza schermo, audio e attende input fuoco giocatore in sequenza per avviare la partita",
+    "conf": "low"
+  },
+  "CALL_0083C4": {
+    "loro_addr": "0x084c4",
+    "loro_nome": "inizializza_stato_gioco",
+    "loro_desc": "Inizializza le variabili di stato del gioco, la memoria, il buffer video e i parametri predefiniti.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xb434"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x084c8",
+        "off": 4,
+        "nome": "inizializza_stato_gioco_completo",
+        "desc": "Azzera buffer, imposta variabili globali iniziali, carica dati e prepara interfaccia grafica",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "inizializza_stato_gioco",
+    "desc": "Inizializza le variabili di stato del gioco, la memoria, il buffer video e i parametri predefiniti.",
+    "conf": "da-verificare"
+  },
+  "CALL_0088E6": {
+    "loro_addr": "0x089e6",
+    "loro_nome": "configura_controlli_input",
+    "loro_desc": "Configura la mappatura dei tasti direzionali e la posizione del cursore in base alla modalita di input selezionata.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0x869e",
+      "0x8b3e"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x08c3e",
+        "off": 600,
+        "nome": "ritardo_ciclo_d0",
+        "desc": "Esegue un ciclo di attesa vuoto decrementando il registro D0.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "configura_controlli_input",
+    "desc": "Configura la mappatura dei tasti direzionali e la posizione del cursore in base alla modalita di input selezionata.",
+    "conf": "low"
+  },
+  "CALL_008B48": {
+    "loro_addr": "0x08c48",
+    "loro_nome": "inizializza_menu_principale",
+    "loro_desc": "Configura controlli input e avvia gestione menu principale con selezione tipo controllo",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x88aa",
+      "0x88e6",
+      "0x8c28"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x08c64",
+        "off": 28,
+        "nome": "somma_bcd_ripetuta",
+        "desc": "Esegue ripetutamente la somma BCD a 8 cifre per un numero di volte specificato nel registro D4.",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x08c84",
+        "off": 60,
+        "nome": "esegui_tre_somme_bcd",
+        "desc": "Esegue tre volte la somma BCD ripetuta per calcoli monetari a precisione fissa.",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x08cf0",
+        "off": 168,
+        "nome": "esegui_somma_bcd_ripetuta",
+        "desc": "Wrapper che esegue la somma BCD ripetuta per calcoli monetari",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "inizializza_menu_principale",
+    "desc": "Configura controlli input e avvia gestione menu principale con selezione tipo controllo",
+    "conf": "da-verificare"
+  },
+  "CALL_008CEC": {
+    "loro_addr": "0x08dec",
+    "loro_nome": "gestisci_menu_principale_2",
+    "loro_desc": "Gestisce il flusso del menu principale: rileva click, inizializza schermo, attende scelta giocatore e aggiorna interfaccia",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x8dcc",
+      "0x8dea",
+      "0x8e88",
+      "0x90e0",
+      "0x967a",
+      "0x9844",
+      "0x98bc",
+      "0x9fea",
+      "0xa296",
+      "0xc102",
+      "0xd4f4"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x08ecc",
+        "off": 224,
+        "nome": "inizializza_schermo_attendi_mouse",
+        "desc": "Inizializza schermo gioco completo e attende rilascio pulsante mouse impostando flag",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x08eea",
+        "off": 254,
+        "nome": "aggiorna_schermo_menu_con_animazione",
+        "desc": "Inizializza schermo, attende input menu, se flag animazione attivo copia dati animazione e buffer soldi poi aggiorna int",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x08f88",
+        "off": 412,
+        "nome": "gestisci_click_menu_principale",
+        "desc": "Rileva click su 5 aree menu (coordinate Y), carica dati corrispondenti, avvia audio e aggiorna schermo",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0915c",
+        "off": 880,
+        "nome": "incrementa_valore_128ce",
+        "desc": "Incrementa la variabile 128ce fino a 10 volte se diversa da 255.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "gestisci_menu_principale_2",
+    "desc": "Gestisce il flusso del menu principale: rileva click, inizializza schermo, attende scelta giocatore e aggiorna interfaccia",
+    "conf": "da-verificare"
+  },
+  "CALL_009074": {
+    "loro_addr": "0x09174",
+    "loro_nome": "decrementa_valore_128ce",
+    "loro_desc": "Decrementa la variabile 128ce fino a 10 volte fermandosi se arriva a 1.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "decrementa_valore_128ce",
+    "desc": "Decrementa la variabile 128ce fino a 10 volte fermandosi se arriva a 1.",
+    "conf": "low",
+    "c_best_pct": 45.83,
+    "c_best_src": "agent/work/CALL_009074/cand.c"
+  },
+  "CALL_0090BC": {
+    "loro_addr": "0x091bc",
+    "loro_nome": "incrementa_livello_129c3",
+    "loro_desc": "Incrementa la variabile 129c3 fino a un valore massimo di 15.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "incrementa_livello_129c3",
+    "desc": "Incrementa la variabile 129c3 fino a un valore massimo di 15.",
+    "conf": "low"
+  },
+  "CALL_0091CE": {
+    "loro_addr": "0x092ce",
+    "loro_nome": "avvia_sequenza_intro_completa",
+    "loro_desc": "Esegue sequenza intro completa: reset audio, 3 inizializzazioni schermo, 2 sequenze audio-testo, attesa fuoco",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xc00e",
+      "0xc01c",
+      "0xd4f4",
+      "0x136a4"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x092f6",
+        "off": 40,
+        "nome": "inizializza_schermo_e_attendi_fuoco",
+        "desc": "Inizializza schermo gioco, attende pressione fuoco, renderizza scena iniziale",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "avvia_sequenza_intro_completa",
+    "desc": "Esegue sequenza intro completa: reset audio, 3 inizializzazioni schermo, 2 sequenze audio-testo, attesa fuoco",
+    "conf": "da-verificare"
+  },
+  "CALL_00921E": {
+    "loro_addr": "0x0931e",
+    "loro_nome": "avvia_sequenza_intro_senza_audio_iniziale",
+    "loro_desc": "Esegue sequenza intro senza attivazione audio iniziale: reset audio, 3 schermi, 2 audio-testo, attesa fuoco",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xc01c",
+      "0xd4f4"
+    ],
+    "name": "avvia_sequenza_intro_senza_audio_iniziale",
+    "desc": "Esegue sequenza intro senza attivazione audio iniziale: reset audio, 3 schermi, 2 audio-testo, attesa fuoco",
+    "conf": "low"
+  },
+  "CALL_009238": {
+    "loro_addr": "0x09338",
+    "loro_nome": "avvia_sequenza_intro_con_audio_iniziale",
+    "loro_desc": "Esegue sequenza intro con attivazione audio iniziale: attiva audio, reset, 3 schermi, 2 audio-testo, attesa fuoco",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xc00e",
+      "0xc01c",
+      "0xd4f4",
+      "0x136a4"
+    ],
+    "name": "avvia_sequenza_intro_con_audio_iniziale",
+    "desc": "Esegue sequenza intro con attivazione audio iniziale: attiva audio, reset, 3 schermi, 2 audio-testo, attesa fuoco",
+    "conf": "low"
+  },
+  "CALL_0092B4": {
+    "loro_addr": "0x093b4",
+    "loro_nome": "aggiorna_maschera_128ce",
+    "loro_desc": "Esegue uno scorrimento a destra di 128ce e imposta il bit meno significativo.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "aggiorna_maschera_128ce",
+    "desc": "Esegue uno scorrimento a destra di 128ce e imposta il bit meno significativo.",
+    "conf": "low",
+    "c_best_pct": 60.0,
+    "c_best_src": "agent/work/CALL_0092B4/cand.c"
+  },
+  "CALL_0092C8": {
+    "loro_addr": "0x093c8",
+    "loro_nome": "aggiorna_ciclo_principale_gioco",
+    "loro_desc": "Ciclo principale di gioco: ogni 16 frame gestisce acquisti modalita testo, avvio partita alto livello, classifiche e transizioni testo modale",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x84c6",
+      "0x9256",
+      "0xd038",
+      "0xd14c"
+    ],
+    "name": "aggiorna_ciclo_principale_gioco",
+    "desc": "Ciclo principale di gioco: ogni 16 frame gestisce acquisti modalita testo, avvio partita alto livello, classifiche e transizioni testo modale",
+    "conf": "low"
+  },
+  "CALL_009340": {
+    "loro_addr": "0x09440",
+    "loro_nome": "ciclo_principale_gioco",
+    "loro_desc": "Loop principale di gioco: gestisce menu, record tesi, interfaccia e transizioni schermo",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x8c08",
+      "0x95cc",
+      "0x9844",
+      "0x9b92",
+      "0xb432",
+      "0xb588",
+      "0xbf0c",
+      "0xc464",
+      "0xd4f4",
+      "0xdaac"
+    ],
+    "name": "ciclo_principale_gioco",
+    "desc": "Loop principale di gioco: gestisce menu, record tesi, interfaccia e transizioni schermo",
+    "conf": "low"
+  },
+  "CALL_00962A": {
+    "loro_addr": "0x0972a",
+    "loro_nome": "inizializza_stato_gioco_default",
+    "loro_desc": "Copia valori predefiniti in variabili stato gioco e aggiorna interfaccia",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xdaac"
+    ],
+    "name": "inizializza_stato_gioco_default",
+    "desc": "Copia valori predefiniti in variabili stato gioco e aggiorna interfaccia",
+    "conf": "low"
+  },
+  "CALL_00967A": {
+    "loro_addr": "0x0977a",
+    "loro_nome": "gestisci_turno_giocatore_acquisto",
+    "loro_desc": "Gestisce turno giocatore: input menu, transazioni BCD soldi, verifica saldo e aggiorna stato",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x86c6",
+      "0x8b64",
+      "0x8c08",
+      "0x9844",
+      "0x9b92",
+      "0xa770",
+      "0xd248",
+      "0xd4f4"
+    ],
+    "name": "gestisci_turno_giocatore_acquisto",
+    "desc": "Gestisce turno giocatore: input menu, transazioni BCD soldi, verifica saldo e aggiorna stato",
+    "conf": "low"
+  },
+  "CALL_009732": {
+    "loro_addr": "0x09832",
+    "loro_nome": "calcola_aggiorna_soldi",
+    "loro_desc": "Gestisce calcoli BCD per aggiornamento soldi con buffer temporanei e ritardo",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x869a",
+      "0x86ea",
+      "0x8b64",
+      "0x8c08",
+      "0x9810"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x09910",
+        "off": 222,
+        "nome": "pausa_ciclo_12895",
+        "desc": "Esegue un ciclo di ritardo in base al valore della variabile 12895.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "calcola_aggiorna_soldi",
+    "desc": "Gestisce calcoli BCD per aggiornamento soldi con buffer temporanei e ritardo",
+    "conf": "low"
+  },
+  "CALL_009CFA": {
+    "loro_addr": "0x09dfa",
+    "loro_nome": "aggiorna_contatori_fine_turno",
+    "loro_desc": "Calcola valori da contatori scorrimento, aggiorna indicatori membri band, esegue somme BCD",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x859a",
+      "0x85e2",
+      "0x869a",
+      "0x8b64",
+      "0x8c08",
+      "0xc054"
+    ],
+    "name": "aggiorna_contatori_fine_turno",
+    "desc": "Calcola valori da contatori scorrimento, aggiorna indicatori membri band, esegue somme BCD",
+    "conf": "low"
+  },
+  "CALL_00A148": {
+    "loro_addr": "0x0a248",
+    "loro_nome": "gestisci_eventi_audio_slot_band",
+    "loro_desc": "Gestisce eventi audio per slot musicisti: verifica slot attivi, soldi BCD e flag stato per attivare timer, menu ritorno o sequenza audio flag2",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xa1e0",
+      "0xa224",
+      "0xa246",
+      "0xd340"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x0a2e0",
+        "off": 152,
+        "nome": "gestisci_evento_audio_con_addebito",
+        "desc": "Gestisce evento audio con addebito BCD: schermi, audio, addebito, pausa, ripristina grafica",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0a324",
+        "off": 220,
+        "nome": "gestisci_evento_audio_flag_2",
+        "desc": "Gestisce evento audio flag 2: schermi, audio, addebito BCD, pausa, ripristina grafica",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0a346",
+        "off": 254,
+        "nome": "gestisci_ritorno_menu_audio",
+        "desc": "Salva stato audio, gestisce menu principale e ripristina audio per ritorno da slot band",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "gestisci_eventi_audio_slot_band",
+    "desc": "Gestisce eventi audio per slot musicisti: verifica slot attivi, soldi BCD e flag stato per attivare timer, menu ritorno o sequenza audio flag2",
+    "conf": "da-verificare"
+  },
+  "CALL_00A296": {
+    "loro_addr": "0x0a396",
+    "loro_nome": "visualizza_menu_formattato_joystick",
+    "loro_desc": "Renderizza menu con testo formattato multiplo, input joystick e transizioni schermo",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x859a",
+      "0x86c6",
+      "0x87a8",
+      "0x8c08",
+      "0x90ce",
+      "0x983c",
+      "0x9844",
+      "0x9b92",
+      "0xa486",
+      "0xb0f6",
+      "0xb432",
+      "0xbf0c",
+      "0xd248",
+      "0xd24c",
+      "0xd340",
+      "0xd4f4",
+      "0xd538",
+      "0xd716",
+      "0xd84a"
+    ],
+    "name": "visualizza_menu_formattato_joystick",
+    "desc": "Renderizza menu con testo formattato multiplo, input joystick e transizioni schermo",
+    "conf": "low"
+  },
+  "CALL_00A978": {
+    "loro_addr": "0x0aa78",
+    "loro_nome": "scorri_elementi_buffer_dati",
+    "loro_desc": "Shifta a destra gli elementi nei buffer dati in base al flag 1289a e al valore D4.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "scorri_elementi_buffer_dati",
+    "desc": "Shifta a destra gli elementi nei buffer dati in base al flag 1289a e al valore D4.",
+    "conf": "low"
+  },
+  "CALL_00AA12": {
+    "loro_addr": "0x0ab12",
+    "loro_nome": "aggiorna_animazioni_buffer_ciclico",
+    "loro_desc": "Aggiorna 30 animazioni cicliche con doppio buffer e timer CIA per sincronizzazione frame",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xa952",
+      "0xaafc",
+      "0xd340"
+    ],
+    "name": "aggiorna_animazioni_buffer_ciclico",
+    "desc": "Aggiorna 30 animazioni cicliche con doppio buffer e timer CIA per sincronizzazione frame",
+    "conf": "da-verificare"
+  },
+  "CALL_00AD30": {
+    "loro_addr": "0x0ae30",
+    "loro_nome": "ciclo_principale_rendering_gioco",
+    "loro_desc": "Ciclo rendering principale: disegna caratteri, simboli, testo formattato, copia schermo in buffer, imposta colori copper, gestisce input fuoco",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xa8cc",
+      "0xae8a",
+      "0xaf24",
+      "0xbe52",
+      "0xd538",
+      "0xd6e4",
+      "0xdb62",
+      "0x138ce"
+    ],
+    "name": "ciclo_principale_rendering_gioco",
+    "desc": "Ciclo rendering principale: disegna caratteri, simboli, testo formattato, copia schermo in buffer, imposta colori copper, gestisce input fuoco",
+    "conf": "low"
+  },
+  "CALL_00AF70": {
+    "loro_addr": "0x0b070",
+    "loro_nome": "esegue_transizione_schermo_con_render",
+    "loro_desc": "Esegue fade-out, pulisce schermo, disegna rettangolo, copia dati e renderizza ciclo principale due volte",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xad30",
+      "0xb432",
+      "0xb51a"
+    ],
+    "name": "esegue_transizione_schermo_con_render",
+    "desc": "Esegue fade-out, pulisce schermo, disegna rettangolo, copia dati e renderizza ciclo principale due volte",
+    "conf": "low"
+  },
+  "CALL_00B012": {
+    "loro_addr": "0x0b112",
+    "loro_nome": "gestisci_input_doppio_buffer",
+    "loro_desc": "Polling input joystick su due buffer alternati con attese temporizzate e gestione bit 0x80 per sincronizzazione.",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb06e",
+      "0xb0d8",
+      "0xd340"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x0b16e",
+        "off": 92,
+        "nome": "pausa_attesa_d6_1",
+        "desc": "Esegue un ciclo vuoto di attesa basato sul contatore D6.",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0b1d8",
+        "off": 198,
+        "nome": "pausa_attesa_d6_2",
+        "desc": "Esegue un ciclo vuoto di attesa decrementando il registro D6.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "gestisci_input_doppio_buffer",
+    "desc": "Polling input joystick su due buffer alternati con attese temporizzate e gestione bit 0x80 per sincronizzazione.",
+    "conf": "da-verificare"
+  },
+  "CALL_00B25A": {
+    "loro_addr": "0x0b35a",
+    "loro_nome": "aggiorna_scorrimento_buffer_dati",
+    "loro_desc": "Gestisce scorrimento elementi nei buffer dati in base a contatori, livello e flag, con timer CIA.",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xa978",
+      "0xd340"
+    ],
+    "name": "aggiorna_scorrimento_buffer_dati",
+    "desc": "Gestisce scorrimento elementi nei buffer dati in base a contatori, livello e flag, con timer CIA.",
+    "conf": "da-verificare"
+  },
+  "CALL_00B452": {
+    "loro_addr": "0x0b552",
+    "loro_nome": "riempi_schermo_colore_7",
+    "loro_desc": "Imposta i bitplane della memoria video per riempire lo schermo con il colore 7.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "riempi_schermo_colore_7",
+    "desc": "Imposta i bitplane della memoria video per riempire lo schermo con il colore 7.",
+    "conf": "low"
+  },
+  "CALL_00B47A": {
+    "loro_addr": "0x0b57a",
+    "loro_nome": "riempi_schermo_colore_2",
+    "loro_desc": "Imposta i bitplane della memoria video per riempire lo schermo con il colore 2.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "riempi_schermo_colore_2",
+    "desc": "Imposta i bitplane della memoria video per riempire lo schermo con il colore 2.",
+    "conf": "low"
+  },
+  "CALL_00BC3E": {
+    "loro_addr": "0x0bd3e",
+    "loro_nome": "attendi_pressione_fuoco",
+    "loro_desc": "Cicla in lettura joystick fino a rilevare pressione tasto fuoco, poi azzera il codice azione.",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xbb76"
+    ],
+    "name": "attendi_pressione_fuoco",
+    "desc": "Cicla in lettura joystick fino a rilevare pressione tasto fuoco, poi azzera il codice azione.",
+    "conf": "low"
+  },
+  "CALL_00C226": {
+    "loro_addr": "0x0c326",
+    "loro_nome": "renderizza_bitmap_testo_e_copia_schermo",
+    "loro_desc": "Disegna bitmap mascherata, visualizza testo con font, processa testo formattato, copia schermo e imposta colori copper",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb57e",
+      "0xbe52",
+      "0xc3f4",
+      "0xd340",
+      "0xd538",
+      "0xdb62"
+    ],
+    "name": "renderizza_bitmap_testo_e_copia_schermo",
+    "desc": "Disegna bitmap mascherata, visualizza testo con font, processa testo formattato, copia schermo e imposta colori copper",
+    "conf": "low"
+  },
+  "CALL_00C276": {
+    "loro_addr": "0x0c376",
+    "loro_nome": "schermata_menu_controllo_testo",
+    "loro_desc": "Gestisce menu controllo con transizione, doppio testo formattato, inizializzazione elemento, audio e transizione finale",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xc328"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x0c37e",
+        "off": 8,
+        "nome": "visualizza_schermata_testo_con_grafica",
+        "desc": "Renderizza testo formattato con font, disegna grafica mascherata, imposta colori copper e avvia audio",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0c428",
+        "off": 178,
+        "nome": "esegue_transizione_schermo_testo_bitmap",
+        "desc": "Esegue transizione schermo: fade-out colori, pulizia, bitmap mascherata, rendering testo da tabella, griglia glifi, test",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0c4f4",
+        "off": 382,
+        "nome": "visualizza_testo_con_font_attivo",
+        "desc": "Attiva flag selezione font, processa e visualizza testo formattato con codici controllo, poi disattiva flag",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0c50e",
+        "off": 408,
+        "nome": "renderizza_testo_da_tabella",
+        "desc": "Analizza stringhe di controllo, per ciascuna legge valori da tabella 4 byte e cancella il resto riga.",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0c550",
+        "off": 474,
+        "nome": "inizializza_elemento_controllo_attivo",
+        "desc": "Seleziona l'elemento UI attivo in base a tipo_controllo, imposta dimensioni finestra 5x48 caratteri.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "schermata_menu_controllo_testo",
+    "desc": "Gestisce menu controllo con transizione, doppio testo formattato, inizializzazione elemento, audio e transizione finale",
+    "conf": "da-verificare"
+  },
+  "CALL_00C61C": {
+    "loro_addr": "0x0c71c",
+    "loro_nome": "sequenza_intro_gioco_completa",
+    "loro_desc": "Sequenza intro completa con ramificazione modalità testo: fade, riempimento, testi, immagini, 4 bitmap, audio finale",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x9074",
+      "0xb432",
+      "0xb452",
+      "0xb510",
+      "0xb57e",
+      "0xbe52",
+      "0xc3f4",
+      "0xc40e",
+      "0xc5d8",
+      "0xd538",
+      "0xdb62",
+      "0x136a4"
+    ],
+    "name": "sequenza_intro_gioco_completa",
+    "desc": "Sequenza intro completa con ramificazione modalità testo: fade, riempimento, testi, immagini, 4 bitmap, audio finale",
+    "conf": "low"
+  },
+  "CALL_0137A4": {
+    "loro_addr": "0x138a4",
+    "loro_nome": "esegui_intro_hamster_attendi_fuoco",
+    "loro_desc": "Avvia sequenza audio intro hamster, sincronizza col pennello video e attende pressione fuoco joystick",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb3a4",
+      "0x12f5a"
+    ],
+    "name": "esegui_intro_hamster_attendi_fuoco",
+    "desc": "Avvia sequenza audio intro hamster, sincronizza col pennello video e attende pressione fuoco joystick",
+    "conf": "low"
+  },
+  "FUN_0000859a": {
+    "loro_addr": "0x0869a",
+    "loro_nome": "somma_bcd_8_cifre",
+    "loro_desc": "Esegue la somma BCD a 8 cifre tra due buffer di byte con gestione del riporto.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "somma_bcd_8_cifre",
+    "desc": "Esegue la somma BCD a 8 cifre tra due buffer di byte con gestione del riporto.",
+    "conf": "low"
+  },
+  "FUN_000085e2": {
+    "loro_addr": "0x086e2",
+    "loro_nome": "aggiorna_interfaccia_e_grafica_base",
+    "loro_desc": "Aggiorna interfaccia completa e copia grafica base (707c6) nel buffer video",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xdaac",
+      "0xdb12"
+    ],
+    "name": "aggiorna_interfaccia_e_grafica_base",
+    "desc": "Aggiorna interfaccia completa e copia grafica base (707c6) nel buffer video",
+    "conf": "low"
+  },
+  "FUN_00008694": {
+    "loro_addr": "0x08794",
+    "loro_nome": "azzera_buffer_8_byte_soldi",
+    "loro_desc": "Azzera un buffer di 8 byte situato all'indirizzo 123ca.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "azzera_buffer_8_byte_soldi",
+    "desc": "Azzera un buffer di 8 byte situato all'indirizzo 123ca.",
+    "conf": "low"
+  },
+  "FUN_0000869a": {
+    "loro_addr": "0x0879a",
+    "loro_nome": "azzera_buffer_8_byte",
+    "loro_desc": "Azzera 8 byte di memoria a partire dall'indirizzo specificato nel puntatore.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "loro_sub": [
+      {
+        "addr": "0x0879c",
+        "off": 2,
+        "nome": "azzera_memoria_d4_byte",
+        "desc": "Azzera un numero di byte specificato dal registro D4 a partire dal puntatore A3.",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0879e",
+        "off": 4,
+        "nome": "riempi_memoria_byte_d6",
+        "desc": "Riempie un blocco di memoria di dimensione D4 con il valore byte D6.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "azzera_buffer_8_byte",
+    "desc": "Azzera 8 byte di memoria a partire dall'indirizzo specificato nel puntatore.",
+    "conf": "da-verificare"
+  },
+  "FUN_000086aa": {
+    "loro_addr": "0x087aa",
+    "loro_nome": "sottrai_soldi_gestisci_underflow",
+    "loro_desc": "Sottrae una quantita BCD e se il saldo diventa negativo attiva il flag e azzera.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "sottrai_soldi_gestisci_underflow",
+    "desc": "Sottrae una quantita BCD e se il saldo diventa negativo attiva il flag e azzera.",
+    "conf": "low",
+    "c_best_pct": 14.29,
+    "c_best_src": "agent/work/FUN_000086aa/cand.c"
+  },
+  "FUN_000086c6": {
+    "loro_addr": "0x087c6",
+    "loro_nome": "verifica_e_aggiorna_saldo_soldi",
+    "loro_desc": "Sottrae importi BCD, imposta flag saldo negativo se serve e aggiorna interfaccia",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x85e2",
+      "0x8694",
+      "0x86ea"
+    ],
+    "name": "verifica_e_aggiorna_saldo_soldi",
+    "desc": "Sottrae importi BCD, imposta flag saldo negativo se serve e aggiorna interfaccia",
+    "conf": "low"
+  },
+  "FUN_000086ea": {
+    "loro_addr": "0x087ea",
+    "loro_nome": "sottrazione_bcd_8_cifre",
+    "loro_desc": "Sottrae due numeri BCD a 8 cifre e imposta un flag se si verifica un prestito finale.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "sottrazione_bcd_8_cifre",
+    "desc": "Sottrae due numeri BCD a 8 cifre e imposta un flag se si verifica un prestito finale.",
+    "conf": "low"
+  },
+  "FUN_00008742": {
+    "loro_addr": "0x08842",
+    "loro_nome": "processa_elenco_stringhe",
+    "loro_desc": "Scorre un elenco di stringhe formattate e le copia nel buffer di testo fino al terminatore 0xFF.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xd4ca",
+      "0xd4de",
+      "0xd63e"
+    ],
+    "name": "processa_elenco_stringhe",
+    "desc": "Scorre un elenco di stringhe formattate e le copia nel buffer di testo fino al terminatore 0xFF.",
+    "conf": "low"
+  },
+  "FUN_000087a8": {
+    "loro_addr": "0x088a8",
+    "loro_nome": "gestisci_input_testo_menu_validato",
+    "loro_desc": "Gestisce input testo in riquadro menu con validazione caratteri e refresh schermo",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xcf84",
+      "0xdaac",
+      "0xdb12"
+    ],
+    "name": "gestisci_input_testo_menu_validato",
+    "desc": "Gestisce input testo in riquadro menu con validazione caratteri e refresh schermo",
+    "conf": "low"
+  },
+  "FUN_00008854": {
+    "loro_addr": "0x08954",
+    "loro_nome": "copia_e_processa_stringhe_ff",
+    "loro_desc": "Copia stringhe terminate da 0xFF da D5 a A3, gestendo byte con bit 0x80 che attivano timer e salto stringhe.",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xd340",
+      "0xd4ca"
+    ],
+    "name": "copia_e_processa_stringhe_ff",
+    "desc": "Copia stringhe terminate da 0xFF da D5 a A3, gestendo byte con bit 0x80 che attivano timer e salto stringhe.",
+    "conf": "low"
+  },
+  "FUN_00008c08": {
+    "loro_addr": "0x08d08",
+    "loro_nome": "azzera_tre_buffer_8_byte",
+    "loro_desc": "Azzera tre buffer consecutivi da 8 byte ciascuno richiamando tre volte la funzione di azzeramento.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0x869a"
+    ],
+    "name": "azzera_tre_buffer_8_byte",
+    "desc": "Azzera tre buffer consecutivi da 8 byte ciascuno richiamando tre volte la funzione di azzeramento.",
+    "conf": "low"
+  },
+  "FUN_0000908c": {
+    "loro_addr": "0x0918c",
+    "loro_nome": "incrementa_valore_128cd",
+    "loro_desc": "Incrementa la variabile 128cd fino a 10 volte se diversa da 255.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "incrementa_valore_128cd",
+    "desc": "Incrementa la variabile 128cd fino a 10 volte se diversa da 255.",
+    "conf": "low",
+    "c_best_pct": 45.83,
+    "c_best_src": "agent/work/FUN_0000908c/cand.c"
+  },
+  "FUN_000090ce": {
+    "loro_addr": "0x091ce",
+    "loro_nome": "decrementa_livello_129c3",
+    "loro_desc": "Decrementa la variabile 129c3 fino a un valore minimo di 0.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "decrementa_livello_129c3",
+    "desc": "Decrementa la variabile 129c3 fino a un valore minimo di 0.",
+    "conf": "low"
+  },
+  "FUN_000095cc": {
+    "loro_addr": "0x096cc",
+    "loro_nome": "carica_record_tabella_tesi",
+    "loro_desc": "Copia un elemento di 30 byte dalla tabella tesi nel buffer di lavoro 1283e.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "carica_record_tabella_tesi",
+    "desc": "Copia un elemento di 30 byte dalla tabella tesi nel buffer di lavoro 1283e.",
+    "conf": "low"
+  },
+  "FUN_0000983c": {
+    "loro_addr": "0x0993c",
+    "loro_nome": "attendi_rilascio_pulsante_mouse",
+    "loro_desc": "Attende il rilascio dei pulsanti del mouse e aggiorna lo stato degli input.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "attendi_rilascio_pulsante_mouse",
+    "desc": "Attende il rilascio dei pulsanti del mouse e aggiorna lo stato degli input.",
+    "conf": "low"
+  },
+  "FUN_00009844": {
+    "loro_addr": "0x09944",
+    "loro_nome": "menu_attendi_scelta",
+    "loro_desc": "aspetta il rilascio del fuoco e la fine della pausa, poi gestisce il menu; restituisce la scelta in d6",
+    "loro_fonte": "manuale",
+    "loro_chiama": [
+      "0xb3a4",
+      "0xd716",
+      "0xd84a"
+    ],
+    "name": "menu_attendi_scelta",
+    "desc": "aspetta il rilascio del fuoco e la fine della pausa, poi gestisce il menu; restituisce la scelta in d6",
+    "conf": "med"
+  },
+  "FUN_0000988e": {
+    "loro_addr": "0x0998e",
+    "loro_nome": "attesa_rilascio_tasto_destro_mouse",
+    "loro_desc": "Se il tasto destro del mouse e' premuto, attende 9 mezzi frame e poi resetta il flag.",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb84a"
+    ],
+    "name": "attesa_rilascio_tasto_destro_mouse",
+    "desc": "Se il tasto destro del mouse e' premuto, attende 9 mezzi frame e poi resetta il flag.",
+    "conf": "low"
+  },
+  "FUN_00009ac8": {
+    "loro_addr": "0x09bc8",
+    "loro_nome": "seleziona_font_ripetuto",
+    "loro_desc": "Chiama seleziona_font per D6 volte consecutive per impostare una sequenza di glifi.",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb616"
+    ],
+    "name": "seleziona_font_ripetuto",
+    "desc": "Chiama seleziona_font per D6 volte consecutive per impostare una sequenza di glifi.",
+    "conf": "low"
+  },
+  "FUN_00009b92": {
+    "loro_addr": "0x09c92",
+    "loro_nome": "aggiorna_stato_ciclo_gioco_principale",
+    "loro_desc": "Gestisce contatori font e sequenze audio; allo step 4 processa soldi BCD e messaggi, allo step 6 avvia gestione fine turno e classifiche",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x859a",
+      "0x869a",
+      "0x86aa",
+      "0x8c08",
+      "0x9ada",
+      "0xab94",
+      "0xc01c",
+      "0xd24c",
+      "0xd4f4",
+      "0xd714"
+    ],
+    "name": "aggiorna_stato_ciclo_gioco_principale",
+    "desc": "Gestisce contatori font e sequenze audio; allo step 4 processa soldi BCD e messaggi, allo step 6 avvia gestione fine turno e classifiche",
+    "conf": "da-verificare"
+  },
+  "FUN_00009fcc": {
+    "loro_addr": "0x0a0cc",
+    "loro_nome": "pausa_ciclo_d6",
+    "loro_desc": "Esegue un breve ciclo di ritardo decrementando il registro D6.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "pausa_ciclo_d6",
+    "desc": "Esegue un breve ciclo di ritardo decrementando il registro D6.",
+    "conf": "low",
+    "c_best_pct": 0.0,
+    "c_best_src": "agent/work/FUN_00009fcc/cand.c"
+  },
+  "FUN_0000a486": {
+    "loro_addr": "0x0a586",
+    "loro_nome": "somma_valore_tabella_128ba",
+    "loro_desc": "Somma alla variabile 128be un valore letto dalla tabella 128ba all'offset A3.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "somma_valore_tabella_128ba",
+    "desc": "Somma alla variabile 128be un valore letto dalla tabella 128ba all'offset A3.",
+    "conf": "low",
+    "c_best_pct": 3.57,
+    "c_best_src": "agent/work/FUN_0000a486/cand.c"
+  },
+  "FUN_0000a516": {
+    "loro_addr": "0x0a616",
+    "loro_nome": "addebita_somma_con_underflow",
+    "loro_desc": "Azzera il buffer temporaneo, attiva il flag e sottrae una somma in BCD gestendo l'eventuale underflow.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0x869a",
+      "0x86aa"
+    ],
+    "name": "addebita_somma_con_underflow",
+    "desc": "Azzera il buffer temporaneo, attiva il flag e sottrae una somma in BCD gestendo l'eventuale underflow.",
+    "conf": "low",
+    "c_best_pct": 15.38,
+    "c_best_src": "agent/work/FUN_0000a516/cand.c"
+  },
+  "FUN_0000a800": {
+    "loro_addr": "0x0a900",
+    "loro_nome": "prepara_copia_stringhe_ff",
+    "loro_desc": "Inizializza buffer destinazione, itera contatore saltando terminatori 0xFF su stringa vuota, poi invoca copia e processamento",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x8854"
+    ],
+    "name": "prepara_copia_stringhe_ff",
+    "desc": "Inizializza buffer destinazione, itera contatore saltando terminatori 0xFF su stringa vuota, poi invoca copia e processamento",
+    "conf": "low"
+  },
+  "FUN_0000a8cc": {
+    "loro_addr": "0x0a9cc",
+    "loro_nome": "renderizza_messaggio_completo",
+    "loro_desc": "Processa elenco stringhe, disegna sfondo area testo, stampa testo, copia schermo in buffer, imposta colori copper e avvia brano musicale",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x8742",
+      "0xbe52",
+      "0xd38e",
+      "0xd486",
+      "0xdb62",
+      "0x13930"
+    ],
+    "name": "renderizza_messaggio_completo",
+    "desc": "Processa elenco stringhe, disegna sfondo area testo, stampa testo, copia schermo in buffer, imposta colori copper e avvia brano musicale",
+    "conf": "low"
+  },
+  "FUN_0000aafc": {
+    "loro_addr": "0x0abfc",
+    "loro_nome": "inizializza_buffer_ciclico_timer_cia",
+    "loro_desc": "Inizializza puntatori buffer schermo e timer CIA per sincronizzazione frame animazioni cicliche a doppio buffer",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xa800",
+      "0xd340"
+    ],
+    "name": "inizializza_buffer_ciclico_timer_cia",
+    "desc": "Inizializza puntatori buffer schermo e timer CIA per sincronizzazione frame animazioni cicliche a doppio buffer",
+    "conf": "low"
+  },
+  "FUN_0000ae8a": {
+    "loro_addr": "0x0af8a",
+    "loro_nome": "disegna_carattere_grafico",
+    "loro_desc": "Disegna carattere grafico con sfondo testo e rettangoli per i 4 bitplane",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb51a",
+      "0xd486"
+    ],
+    "name": "disegna_carattere_grafico",
+    "desc": "Disegna carattere grafico con sfondo testo e rettangoli per i 4 bitplane",
+    "conf": "low"
+  },
+  "FUN_0000af24": {
+    "loro_addr": "0x0b024",
+    "loro_nome": "disegna_simbolo_grafico",
+    "loro_desc": "Disegna simbolo grafico selezionando sorgente in base al carattere input",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb51a"
+    ],
+    "name": "disegna_simbolo_grafico",
+    "desc": "Disegna simbolo grafico selezionando sorgente in base al carattere input",
+    "conf": "da-verificare"
+  },
+  "FUN_0000b0f6": {
+    "loro_addr": "0x0b1f6",
+    "loro_nome": "calcola_posizione_cursore_menu",
+    "loro_desc": "Confronta sommatore e cursore Y contro tabelle soglia, imposta indici e timer per navigazione menu.",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xd340"
+    ],
+    "name": "calcola_posizione_cursore_menu",
+    "desc": "Confronta sommatore e cursore Y contro tabelle soglia, imposta indici e timer per navigazione menu.",
+    "conf": "low"
+  },
+  "FUN_0000b4a2": {
+    "loro_addr": "0x0b5a2",
+    "loro_nome": "attendi_mezzoframe",
+    "loro_desc": "Attende il passaggio del pennello video per sincronizzazione a mezzoframe",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb3a4"
+    ],
+    "name": "attendi_mezzoframe",
+    "desc": "Attende il passaggio del pennello video per sincronizzazione a mezzoframe",
+    "conf": "low"
+  },
+  "FUN_0000b4b0": {
+    "loro_addr": "0x0b5b0",
+    "loro_nome": "calcola_indirizzo_video",
+    "loro_desc": "Funzione wrapper che calcola l'indirizzo di memoria video corrispondente alle coordinate sullo schermo.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xb4d0"
+    ],
+    "name": "calcola_indirizzo_video",
+    "desc": "Funzione wrapper che calcola l'indirizzo di memoria video corrispondente alle coordinate sullo schermo.",
+    "conf": "low",
+    "c_best_pct": 6.67,
+    "c_best_src": "agent/work/FUN_0000b4b0/cand.c"
+  },
+  "FUN_0000b4ce": {
+    "loro_addr": "0x0b5ce",
+    "loro_nome": "maschera_byte_superiore_d4",
+    "loro_desc": "Applica una maschera 0xFF00 al registro D4 ritornando il byte piu significativo.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "maschera_byte_superiore_d4",
+    "desc": "Applica una maschera 0xFF00 al registro D4 ritornando il byte piu significativo.",
+    "conf": "low"
+  },
+  "FUN_0000b4d0": {
+    "loro_addr": "0x0b5d0",
+    "loro_nome": "indirizzo_schermo",
+    "loro_desc": "calcola l'indirizzo nello schermo (40 byte/riga, 8000 byte/piano)",
+    "loro_fonte": "manuale",
+    "loro_chiama": [],
+    "name": "indirizzo_schermo",
+    "desc": "calcola l'indirizzo nello schermo (40 byte/riga, 8000 byte/piano)",
+    "conf": "med"
+  },
+  "FUN_0000b510": {
+    "loro_addr": "0x0b610",
+    "loro_nome": "disegna_immagine_4_bitplane",
+    "loro_desc": "Disegna un'immagine rettangolare dai dati in A0 sui 4 bitplane dello schermo.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "disegna_immagine_4_bitplane",
+    "desc": "Disegna un'immagine rettangolare dai dati in A0 sui 4 bitplane dello schermo.",
+    "conf": "low"
+  },
+  "FUN_0000b51a": {
+    "loro_addr": "0x0b61a",
+    "loro_nome": "disegna_rettangolo_grafico",
+    "loro_desc": "Copia una regione di memoria grafica nei 4 bitplanes dello schermo per la larghezza e altezza specificate.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xb4d0"
+    ],
+    "name": "disegna_rettangolo_grafico",
+    "desc": "Copia una regione di memoria grafica nei 4 bitplanes dello schermo per la larghezza e altezza specificate.",
+    "conf": "low"
+  },
+  "FUN_0000b57e": {
+    "loro_addr": "0x0b67e",
+    "loro_nome": "disegna_bitmap_mascherata",
+    "loro_desc": "Disegna una bitmap con maschera di trasparenza su quattro bitplane dello schermo.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "disegna_bitmap_mascherata",
+    "desc": "Disegna una bitmap con maschera di trasparenza su quattro bitplane dello schermo.",
+    "conf": "low"
+  },
+  "FUN_0000b588": {
+    "loro_addr": "0x0b688",
+    "loro_nome": "disegna_grafica_mascherata",
+    "loro_desc": "Disegna un'immagine grafica mascherata sui 4 bitplanes per sovrapporre elementi visivi allo sfondo.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xb4d0"
+    ],
+    "name": "disegna_grafica_mascherata",
+    "desc": "Disegna un'immagine grafica mascherata sui 4 bitplanes per sovrapporre elementi visivi allo sfondo.",
+    "conf": "low"
+  },
+  "FUN_0000b616": {
+    "loro_addr": "0x0b716",
+    "loro_nome": "seleziona_font",
+    "loro_desc": "sceglie il font (piccolo a $c7c5, 6 byte/carattere) e il glifo",
+    "loro_fonte": "manuale",
+    "loro_chiama": [
+      "0xb68e",
+      "0xb78a"
+    ],
+    "name": "seleziona_font",
+    "desc": "sceglie il font (piccolo a $c7c5, 6 byte/carattere) e il glifo",
+    "conf": "med"
+  },
+  "FUN_0000b68e": {
+    "loro_addr": "0x0b78e",
+    "loro_nome": "disegna_glifo",
+    "loro_desc": "disegna un carattere nei 4 bitplane",
+    "loro_fonte": "manuale",
+    "loro_chiama": [
+      "0xb4d0"
+    ],
+    "name": "disegna_glifo",
+    "desc": "disegna un carattere nei 4 bitplane",
+    "conf": "med"
+  },
+  "FUN_0000b710": {
+    "loro_addr": "0x0b810",
+    "loro_nome": "disegna_area_invertita_bitplane",
+    "loro_desc": "Disegna area rettangolare invertendo i pixel sui 4 bitplane dello schermo",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb4b0"
+    ],
+    "name": "disegna_area_invertita_bitplane",
+    "desc": "Disegna area rettangolare invertendo i pixel sui 4 bitplane dello schermo",
+    "conf": "low"
+  },
+  "FUN_0000b782": {
+    "loro_addr": "0x0b882",
+    "loro_nome": "attendi_timer_ciaa",
+    "loro_desc": "Funzione vuota usata come segnaposto per la gestione del timer CIAA TODLO.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "attendi_timer_ciaa",
+    "desc": "Funzione vuota usata come segnaposto per la gestione del timer CIAA TODLO.",
+    "conf": "low"
+  },
+  "FUN_0000b78a": {
+    "loro_addr": "0x0b88a",
+    "loro_nome": "disegna_sfondo_carattere",
+    "loro_desc": "riempie lo sfondo della cella di un carattere",
+    "loro_fonte": "manuale",
+    "loro_chiama": [
+      "0xb4ce"
+    ],
+    "name": "disegna_sfondo_carattere",
+    "desc": "riempie lo sfondo della cella di un carattere",
+    "conf": "med"
+  },
+  "FUN_0000b84a": {
+    "loro_addr": "0x0b94a",
+    "loro_nome": "pausa_breve",
+    "loro_desc": "5 x attendi_passaggio_pennello",
+    "loro_fonte": "manuale",
+    "loro_chiama": [
+      "0xb3a4"
+    ],
+    "name": "pausa_breve",
+    "desc": "5 x attendi_passaggio_pennello",
+    "conf": "med"
+  },
+  "FUN_0000bb76": {
+    "loro_addr": "0x0bc76",
+    "loro_nome": "leggi_input_joystick_fuoco",
+    "loro_desc": "Legge stato joystick e tasto fuoco, imposta codice azione in base a input",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb3a4"
+    ],
+    "name": "leggi_input_joystick_fuoco",
+    "desc": "Legge stato joystick e tasto fuoco, imposta codice azione in base a input",
+    "conf": "da-verificare"
+  },
+  "FUN_0000bc54": {
+    "loro_addr": "0x0bd54",
+    "loro_nome": "aggiorna_scorrimento_tavolozza",
+    "loro_desc": "Aggiorna coordinata schermo e ricarica tavolozza per scorrimento fluido",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb3a4",
+      "0xbd8e"
+    ],
+    "name": "aggiorna_scorrimento_tavolozza",
+    "desc": "Aggiorna coordinata schermo e ricarica tavolozza per scorrimento fluido",
+    "conf": "low"
+  },
+  "FUN_0000bcea": {
+    "loro_addr": "0x0bdea",
+    "loro_nome": "aggiorna_bitplane_e_grafica",
+    "loro_desc": "Duplica i dati del primo bitplane nel secondo per un'area verticale e aggiorna i buffer grafici.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xb4ce",
+      "0xda70",
+      "0xdb12"
+    ],
+    "name": "aggiorna_bitplane_e_grafica",
+    "desc": "Duplica i dati del primo bitplane nel secondo per un'area verticale e aggiorna i buffer grafici.",
+    "conf": "low"
+  },
+  "FUN_0000bd5a": {
+    "loro_addr": "0x0be5a",
+    "loro_nome": "copia_bitplane_2_in_1",
+    "loro_desc": "Copia i dati dal terzo bitplane (offset 16000) nel secondo bitplane (offset 8000) per le righe specificate.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xb4ce"
+    ],
+    "name": "copia_bitplane_2_in_1",
+    "desc": "Copia i dati dal terzo bitplane (offset 16000) nel secondo bitplane (offset 8000) per le righe specificate.",
+    "conf": "low"
+  },
+  "FUN_0000bd8e": {
+    "loro_addr": "0x0be8e",
+    "loro_nome": "carica_tavolozza_schermo_1",
+    "loro_desc": "Configura i registri e copia una tavolozza di 16 colori nella memoria Copper a $300.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "carica_tavolozza_schermo_1",
+    "desc": "Configura i registri e copia una tavolozza di 16 colori nella memoria Copper a $300.",
+    "conf": "low"
+  },
+  "FUN_0000bdc4": {
+    "loro_addr": "0x0bec4",
+    "loro_nome": "carica_tavolozza_schermo_2",
+    "loro_desc": "Copia una tavolozza alternativa di 16 colori nella memoria Copper all'indirizzo $304.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "carica_tavolozza_schermo_2",
+    "desc": "Copia una tavolozza alternativa di 16 colori nella memoria Copper all'indirizzo $304.",
+    "conf": "low"
+  },
+  "FUN_0000be52": {
+    "loro_addr": "0x0bf52",
+    "loro_nome": "imposta_colori_copper_4",
+    "loro_desc": "Copia 16 valori di colore dalla sorgente bf6c nei registri colore della Copper list.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "imposta_colori_copper_4",
+    "desc": "Copia 16 valori di colore dalla sorgente bf6c nei registri colore della Copper list.",
+    "conf": "low",
+    "c_best_pct": 4.55,
+    "c_best_src": "agent/work/FUN_0000be52/cand.c"
+  },
+  "FUN_0000bf0c": {
+    "loro_addr": "0x0c00c",
+    "loro_nome": "renderizza_schermo_completo_con_colori",
+    "loro_desc": "Renderizza schermo completo: copia grafica, scena, interfaccia, buffer, colori copper",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xbe52",
+      "0xd9d2",
+      "0xda48",
+      "0xdaac",
+      "0xdb62"
+    ],
+    "name": "renderizza_schermo_completo_con_colori",
+    "desc": "Renderizza schermo completo: copia grafica, scena, interfaccia, buffer, colori copper",
+    "conf": "low",
+    "c_best_pct": 3.57,
+    "c_best_src": "agent/work/FUN_0000bf0c/cand.c"
+  },
+  "FUN_0000bf28": {
+    "loro_addr": "0x0c028",
+    "loro_nome": "disegna_elementi_controllo_mascherati",
+    "loro_desc": "Disegna grafica mascherata per tutti gli elementi di controllo attivi",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb588",
+      "0xc464"
+    ],
+    "name": "disegna_elementi_controllo_mascherati",
+    "desc": "Disegna grafica mascherata per tutti gli elementi di controllo attivi",
+    "conf": "da-verificare"
+  },
+  "FUN_0000c00e": {
+    "loro_addr": "0x0c10e",
+    "loro_nome": "attiva_stato_audio",
+    "loro_desc": "Imposta a 1 il flag dello stato audio ed esegue una routine neutra di completamento.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xd714"
+    ],
+    "name": "attiva_stato_audio",
+    "desc": "Imposta a 1 il flag dello stato audio ed esegue una routine neutra di completamento.",
+    "conf": "low"
+  },
+  "FUN_0000c01c": {
+    "loro_addr": "0x0c11c",
+    "loro_nome": "resetta_stato_audio",
+    "loro_desc": "Azzera la variabile di stato 128aa e richiama la routine di sincronizzazione.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "resetta_stato_audio",
+    "desc": "Azzera la variabile di stato 128aa e richiama la routine di sincronizzazione.",
+    "conf": "low"
+  },
+  "FUN_0000c020": {
+    "loro_addr": "0x0c120",
+    "loro_nome": "inizializza_schermo_audio_e_renderizza",
+    "loro_desc": "Inizializza schermo, avvia due sequenze audio buffer ausiliario, attiva flag, renderizza scena e copia grafica",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xd23a",
+      "0xd4f4",
+      "0xd9d2",
+      "0xda70",
+      "0x137f2"
+    ],
+    "name": "inizializza_schermo_audio_e_renderizza",
+    "desc": "Inizializza schermo, avvia due sequenze audio buffer ausiliario, attiva flag, renderizza scena e copia grafica",
+    "conf": "low"
+  },
+  "FUN_0000c046": {
+    "loro_addr": "0x0c146",
+    "loro_nome": "aggiorna_schermo_base_grafica",
+    "loro_desc": "Disabilita flag stato, renderizza scena condizionale con ritardo e copia grafica di base (0x6f8c6) nel buffer video",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xd244",
+      "0xd9d2",
+      "0xda70"
+    ],
+    "name": "aggiorna_schermo_base_grafica",
+    "desc": "Disabilita flag stato, renderizza scena condizionale con ritardo e copia grafica di base (0x6f8c6) nel buffer video",
+    "conf": "low"
+  },
+  "FUN_0000c054": {
+    "loro_addr": "0x0c154",
+    "loro_nome": "cancella_indicatori_schermo",
+    "loro_desc": "Azzera bit specifici nei 4 bitplanes della memoria video per cancellare elementi o indicatori grafici.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xb4d0"
+    ],
+    "name": "cancella_indicatori_schermo",
+    "desc": "Azzera bit specifici nei 4 bitplanes della memoria video per cancellare elementi o indicatori grafici.",
+    "conf": "low"
+  },
+  "FUN_0000c464": {
+    "loro_addr": "0x0c564",
+    "loro_nome": "trova_elemento_e_imposta_finestra",
+    "loro_desc": "Trova il primo elemento attivo nell'array e imposta le dimensioni della finestra.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "trova_elemento_e_imposta_finestra",
+    "desc": "Trova il primo elemento attivo nell'array e imposta le dimensioni della finestra.",
+    "conf": "low"
+  },
+  "FUN_0000c4cc": {
+    "loro_addr": "0x0c5cc",
+    "loro_nome": "disegna_elementi_tabella_mascherati",
+    "loro_desc": "Disegna grafica mascherata per elementi usando parametri da tabella lookup",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb588",
+      "0xc464"
+    ],
+    "name": "disegna_elementi_tabella_mascherati",
+    "desc": "Disegna grafica mascherata per elementi usando parametri da tabella lookup",
+    "conf": "low"
+  },
+  "FUN_0000c52a": {
+    "loro_addr": "0x0c62a",
+    "loro_nome": "disegna_interfaccia_tipo_controllo",
+    "loro_desc": "Disegna interfaccia grafica variando parametri in base al tipo di controllo",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb510",
+      "0xb588",
+      "0xc464"
+    ],
+    "name": "disegna_interfaccia_tipo_controllo",
+    "desc": "Disegna interfaccia grafica variando parametri in base al tipo di controllo",
+    "conf": "low"
+  },
+  "FUN_0000cf84": {
+    "loro_addr": "0x0d084",
+    "loro_nome": "processa_input_testo_riquadro_menu",
+    "loro_desc": "Processa input tastiera in riquadro menu: buffer 30 char, backspace, invio, caratteri validi, refresh grafico",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb616",
+      "0xb78a",
+      "0xd024",
+      "0xd38e",
+      "0xd714",
+      "0xd716",
+      "0xdb12",
+      "0xdc2a"
+    ],
+    "name": "processa_input_testo_riquadro_menu",
+    "desc": "Processa input tastiera in riquadro menu: buffer 30 char, backspace, invio, caratteri validi, refresh grafico",
+    "conf": "low"
+  },
+  "FUN_0000d024": {
+    "loro_addr": "0x0d124",
+    "loro_nome": "inizializza_buffer_spazi",
+    "loro_desc": "Riempie un buffer di testo con 30 spazi e appone il terminatore 0xFF.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "inizializza_buffer_spazi",
+    "desc": "Riempie un buffer di testo con 30 spazi e appone il terminatore 0xFF.",
+    "conf": "low",
+    "c_best_pct": 15.0,
+    "c_best_src": "agent/work/FUN_0000d024/cand.c"
+  },
+  "FUN_0000d23a": {
+    "loro_addr": "0x0d33a",
+    "loro_nome": "attiva_flag_128b1",
+    "loro_desc": "Imposta a 1 il flag di stato DAT_000128b1.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "attiva_flag_128b1",
+    "desc": "Imposta a 1 il flag di stato DAT_000128b1.",
+    "conf": "da-verificare"
+  },
+  "FUN_0000d244": {
+    "loro_addr": "0x0d344",
+    "loro_nome": "disattiva_flag_128b1",
+    "loro_desc": "Azzera il flag di stato DAT_000128b1.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "disattiva_flag_128b1",
+    "desc": "Azzera il flag di stato DAT_000128b1.",
+    "conf": "low"
+  },
+  "FUN_0000d248": {
+    "loro_addr": "0x0d348",
+    "loro_nome": "attendi_input_gioco_con_timeout_59_frame",
+    "loro_desc": "Inizializza schermo e attende input joystick/fuoco per 59 frame (circa 1 sec) o fino a pressione tasto",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xd4f4"
+    ],
+    "name": "attendi_input_gioco_con_timeout_59_frame",
+    "desc": "Inizializza schermo e attende input joystick/fuoco per 59 frame (circa 1 sec) o fino a pressione tasto",
+    "conf": "low"
+  },
+  "FUN_0000d24c": {
+    "loro_addr": "0x0d34c",
+    "loro_nome": "pausa_messaggio",
+    "loro_desc": "pausa dopo un messaggio (65 pause brevi), interrompibile; con spazio premuto aspetta il rilascio",
+    "loro_fonte": "manuale",
+    "loro_chiama": [
+      "0xb84a",
+      "0xbb76"
+    ],
+    "name": "pausa_messaggio",
+    "desc": "pausa dopo un messaggio (65 pause brevi), interrompibile; con spazio premuto aspetta il rilascio",
+    "conf": "med"
+  },
+  "FUN_0000d340": {
+    "loro_addr": "0x0d440",
+    "loro_nome": "gestisci_timer_attesa_ciclica",
+    "loro_desc": "Gestisce attesa temporizzata CIA con indice buffer circolare per sincronizzazione",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xd34a"
+    ],
+    "name": "gestisci_timer_attesa_ciclica",
+    "desc": "Gestisce attesa temporizzata CIA con indice buffer circolare per sincronizzazione",
+    "conf": "low"
+  },
+  "FUN_0000d34a": {
+    "loro_addr": "0x0d44a",
+    "loro_nome": "gestisci_tempo_attesa_ciaa",
+    "loro_desc": "Imposta il contatore di attesa e attende il completamento dell'intervallo temporale tramite il timer CIAA.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xb782"
+    ],
+    "name": "gestisci_tempo_attesa_ciaa",
+    "desc": "Imposta il contatore di attesa e attende il completamento dell'intervallo temporale tramite il timer CIAA.",
+    "conf": "low"
+  },
+  "FUN_0000d38e": {
+    "loro_addr": "0x0d48e",
+    "loro_nome": "stampa_testo",
+    "loro_desc": "impagina e disegna un testo nel riquadro dei messaggi",
+    "loro_fonte": "manuale",
+    "loro_chiama": [
+      "0xb616",
+      "0xd498"
+    ],
+    "name": "stampa_testo",
+    "desc": "impagina e disegna un testo nel riquadro dei messaggi",
+    "conf": "med"
+  },
+  "FUN_0000d486": {
+    "loro_addr": "0x0d586",
+    "loro_nome": "disegna_sfondo_area_testo",
+    "loro_desc": "Legge le coordinate da una tabella a 4 byte e ridisegna lo sfondo dei caratteri nell'area delimitata.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xd6e4"
+    ],
+    "name": "disegna_sfondo_area_testo",
+    "desc": "Legge le coordinate da una tabella a 4 byte e ridisegna lo sfondo dei caratteri nell'area delimitata.",
+    "conf": "low"
+  },
+  "FUN_0000d498": {
+    "loro_addr": "0x0d598",
+    "loro_nome": "cancella_resto_riga",
+    "loro_desc": "pulisce la riga di testo dopo l'ultimo carattere",
+    "loro_fonte": "manuale",
+    "loro_chiama": [
+      "0xb78a"
+    ],
+    "name": "cancella_resto_riga",
+    "desc": "pulisce la riga di testo dopo l'ultimo carattere",
+    "conf": "med"
+  },
+  "FUN_0000d4ca": {
+    "loro_addr": "0x0d5ca",
+    "loro_nome": "avanza_puntatore_stringhe_ff",
+    "loro_desc": "Avanza il puntatore di memoria saltando un numero di stringhe terminate da 0xFF.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "avanza_puntatore_stringhe_ff",
+    "desc": "Avanza il puntatore di memoria saltando un numero di stringhe terminate da 0xFF.",
+    "conf": "low"
+  },
+  "FUN_0000d4de": {
+    "loro_addr": "0x0d5de",
+    "loro_nome": "avanza_puntatore_stringhe_bit7",
+    "loro_desc": "Avanza il puntatore di memoria saltando stringhe terminate da un carattere con bit 7 attivo.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "avanza_puntatore_stringhe_bit7",
+    "desc": "Avanza il puntatore di memoria saltando stringhe terminate da un carattere con bit 7 attivo.",
+    "conf": "low",
+    "c_best_pct": 0.0,
+    "c_best_src": "agent/work/FUN_0000d4de/cand.c"
+  },
+  "FUN_0000d63e": {
+    "loro_addr": "0x0d73e",
+    "loro_nome": "formatta_e_copia_stringa_in_buffer",
+    "loro_desc": "Formatta e accoda caratteri nel buffer 122c8 convertendo cifre e gestendo la punteggiatura.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "formatta_e_copia_stringa_in_buffer",
+    "desc": "Formatta e accoda caratteri nel buffer 122c8 convertendo cifre e gestendo la punteggiatura.",
+    "conf": "low"
+  },
+  "FUN_0000d6e4": {
+    "loro_addr": "0x0d7e4",
+    "loro_nome": "leggi_valore_tabella_4byte",
+    "loro_desc": "Cerca un record di 4 byte in una tabella e ne restituisce il terzo byte traslato di 8 bit.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "leggi_valore_tabella_4byte",
+    "desc": "Cerca un record di 4 byte in una tabella e ne restituisce il terzo byte traslato di 8 bit.",
+    "conf": "low"
+  },
+  "FUN_0000d714": {
+    "loro_addr": "0x0d814",
+    "loro_nome": "routine_vuota",
+    "loro_desc": "Funzione vuota usata come punto di ritorno neutro o segnaposto.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "routine_vuota",
+    "desc": "Funzione vuota usata come punto di ritorno neutro o segnaposto.",
+    "conf": "low"
+  },
+  "FUN_0000d716": {
+    "loro_addr": "0x0d816",
+    "loro_nome": "aggiorna_riquadro_menu_con_grafica",
+    "loro_desc": "Aggiorna riquadro menu: legge coordinate da tabella, pulisce bordi e riga, visualizza testo formattato, copia grafica condizionale nel buffer video",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xd498",
+      "0xd538",
+      "0xd6e4",
+      "0xd76c",
+      "0xda70",
+      "0xdb12"
+    ],
+    "name": "aggiorna_riquadro_menu_con_grafica",
+    "desc": "Aggiorna riquadro menu: legge coordinate da tabella, pulisce bordi e riga, visualizza testo formattato, copia grafica condizionale nel buffer video",
+    "conf": "low"
+  },
+  "FUN_0000d76c": {
+    "loro_addr": "0x0d86c",
+    "loro_nome": "pulisci_bordi_riquadro",
+    "loro_desc": "Pulisce i bordi esterni e i margini di un riquadro nei 4 bitplanes della memoria video.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xb4ce",
+      "0xb4d0"
+    ],
+    "name": "pulisci_bordi_riquadro",
+    "desc": "Pulisce i bordi esterni e i margini di un riquadro nei 4 bitplanes della memoria video.",
+    "conf": "da-verificare"
+  },
+  "FUN_0000d84a": {
+    "loro_addr": "0x0d94a",
+    "loro_nome": "ciclo_principale_menu_joystick",
+    "loro_desc": "Ciclo menu principale: aggiorna bitplane, tavolozza, input joystick, renderizza scena",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x988e",
+      "0xb3a4",
+      "0xbb76",
+      "0xbc54",
+      "0xbcea",
+      "0xbd5a",
+      "0xbd8e",
+      "0xbdc4",
+      "0xd9d2",
+      "0xda70",
+      "0xdaac",
+      "0xdb12"
+    ],
+    "name": "ciclo_principale_menu_joystick",
+    "desc": "Ciclo menu principale: aggiorna bitplane, tavolozza, input joystick, renderizza scena",
+    "conf": "low"
+  },
+  "FUN_0000d928": {
+    "loro_addr": "0x0da28",
+    "loro_nome": "disegna_strati_grafici_mascherati",
+    "loro_desc": "Disegna elementi tabella (contatore=4) o controlli (contatore=2), poi sempre bitmap principale mascherata.",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb57e",
+      "0xbf28",
+      "0xc4cc"
+    ],
+    "name": "disegna_strati_grafici_mascherati",
+    "desc": "Disegna elementi tabella (contatore=4) o controlli (contatore=2), poi sempre bitmap principale mascherata.",
+    "conf": "low"
+  },
+  "FUN_0000d994": {
+    "loro_addr": "0x0da94",
+    "loro_nome": "renderizza_strati_grafici_con_ritardo",
+    "loro_desc": "Esegue ritardo software, copia bitplane intercalati e disegna strati grafici mascherati (tabella/controlli + bitmap principale)",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xd928",
+      "0xd9a6",
+      "0xda5a"
+    ],
+    "name": "renderizza_strati_grafici_con_ritardo",
+    "desc": "Esegue ritardo software, copia bitplane intercalati e disegna strati grafici mascherati (tabella/controlli + bitmap principale)",
+    "conf": "low"
+  },
+  "FUN_0000d9a6": {
+    "loro_addr": "0x0daa6",
+    "loro_nome": "ritardo_ciclo_contatore",
+    "loro_desc": "Esegue un ciclo di attesa software decrementando il contatore fino a 1.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "ritardo_ciclo_contatore",
+    "desc": "Esegue un ciclo di attesa software decrementando il contatore fino a 1.",
+    "conf": "low"
+  },
+  "FUN_0000d9d2": {
+    "loro_addr": "0x0dad2",
+    "loro_nome": "renderizza_scena_condizionale",
+    "loro_desc": "Ritardo e copia bitplane, poi disegna strati mascherati; in base a flag schermo e contatore sceglie immagine o bitmap mascherata, e a contatore=4 elementi tabel",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb510",
+      "0xb57e",
+      "0xc4cc",
+      "0xd928",
+      "0xd9a6",
+      "0xda5a"
+    ],
+    "name": "renderizza_scena_condizionale",
+    "desc": "Ritardo e copia bitplane, poi disegna strati mascherati; in base a flag schermo e contatore sceglie immagine o bitmap mascherata, e a contatore=4 elementi tabel",
+    "conf": "low"
+  },
+  "FUN_0000da48": {
+    "loro_addr": "0x0db48",
+    "loro_nome": "copia_grafica_5c70a_su_schermo",
+    "loro_desc": "Copia blocchi di dati grafici da 5c70a nei 4 bitplane della memoria video.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "copia_grafica_5c70a_su_schermo",
+    "desc": "Copia blocchi di dati grafici da 5c70a nei 4 bitplane della memoria video.",
+    "conf": "low"
+  },
+  "FUN_0000da5a": {
+    "loro_addr": "0x0db5a",
+    "loro_nome": "copia_interleaved_bitplane_custom",
+    "loro_desc": "Copia una quantita' di word specificata distribuendo i dati nei 4 bitplane.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "copia_interleaved_bitplane_custom",
+    "desc": "Copia una quantita' di word specificata distribuendo i dati nei 4 bitplane.",
+    "conf": "low"
+  },
+  "FUN_0000da70": {
+    "loro_addr": "0x0db70",
+    "loro_nome": "copia_grafica_6f8c6_in_buffer_video",
+    "loro_desc": "Copia 1920 word di dati grafici da 6f8c6 nel buffer video con offset 0x780.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "copia_grafica_6f8c6_in_buffer_video",
+    "desc": "Copia 1920 word di dati grafici da 6f8c6 nel buffer video con offset 0x780.",
+    "conf": "low"
+  },
+  "FUN_0000da8e": {
+    "loro_addr": "0x0db8e",
+    "loro_nome": "copia_parziale_grafica_6f8c6",
+    "loro_desc": "Copia 320 word di dati grafici da 6f8c6 nel buffer video con offset 0x780.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "copia_parziale_grafica_6f8c6",
+    "desc": "Copia 320 word di dati grafici da 6f8c6 nel buffer video con offset 0x780.",
+    "conf": "low"
+  },
+  "FUN_0000dad6": {
+    "loro_addr": "0x0dbd6",
+    "loro_nome": "disegna_rettangoli_stato_attivo",
+    "loro_desc": "Disegna rettangoli grafici per 4 slot se il flag corrispondente è attivo",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb51a"
+    ],
+    "name": "disegna_rettangoli_stato_attivo",
+    "desc": "Disegna rettangoli grafici per 4 slot se il flag corrispondente è attivo",
+    "conf": "low"
+  },
+  "FUN_0000db12": {
+    "loro_addr": "0x0dc12",
+    "loro_nome": "copia_grafica_707c6_in_buffer_video",
+    "loro_desc": "Copia 1120 word di dati grafici da 707c6 nel buffer video con offset 0x1680.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "copia_grafica_707c6_in_buffer_video",
+    "desc": "Copia 1120 word di dati grafici da 707c6 nel buffer video con offset 0x1680.",
+    "conf": "low"
+  },
+  "FUN_0000db30": {
+    "loro_addr": "0x0dc30",
+    "loro_nome": "salva_area_memoria_video",
+    "loro_desc": "Copia 960 word dai 4 bitplane della memoria video al buffer di destinazione.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "salva_area_memoria_video",
+    "desc": "Copia 960 word dai 4 bitplane della memoria video al buffer di destinazione.",
+    "conf": "da-verificare"
+  },
+  "FUN_0000db62": {
+    "loro_addr": "0x0dc62",
+    "loro_nome": "copia_schermo_intero_in_buffer",
+    "loro_desc": "Copia l'intero schermo di 4000 word per bitplane dalla memoria video al buffer.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "copia_schermo_intero_in_buffer",
+    "desc": "Copia l'intero schermo di 4000 word per bitplane dalla memoria video al buffer.",
+    "conf": "low",
+    "c_best_pct": 9.09,
+    "c_best_src": "agent/work/FUN_0000db62/cand.c"
+  },
+  "FUN_0000dc2a": {
+    "loro_addr": "0x0dd2a",
+    "loro_nome": "attendi_tasto",
+    "loro_desc": "azzera $12866 e aspetta che il gestore della tastiera ci scriva un tasto; lo restituisce in d6",
+    "loro_fonte": "manuale",
+    "loro_chiama": [],
+    "name": "attendi_tasto",
+    "desc": "azzera $12866 e aspetta che il gestore della tastiera ci scriva un tasto; lo restituisce in d6",
+    "conf": "med"
+  },
+  "FUN_00013a7e": {
+    "loro_addr": "0x13b7e",
+    "loro_nome": "pausa_cicli_d4",
+    "loro_desc": "Esegue un breve ciclo di attesa a vuoto in base al valore del registro D4.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "pausa_cicli_d4",
+    "desc": "Esegue un breve ciclo di attesa a vuoto in base al valore del registro D4.",
+    "conf": "low"
+  },
+  "FUN_00013aa0": {
+    "loro_addr": "0x13ba0",
+    "loro_nome": "pausa_cicli_d6",
+    "loro_desc": "Esegue un breve ciclo di attesa a vuoto in base al valore del registro D6.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "pausa_cicli_d6",
+    "desc": "Esegue un breve ciclo di attesa a vuoto in base al valore del registro D6.",
+    "conf": "low",
+    "c_best_pct": 14.29,
+    "c_best_src": "agent/work/FUN_00013aa0/cand.c"
+  },
+  "FUN_00013abc": {
+    "loro_addr": "0x13bbc",
+    "loro_nome": "copia_blocco_dati_512",
+    "loro_desc": "Copia 512 byte da A3 ad A1 a blocchi di 16 byte e aggiunge il terminatore 0x0D.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "copia_blocco_dati_512",
+    "desc": "Copia 512 byte da A3 ad A1 a blocchi di 16 byte e aggiunge il terminatore 0x0D.",
+    "conf": "low"
+  },
+  "FUN_00013ae6": {
+    "loro_addr": "0x13be6",
+    "loro_nome": "trasponi_e_copia_dati_traccia",
+    "loro_desc": "Copia e traspone le note del buffer audio sottraendo l'offset D6, terminando con 0x0D.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "trasponi_e_copia_dati_traccia",
+    "desc": "Copia e traspone le note del buffer audio sottraendo l'offset D6, terminando con 0x0D.",
+    "conf": "low"
+  },
+  "GAP_008818": {
+    "loro_addr": "0x08918",
+    "loro_nome": "elabora_input_e_stringhe_ff",
+    "loro_desc": "Imposta stato controlli, scorre tabella stringhe saltando terminatori 0xFF in base a tasto premuto, poi copia e processa stringhe",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x8854"
+    ],
+    "name": "elabora_input_e_stringhe_ff",
+    "desc": "Imposta stato controlli, scorre tabella stringhe saltando terminatori 0xFF in base a tasto premuto, poi copia e processa stringhe",
+    "conf": "low"
+  },
+  "GAP_0088AA": {
+    "loro_addr": "0x089aa",
+    "loro_nome": "elabora_scelta_menu_principale",
+    "loro_desc": "Elabora input menu, inizializza schermo, attende rilascio mouse e gestisce validazione selezione",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x87a8",
+      "0x8818",
+      "0x983c",
+      "0xd4f4"
+    ],
+    "name": "elabora_scelta_menu_principale",
+    "desc": "Elabora input menu, inizializza schermo, attende rilascio mouse e gestisce validazione selezione",
+    "conf": "low"
+  },
+  "GAP_008C28": {
+    "loro_addr": "0x08d28",
+    "loro_nome": "gestisci_menu_principale_soldi",
+    "loro_desc": "Azzera buffer, calcola somme BCD per tipo controllo, inizializza schermo, attende scelta menu e verifica saldo soldi",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x86c6",
+      "0x8b84",
+      "0x8c08",
+      "0x9844",
+      "0xd4f4"
+    ],
+    "name": "gestisci_menu_principale_soldi",
+    "desc": "Azzera buffer, calcola somme BCD per tipo controllo, inizializza schermo, attende scelta menu e verifica saldo soldi",
+    "conf": "low"
+  },
+  "GAP_0090E0": {
+    "loro_addr": "0x091e0",
+    "loro_nome": "esegui_ciclo_concerti_registrazioni",
+    "loro_desc": "Esegue 6 turni di concerti/registrazioni: inizializza schermo, gestisce soldi BCD, input, audio e aggiorna stato gioco per ogni turno",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x869a",
+      "0x86aa",
+      "0x8b64",
+      "0x908c",
+      "0x90ce",
+      "0x9844",
+      "0x9b92",
+      "0xa148",
+      "0xc00e",
+      "0xc01c",
+      "0xd248",
+      "0xd4f4",
+      "0x138ce"
+    ],
+    "name": "esegui_ciclo_concerti_registrazioni",
+    "desc": "Esegue 6 turni di concerti/registrazioni: inizializza schermo, gestisce soldi BCD, input, audio e aggiorna stato gioco per ogni turno",
+    "conf": "low"
+  },
+  "GAP_0098BC": {
+    "loro_addr": "0x099bc",
+    "loro_nome": "esegui_flusso_principale_gioco",
+    "loro_desc": "Esegue flusso completo del gioco: intro, ciclo 10 turni con menu band, concerti, soldi BCD, classifiche, e finale",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x859a",
+      "0x85e2",
+      "0x869a",
+      "0x86aa",
+      "0x8b64",
+      "0x905c",
+      "0x9074",
+      "0x908c",
+      "0x90bc",
+      "0x9732",
+      "0x9810",
+      "0x9834",
+      "0x9844",
+      "0x9b92",
+      "0xa530",
+      "0xb432",
+      "0xbf0c",
+      "0xc00e",
+      "0xc01c",
+      "0xc61c",
+      "0xd248",
+      "0xd4f4",
+      "0xd9d2",
+      "0xda70",
+      "0x137f2"
+    ],
+    "name": "esegui_flusso_principale_gioco",
+    "desc": "Esegue flusso completo del gioco: intro, ciclo 10 turni con menu band, concerti, soldi BCD, classifiche, e finale",
+    "conf": "low"
+  },
+  "GAP_009FEA": {
+    "loro_addr": "0x0a0ea",
+    "loro_nome": "avvia_nuova_partita_da_menu",
+    "loro_desc": "Avvia nuova partita dal menu: inizializza schermo, attende scelta, processa acquisto, esegue loop render/input/audio fino a fine partita",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x869a",
+      "0x869e",
+      "0x86aa",
+      "0x908c",
+      "0x90ce",
+      "0x9844",
+      "0x9b92",
+      "0x9ea4",
+      "0xa4a2",
+      "0xb432",
+      "0xbf0c",
+      "0xd248",
+      "0xd4f4"
+    ],
+    "name": "avvia_nuova_partita_da_menu",
+    "desc": "Avvia nuova partita dal menu: inizializza schermo, attende scelta, processa acquisto, esegue loop render/input/audio fino a fine partita",
+    "conf": "low"
+  },
+  "GAP_00A826": {
+    "loro_addr": "0x0a926",
+    "loro_nome": "elabora_animazioni_timer_30_frame",
+    "loro_desc": "Elabora 30 frame animazioni con timer CIA, copia stringhe FF, aggiorna buffer ciclico",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xa800",
+      "0xaa12",
+      "0xd340"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x0a9a8",
+        "off": 130,
+        "nome": "carica_buffer_da_1201c",
+        "desc": "Copia due blocchi di 10 byte dall'indirizzo 1201c nei buffer 12442 e 12424.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "elabora_animazioni_timer_30_frame",
+    "desc": "Elabora 30 frame animazioni con timer CIA, copia stringhe FF, aggiorna buffer ciclico",
+    "conf": "low"
+  },
+  "GAP_00A952": {
+    "loro_addr": "0x0aa52",
+    "loro_nome": "riempi_blocco_memoria",
+    "loro_desc": "Invoqua la routine per riempire un blocco di memoria con il valore byte specificato.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0x869e"
+    ],
+    "name": "riempi_blocco_memoria",
+    "desc": "Invoqua la routine per riempire un blocco di memoria con il valore byte specificato.",
+    "conf": "low"
+  },
+  "GAP_00AB94": {
+    "loro_addr": "0x0ac94",
+    "loro_nome": "processa_eventi_fine_turno_classifiche",
+    "loro_desc": "Se flag eventi attivo: resetta audio, mostra messaggi, gestisce high-score e classifica, esegue fade-out schermo e ricarica stato gioco",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x9b92",
+      "0x9cfa",
+      "0xac10",
+      "0xac1a",
+      "0xb432",
+      "0xbf0c",
+      "0xc00e",
+      "0xc01c",
+      "0xd24c",
+      "0xd4f4"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x0ad10",
+        "off": 124,
+        "nome": "mostra_schermata_classifica",
+        "desc": "Inizializza, disegna e gestisce la visualizzazione della classifica musicale.",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0ad1a",
+        "off": 134,
+        "nome": "gestisci_classifiche_e_transizione",
+        "desc": "Gestisce high-score, transizione schermo, input doppio buffer, confronto mastermind",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0ade6",
+        "off": 338,
+        "nome": "inserisci_in_classifica",
+        "desc": "Inserisce un valore nella classifica ordinata di 10 elementi se e inferiore ai valori presenti.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "processa_eventi_fine_turno_classifiche",
+    "desc": "Se flag eventi attivo: resetta audio, mostra messaggi, gestisce high-score e classifica, esegue fade-out schermo e ricarica stato gioco",
+    "conf": "da-verificare"
+  },
+  "GAP_00BDD6": {
+    "loro_addr": "0x0bed6",
+    "loro_nome": "effetto_sfumatura_colori_giu",
+    "loro_desc": "Esegue sfumatura verso il basso dei colori Copper attendendo il pennello",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb3a4",
+      "0xbe3e"
+    ],
+    "name": "effetto_sfumatura_colori_giu",
+    "desc": "Esegue sfumatura verso il basso dei colori Copper attendendo il pennello",
+    "conf": "low"
+  },
+  "GAP_00C102": {
+    "loro_addr": "0x0c202",
+    "loro_nome": "esegui_transizione_testo_audio",
+    "loro_desc": "Gestisce transizioni schermo con fade, renderizza bitmap/testo, sincronizza timer e audio",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x9b92",
+      "0xb432",
+      "0xbf0c",
+      "0xc00e",
+      "0xc01c",
+      "0xc210",
+      "0xc226",
+      "0xc27e",
+      "0xc328",
+      "0xd248",
+      "0xd340",
+      "0xd4f4",
+      "0x136a4"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x0c310",
+        "off": 270,
+        "nome": "decrementa_timer_attesa",
+        "desc": "Decrementa il contatore di timer se il suo valore e' maggiore di zero.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "esegui_transizione_testo_audio",
+    "desc": "Gestisce transizioni schermo con fade, renderizza bitmap/testo, sincronizza timer e audio",
+    "conf": "low"
+  },
+  "GAP_00C5D8": {
+    "loro_addr": "0x0c6d8",
+    "loro_nome": "disegna_sequenza_elementi_mascherati",
+    "loro_desc": "Disegna sequenza di elementi mascherati incrementando offset finestra",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xb588",
+      "0xc464"
+    ],
+    "name": "disegna_sequenza_elementi_mascherati",
+    "desc": "Disegna sequenza di elementi mascherati incrementando offset finestra",
+    "conf": "low"
+  },
+  "GAP_00D038": {
+    "loro_addr": "0x0d138",
+    "loro_nome": "processa_acquisto_testo_soldi",
+    "loro_desc": "In modalita testo azzera timer, sottrae soldi BCD, mostra messaggio e aggiorna interfaccia",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0x859a",
+      "0x85e2",
+      "0x869a",
+      "0x86aa",
+      "0x983c",
+      "0x9b92",
+      "0xc020",
+      "0xc046",
+      "0xd248",
+      "0xd24c",
+      "0xd340",
+      "0xd4f4",
+      "0x137f2"
+    ],
+    "name": "processa_acquisto_testo_soldi",
+    "desc": "In modalita testo azzera timer, sottrae soldi BCD, mostra messaggio e aggiorna interfaccia",
+    "conf": "low"
+  },
+  "GAP_00D2A6": {
+    "loro_addr": "0x0d3a6",
+    "loro_nome": "confronta_sequenza_mastermind",
+    "loro_desc": "Esegue il confronto su 10 caratteri consecutivi invocando la routine mastermind per ciascuna posizione.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [
+      "0xd2ba"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x0d3ba",
+        "off": 20,
+        "nome": "confronta_carattere_mastermind",
+        "desc": "Confronta caratteri tra buffer e imposta il simbolo di corrispondenza esatta, parziale o assente.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "confronta_sequenza_mastermind",
+    "desc": "Esegue il confronto su 10 caratteri consecutivi invocando la routine mastermind per ciascuna posizione.",
+    "conf": "da-verificare"
+  },
+  "GAP_00DB78": {
+    "loro_addr": "0x0dc78",
+    "loro_nome": "esegui_sequenza_intro_hamster",
+    "loro_desc": "Imposta palette copper, decomprime immagine intro, riproduce sequenza audio hamster attendendo pressione tasto fuoco",
+    "loro_fonte": "opencode/nemotron-3-ultra-free",
+    "loro_chiama": [
+      "0xbe46",
+      "0xbe4c",
+      "0xbe52",
+      "0xdbac",
+      "0x137a4"
+    ],
+    "loro_sub": [
+      {
+        "addr": "0x0dcac",
+        "off": 52,
+        "nome": "decomprime_e_riorganizza_immagine",
+        "desc": "Decomprime i dati RLE in memoria video e organizza i 4 bitplane nel buffer di destinazione.",
+        "conf": "da-verificare"
+      },
+      {
+        "addr": "0x0dce6",
+        "off": 110,
+        "nome": "converti_bitplane_schermo",
+        "desc": "Copia e separa i 4 bitplane dalla memoria video al buffer grafico per 200 righe.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "esegui_sequenza_intro_hamster",
+    "desc": "Imposta palette copper, decomprime immagine intro, riproduce sequenza audio hamster attendendo pressione tasto fuoco",
+    "conf": "da-verificare"
+  },
+  "GAP_013684": {
+    "loro_addr": "0x13784",
+    "loro_nome": "copia_memoria_indietro",
+    "loro_desc": "Copia a ritroso un blocco di memoria di 38912 byte dall'indirizzo sorgente al destinazione.",
+    "loro_fonte": "google/gemini-3.5-flash",
+    "loro_chiama": [],
+    "name": "copia_memoria_indietro",
+    "desc": "Copia a ritroso un blocco di memoria di 38912 byte dall'indirizzo sorgente al destinazione.",
+    "conf": "low"
+  },
+  "GAP_0095FC": {
+    "loro_sub": [
+      {
+        "addr": "0x096fe",
+        "off": 2,
+        "nome": "resetta_configurazione_input",
+        "desc": "Copia l'impostazione dei controlli da 129c5 a 129c4 e ripristina i blocchi di memoria associati.",
+        "conf": "da-verificare"
+      }
+    ],
+    "name": "GAP_0095FC",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
+  },
+  "CALL_0138A4": {
+    "name": "CALL_0138A4",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
+  },
+  "FUN_0000aaba": {
+    "name": "FUN_0000aaba",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
+  },
+  "FUN_0000d23c": {
+    "name": "FUN_0000d23c",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
+  },
+  "FUN_0000d814": {
+    "name": "FUN_0000d814",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
+  },
+  "FUN_0000db44": {
+    "name": "Mem_Copy3Words",
+    "desc": "Copia 3 word (dbra) da A0 a A1 con offset 1F40/3E80/5DC0.",
+    "conf": "low"
+  },
+  "GAP_0090A4": {
+    "name": "GAP_0090A4",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
+  },
+  "GAP_009BCA": {
+    "name": "GAP_009BCA",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
+  },
+  "GAP_00AF4E": {
+    "name": "GAP_00AF4E",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
+  },
+  "GAP_00B1A8": {
+    "name": "GAP_00B1A8",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
+  },
+  "GAP_00B440": {
+    "name": "GAP_00B440",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
+  },
+  "GAP_013A0A": {
+    "name": "GAP_013A0A",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
+  }
+}

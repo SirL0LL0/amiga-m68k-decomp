@@ -69,7 +69,7 @@ def find_hunk(hunks, addr, size):
 
 def convert(symbols_path, orig_dir, func_dir, out_units, manifest_path,
             base, lvo_header, data_path, src_dir="src", asm_dir="asm",
-            build_dir="build"):
+            build_dir="build", extra_symbols=None):
     with open(symbols_path, encoding="utf-8") as f:
         syms = json.load(f)
     hunks = load_manifest(orig_dir, manifest_path, base)
@@ -90,7 +90,10 @@ def convert(symbols_path, orig_dir, func_dir, out_units, manifest_path,
             pass
 
     units, skipped, seen = [], [], set()
-    for fn in syms.get("functions", []):
+    all_fns = list(syms.get("functions", []))
+    if extra_symbols and os.path.isfile(extra_symbols):
+        all_fns += json.load(open(extra_symbols, encoding="utf-8")).get("functions", [])
+    for fn in all_fns:
         name = fn["name"]
         if fn.get("external") or fn.get("thunk"):
             skipped.append((name, "external/thunk"))
@@ -234,6 +237,8 @@ def main(argv=None):
     ap.add_argument("--func-dir", default="orig/func")
     ap.add_argument("--out-units", default="config/units.json")
     ap.add_argument("--manifest", default="orig/manifest.json")
+    ap.add_argument("--extra-symbols", default=None,
+                    help="JSON con {functions: [...]} da unire (es. gaps.json)")
     ap.add_argument("--base", default="0x0")
     ap.add_argument("--lvo-header", default="include/amiga_lvo.h")
     ap.add_argument("--data", default=DEFAULT_DATA)
@@ -243,7 +248,8 @@ def main(argv=None):
         self_test()
         return 0
     return convert(a.symbols, a.orig_dir, a.func_dir, a.out_units,
-                   a.manifest, int(a.base, 16), a.lvo_header, a.data)
+                   a.manifest, int(a.base, 16), a.lvo_header, a.data,
+                   extra_symbols=a.extra_symbols)
 
 
 if __name__ == "__main__":
