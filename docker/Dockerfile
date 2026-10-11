@@ -11,10 +11,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
     build-essential \
-    curl \
     wget \
     tar \
-    lhasa \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
@@ -36,26 +34,22 @@ RUN wget -q http://sun.hasenbraten.de/vlink/release/vlink.tar.gz && \
     cp vlink /usr/local/bin/ && \
     cd .. && rm -rf vlink*
 
-# 3. vbcc (sorgenti ufficiali; URL verificato 200: ibaug.de, snapshot 2026-01-10.
-#     NOTA: i vecchi URL sun.hasenbraten.de/vbcc/release e compilers.de/downloads
-#     non esistono piu' (404). Precompilati per host: vedi README sezione toolchain.)
-RUN mkdir -p vbcc && cd vbcc && \
-    wget -q http://www.ibaug.de/vbcc/vbcc.tar.gz && \
-    tar -xzf vbcc.tar.gz && \
-    mkdir -p bin && \
-    make TARGET=m68k && \
-    cp bin/vbccm68k bin/vc /usr/local/bin/ && \
-    cd .. && rm -rf vbcc
+# 3. vbcc PRECOMPILATO multi-target per Linux x64 (binari ufficiali ibaug).
+#    Include gia': vbccm68k + vc, config aos68k, target m68k-amigaos
+#    (stessa famiglia del pacchetto Windows, verificato: config+target presenti).
+#    Niente compilazione dai sorgenti: 'make TARGET=m68k' falliva (exit 2).
+RUN wget -q -O /tmp/vbcc_linux_x64.tar.gz http://www.ibaug.de/vbcc/vbcc_linux_x64.tar.gz && \
+    mkdir -p /opt/vbcc && tar -xzf /tmp/vbcc_linux_x64.tar.gz -C /opt/vbcc && \
+    rm /tmp/vbcc_linux_x64.tar.gz && \
+    test -f /opt/vbcc/vbcc/config/aos68k \
+      || (echo "LAYOUT INATTESO, contenuto:" && ls -R /opt/vbcc | head -30 && exit 1) && \
+    test -d /opt/vbcc/vbcc/targets/m68k-amigaos \
+      || (echo "MANCA targets/m68k-amigaos:" && ls /opt/vbcc/vbcc/targets && exit 1) && \
+    test -x /opt/vbcc/vbcc/bin/vbccm68k && test -x /opt/vbcc/vbcc/bin/vc && \
+    cp /opt/vbcc/vbcc/bin/vbccm68k /opt/vbcc/vbcc/bin/vc /usr/local/bin/ && \
+    echo "vbcc OK:" && ls /opt/vbcc/vbcc/targets/m68k-amigaos
 
-# 4. Target m68k-amigaos per vbcc (config + include + lib).
-# Fonte verificata: vendor/ di Team-Boingo/AmiCC (contiene l'archivio
-# upstream non modificato vbcc_target_m68k-amiga.lha).
-ENV VBCC=/opt/vbcc_target
-RUN mkdir -p ${VBCC} && \
-    wget -q -O /tmp/vbcc_target.lha https://github.com/Team-Boingo/AmiCC/raw/main/vendor/targets/vbcc_target_m68k-amiga.lha && \
-    lhasa x -w=${VBCC} /tmp/vbcc_target.lha && \
-    rm /tmp/vbcc_target.lha && \
-    ls -R ${VBCC} | head -50
+ENV VBCC=/opt/vbcc/vbcc
 
 # ---- Runtime ----
 FROM ubuntu:22.04
@@ -64,7 +58,6 @@ RUN apt-get update && apt-get install -y \
     make \
     python3 \
     python3-pip \
-    lhasa \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
     && pip3 install --no-cache-dir capstone pyelftools
@@ -73,10 +66,14 @@ COPY --from=builder /usr/local/bin/vasmm68k_mot /usr/local/bin/
 COPY --from=builder /usr/local/bin/vlink /usr/local/bin/
 COPY --from=builder /usr/local/bin/vbccm68k /usr/local/bin/
 COPY --from=builder /usr/local/bin/vc /usr/local/bin/
-COPY --from=builder /opt/vbcc_target /opt/vbcc_target
+COPY --from=builder /opt/vbcc/vbcc /opt/vbcc/vbcc
 
-ENV VBCC=/opt/vbcc_target
+ENV VBCC=/opt/vbcc/vbcc
 ENV PATH="${PATH}:/usr/local/bin"
+
+# Smoke test: compila un C minimale col target aos68k (vbccm68k + vasm)
+RUN printf 'void f(void){}\n' > /tmp/t.c && \
+    vc +aos68k -c /tmp/t.c -o /tmp/t.o && ls -l /tmp/t.o && rm /tmp/t.c /tmp/t.o
 
 WORKDIR /workspace
 

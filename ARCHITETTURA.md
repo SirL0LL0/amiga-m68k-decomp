@@ -134,6 +134,11 @@ docker run --rm -v $PWD:/workspace amiga-decomp-toolchain make report
   (`No config file!`); usare `set "VBCC=X"`. `vc` lancia `vbccm68k` per nome:
   serve `bin/` nel PATH del sottoprocesso (vedi `config.native-win.json`).
 - Docker Desktop 4.94.0 in installazione (richiede UAC + `wsl --install` + reboot).
+  Immagine verificata: build OK con vbcc precompilato Linux (niente make dai
+  sorgenti), smoke test incluso; `vc +aos68k` nel container produce `main.o`
+  da 376 B, identico alla toolchain nativa. Nota: se `apt-get update` si pianta
+  con `Ign`, è il mirror transitorio — testare con
+  `docker run --rm ubuntu:22.04 apt-get update` prima di cambiare mirror.
 
 - Deploy decomp.dev (`config.yml`, `/manage/new`) puntato a questo repo/CI.
 - Agente di decompilazione (Ghidra decompiler -> C -> vbcc -> diff -> refine).
