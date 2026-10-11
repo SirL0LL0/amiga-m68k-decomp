@@ -21,8 +21,9 @@ riproducibili.
 
 ## RSTAR: mappa (verificata)
 
-Base di caricamento assunta: **`0x8000`** (stack `$80000` in testa, BSS dopo
-`0x6ED56`, 593/593 ref assoluti in-range; da confermare col loader decrittato).
+Base di caricamento: **`0x8000` CONFERMATA** — 11/31 JMP/JSR assoluti cadono
+esattamente su start-funzione Ghidra solo a base `0x8000` (0 per le altre
+candidate `0x1000`-`0x7000`). Coerente con stack `$80000` e BSS in coda.
 Import Ghidra con padding di `0x8000` zeri (`rstar_pad.bin`, solo TEMP).
 
 - `0x00000-0x08100`: codice M68k (startup: stack, kill OS, `COLOR00`).
@@ -48,6 +49,13 @@ anti-debug + payload cifrato. Meccanismi mappati (non ancora eseguiti):
    cieca per disegno — serve emulazione (cfr. `m68k/`+`amiga/` di Disk-Utilities).
 3. Base RSTAR `0x8000` resta assunzione di lavoro (forte ma non confermata):
    stack `$80000`, 593/593 ref in-range, BSS in coda.
+4. **Emulazione** (Disk-Utilities `m68k/`+`amiga/`, compilati MinGW statici):
+   il trap `$10` confermato live (`0x4000A→0x4000C`, `0x4001C→0x4002C`),
+   trace mode ON, loop EOR a `0xF4A` eseguito (326 insn), 8 byte decrittati
+   in place a `0x4045E`, crash a `0x40466` su `SysBase ($4)` avvelenato
+   (niente ExecBase/DOS nell'emulatore). Gotcha copylock: il `:` del drive
+   collide con `nome:base` → usare path relativi. Tool: `tools/emu_mem.py`,
+   `tools/emu_trace.py`. Per proseguire servirebbe SysBase finto + DOS.
 
 ## Chain su RSTAR (fatta)
 
