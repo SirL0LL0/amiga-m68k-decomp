@@ -133,9 +133,9 @@
     "conf": "med"
   },
   "FUN_000132c6": {
-    "name": "SoundVoices_Update",
-    "desc": "Frame counter $13CEE (mod 6), per le 4 voci attive chiama SoundVoice_Worker.",
-    "conf": "high",
+    "name": "FUN_000132c6",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare",
     "loro_addr": "0x133c6",
     "loro_nome": "aggiorna_pitch_audio_vblank",
     "loro_desc": "Aggiorna pitch dei 4 canali audio durante VBlank ciclando effetti pitch",
@@ -2557,29 +2557,29 @@
         "conf": "da-verificare"
       }
     ],
-    "name": "Input_SwapBuffers",
-    "desc": "Swap buffer: D0=6F146, A0=129C5, A1=129C4, chiama helper -0xF5E, rts.",
-    "conf": "low"
+    "name": "GAP_0095FC",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
   },
   "CALL_0138A4": {
-    "name": "Input_WaitFireOrBlock",
-    "desc": "ASR D1; se BB64!=0 o D1==0 ritorna subito (polling blocco input).",
-    "conf": "low"
+    "name": "CALL_0138A4",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
   },
   "FUN_0000aaba": {
-    "name": "Str_CopyN",
-    "desc": "Copia N stringhe (D4) da A3 a A0 con terminatore FF; ricorsione interna.",
-    "conf": "low"
+    "name": "FUN_0000aaba",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
   },
   "FUN_0000d23c": {
-    "name": "Flag_Set128B1",
-    "desc": "Set flag 128B1=D6, rts.",
-    "conf": "low"
+    "name": "FUN_0000d23c",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
   },
   "FUN_0000d814": {
-    "name": "Util_Null",
-    "desc": "Ritorna subito (routine vuota/placeholder).",
-    "conf": "low"
+    "name": "FUN_0000d814",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
   },
   "FUN_0000db44": {
     "name": "Mem_Copy3Words",
@@ -2587,33 +2587,33 @@
     "conf": "low"
   },
   "GAP_0090A4": {
-    "name": "Timer_Wait128CD",
-    "desc": "Decrementa 128CD fino a 0 (max 9), rts.",
-    "conf": "low"
+    "name": "GAP_0090A4",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
   },
   "GAP_009BCA": {
-    "name": "Menu_ScrollUpdate",
-    "desc": "Aggiorna scroll menu: confronta 12864/12865 con tabella 120CA, chiama helper.",
-    "conf": "low"
+    "name": "GAP_009BCA",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
   },
   "GAP_00AF4E": {
-    "name": "Audio_ChannelWrite",
-    "desc": "Scrive 2 byte in canale audio (A1), chiama helper 5CC, rts.",
-    "conf": "low"
+    "name": "GAP_00AF4E",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
   },
   "GAP_00B1A8": {
-    "name": "Menu_CounterStep",
-    "desc": "Step contatore menu 128C4/128C5 con wrap a 0x14, chiama helper.",
-    "conf": "low"
+    "name": "GAP_00B1A8",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
   },
   "GAP_00B440": {
-    "name": "Mem_FillD4",
-    "desc": "Riempi D4 word (0x7CF) con D0, dbra loop, rts.",
-    "conf": "low"
+    "name": "GAP_00B440",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
   },
   "GAP_013A0A": {
-    "name": "Audio_ChannelStep",
-    "desc": "Step canale audio: aggiorna pitch/volume via helper, gestione 0xAA/0x96.",
-    "conf": "low"
+    "name": "GAP_013A0A",
+    "desc": "Entry non riconosciuta: nessun seed, nessun puntatore noto. Da analizzare manualmente.",
+    "conf": "da-verificare"
   }
 }
