@@ -1,3 +1,6 @@
+# Toolchain nativa (scaricata via make toolchain, mai committare)
+.toolchain/
+
 # Build
 build/
 bin/
@@ -14,6 +17,10 @@ __pycache__/
 
 # Derivati locali Ghidra (rigenerabili con make analyze/units)
 symbols.json
+decompiled/
+
+# Derivati agent (stato locale)
+agent/work/
 
 # decomp.dev locale
 config.yml

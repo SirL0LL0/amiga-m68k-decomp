@@ -36,9 +36,11 @@ RUN wget -q http://sun.hasenbraten.de/vlink/release/vlink.tar.gz && \
     cp vlink /usr/local/bin/ && \
     cd .. && rm -rf vlink*
 
-# 3. vbcc (sorgenti canonicali, non compilers.de/downloads)
+# 3. vbcc (sorgenti ufficiali; URL verificato 200: ibaug.de, snapshot 2026-01-10.
+#     NOTA: i vecchi URL sun.hasenbraten.de/vbcc/release e compilers.de/downloads
+#     non esistono piu' (404). Precompilati per host: vedi README sezione toolchain.)
 RUN mkdir -p vbcc && cd vbcc && \
-    wget -q http://sun.hasenbraten.de/vbcc/release/vbcc.tar.gz && \
+    wget -q http://www.ibaug.de/vbcc/vbcc.tar.gz && \
     tar -xzf vbcc.tar.gz && \
     mkdir -p bin && \
     make TARGET=m68k && \

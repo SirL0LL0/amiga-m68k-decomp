@@ -121,5 +121,19 @@ docker run --rm -v $PWD:/workspace amiga-decomp-toolchain make report
 - Verifiche: agent self-test 6/6 (convergenza 0→100%, idempotenza,
   no-regression, fallback LLM senza chiave, 4 varianti euristiche).
 
+## Toolchain vera (verificata su questa macchina)
+
+- Nativa: `vbcc_win_x64.zip` ufficiale (16 MB, 1890 file) in `.toolchain/`
+  (gitignored): `vbccm68k.exe`, `vc.exe`, `vasmm68k_mot.exe`, config `aos68k`,
+  target `m68k-amigaos`. `vc +aos68k -c src/main.c` → exit 0, oggetto Hunk 376 B;
+  disassembly: `movea.l #$dff000,a0` + `move.w d0,$180(a0)` (COLOR00 ✓).
+- URL vbcc nel Dockerfile corretto (i vecchi davano 404):
+  sorgenti `http://www.ibaug.de/vbcc/vbcc.tar.gz`.
+- Agent + vbcc reale: 0% → 56.1% (83/148) al primo passaggio euristico.
+  Gotcha cmd: `set VBCC=X &&` lascia uno spazio finale nel valore
+  (`No config file!`); usare `set "VBCC=X"`. `vc` lancia `vbccm68k` per nome:
+  serve `bin/` nel PATH del sottoprocesso (vedi `config.native-win.json`).
+- Docker Desktop 4.94.0 in installazione (richiede UAC + `wsl --install` + reboot).
+
 - Deploy decomp.dev (`config.yml`, `/manage/new`) puntato a questo repo/CI.
 - Agente di decompilazione (Ghidra decompiler -> C -> vbcc -> diff -> refine).

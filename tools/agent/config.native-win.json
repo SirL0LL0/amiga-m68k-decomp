@@ -1,0 +1,16 @@
+{
+  "$comment": "Config agent per toolchain vbcc NATIVA Windows (.toolchain/vbcc-win). Uso: python tools/agent/loop.py --config tools/agent/config.native-win.json",
+  "backend": "heuristic",
+  "max_iters": 2,
+  "max_variants_per_unit": 8,
+  "compile_timeout": 300,
+  "compile_c": "set \"VBCC={root}\\.toolchain\\vbcc-win\\vbcc\" && set \"PATH={root}\\.toolchain\\vbcc-win\\vbcc\\bin;%PATH%\" && vc.exe +aos68k -c -Iinclude {flags} {src} -o {out}",
+  "compile_asm": "{root}\\.toolchain\\vbcc-win\\vbcc\\bin\\vasmm68k_mot.exe -Fhunk -m68000 -Iinclude {src} -o {out}",
+  "flag_sets": ["", "-O1", "-O2"],
+  "llm": {
+    "base_url": "https://api.openai.com/v1",
+    "model": "gpt-4o-mini",
+    "api_key_env": "OPENAI_API_KEY",
+    "max_proposals": 2
+  }
+}
