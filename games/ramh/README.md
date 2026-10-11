@@ -64,6 +64,21 @@ anti-debug + payload cifrato. Meccanismi mappati (non ancora eseguiti):
 3. `python tools/symbols_to_units.py ...` → 120 unit, 0 skip
 4. `python tools/diff_m68k.py ...` → `build/report.json` (0/9586 B)
 
+## Matching asm: regole verificate (8/8 custom_refs a 100%)
+
+- Trascrizione in `asm/*.s` (vasm mot) + `diff` a payload Hunk (`_payload`,
+  tolleranza pad `4E71`/`00` di allineamento sezione).
+- `opt o-` in testa: vasm ottimizza `cmp.b #0,d0` in `tst.b` (byte diversi).
+- `btst #n,Dn` vuole `.l` (`.b` solo per memoria); se vasm dice
+  `illegal opcode extension` su un assoluto, aggiungere `.l`.
+- `movem` = 4 byte (una mask word), non 12: contare i NOP sled di conseguenza.
+- Displacement PC-relativi (Bcc/DBcc/BSR/LEA): base = insn+2 **sempre**.
+  Il rendering `$xyz` di capstone = addr+disp+2 (corretto solo se size=2).
+- Riferimenti fuori slice (LEA/BSR esterni): `dc.w` coi byte letterali
+  dall'hexdump, mai derivati dal rendering. Il loop di diff li becca tutti.
+- Quirk vasm: `move.b #1,(a1)` assembla `12BC 0001` (lettura PC-rel!);
+  se serve davvero, usare `dc.w` esplicito.
+
 ## Chain su `boot` (loader, 3676 B)
 
 1. `python tools/split_hunk.py game-ramh/boot --out-dir orig --manifest orig/manifest-boot.json`
