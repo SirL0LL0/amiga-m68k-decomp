@@ -1,6 +1,336 @@
 {
   "units": [
     {
+      "name": "CALL_008366",
+      "target": "orig/func/CALL_008366.bin",
+      "base": "build/CALL_008366.o",
+      "source_path": "asm/CALL_008366.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_0083C4",
+      "target": "orig/func/CALL_0083C4.bin",
+      "base": "build/CALL_0083C4.o",
+      "source_path": "asm/CALL_0083C4.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_0088E6",
+      "target": "orig/func/CALL_0088E6.bin",
+      "base": "build/CALL_0088E6.o",
+      "source_path": "src/CALL_0088E6.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_008B48",
+      "target": "orig/func/CALL_008B48.bin",
+      "base": "build/CALL_008B48.o",
+      "source_path": "asm/CALL_008B48.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_008CEC",
+      "target": "orig/func/CALL_008CEC.bin",
+      "base": "build/CALL_008CEC.o",
+      "source_path": "asm/CALL_008CEC.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_009074",
+      "target": "orig/func/CALL_009074.bin",
+      "base": "build/CALL_009074.o",
+      "source_path": "src/CALL_009074.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_0090BC",
+      "target": "orig/func/CALL_0090BC.bin",
+      "base": "build/CALL_0090BC.o",
+      "source_path": "src/CALL_0090BC.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_0091CE",
+      "target": "orig/func/CALL_0091CE.bin",
+      "base": "build/CALL_0091CE.o",
+      "source_path": "asm/CALL_0091CE.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00921E",
+      "target": "orig/func/CALL_00921E.bin",
+      "base": "build/CALL_00921E.o",
+      "source_path": "asm/CALL_00921E.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_009238",
+      "target": "orig/func/CALL_009238.bin",
+      "base": "build/CALL_009238.o",
+      "source_path": "asm/CALL_009238.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_0092B4",
+      "target": "orig/func/CALL_0092B4.bin",
+      "base": "build/CALL_0092B4.o",
+      "source_path": "src/CALL_0092B4.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_0092C8",
+      "target": "orig/func/CALL_0092C8.bin",
+      "base": "build/CALL_0092C8.o",
+      "source_path": "src/CALL_0092C8.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_009340",
+      "target": "orig/func/CALL_009340.bin",
+      "base": "build/CALL_009340.o",
+      "source_path": "asm/CALL_009340.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00962A",
+      "target": "orig/func/CALL_00962A.bin",
+      "base": "build/CALL_00962A.o",
+      "source_path": "asm/CALL_00962A.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00967A",
+      "target": "orig/func/CALL_00967A.bin",
+      "base": "build/CALL_00967A.o",
+      "source_path": "src/CALL_00967A.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_009732",
+      "target": "orig/func/CALL_009732.bin",
+      "base": "build/CALL_009732.o",
+      "source_path": "src/CALL_009732.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_009CFA",
+      "target": "orig/func/CALL_009CFA.bin",
+      "base": "build/CALL_009CFA.o",
+      "source_path": "src/CALL_009CFA.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00A148",
+      "target": "orig/func/CALL_00A148.bin",
+      "base": "build/CALL_00A148.o",
+      "source_path": "src/CALL_00A148.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00A296",
+      "target": "orig/func/CALL_00A296.bin",
+      "base": "build/CALL_00A296.o",
+      "source_path": "src/CALL_00A296.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00A978",
+      "target": "orig/func/CALL_00A978.bin",
+      "base": "build/CALL_00A978.o",
+      "source_path": "src/CALL_00A978.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00AA12",
+      "target": "orig/func/CALL_00AA12.bin",
+      "base": "build/CALL_00AA12.o",
+      "source_path": "src/CALL_00AA12.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00AD30",
+      "target": "orig/func/CALL_00AD30.bin",
+      "base": "build/CALL_00AD30.o",
+      "source_path": "src/CALL_00AD30.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00AF70",
+      "target": "orig/func/CALL_00AF70.bin",
+      "base": "build/CALL_00AF70.o",
+      "source_path": "src/CALL_00AF70.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00B012",
+      "target": "orig/func/CALL_00B012.bin",
+      "base": "build/CALL_00B012.o",
+      "source_path": "src/CALL_00B012.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00B25A",
+      "target": "orig/func/CALL_00B25A.bin",
+      "base": "build/CALL_00B25A.o",
+      "source_path": "src/CALL_00B25A.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00B452",
+      "target": "orig/func/CALL_00B452.bin",
+      "base": "build/CALL_00B452.o",
+      "source_path": "src/CALL_00B452.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00B47A",
+      "target": "orig/func/CALL_00B47A.bin",
+      "base": "build/CALL_00B47A.o",
+      "source_path": "src/CALL_00B47A.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00BC3E",
+      "target": "orig/func/CALL_00BC3E.bin",
+      "base": "build/CALL_00BC3E.o",
+      "source_path": "src/CALL_00BC3E.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00C226",
+      "target": "orig/func/CALL_00C226.bin",
+      "base": "build/CALL_00C226.o",
+      "source_path": "src/CALL_00C226.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00C276",
+      "target": "orig/func/CALL_00C276.bin",
+      "base": "build/CALL_00C276.o",
+      "source_path": "src/CALL_00C276.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_00C61C",
+      "target": "orig/func/CALL_00C61C.bin",
+      "base": "build/CALL_00C61C.o",
+      "source_path": "src/CALL_00C61C.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_0137A4",
+      "target": "orig/func/CALL_0137A4.bin",
+      "base": "build/CALL_0137A4.o",
+      "source_path": "asm/CALL_0137A4.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "CALL_0138A4",
+      "target": "orig/func/CALL_0138A4.bin",
+      "base": "build/CALL_0138A4.o",
+      "source_path": "asm/CALL_0138A4.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
       "name": "FUN_0000859a",
       "target": "orig/func/FUN_0000859a.bin",
       "base": "build/FUN_0000859a.o",
@@ -1204,7 +1534,7 @@
       "name": "GAP_008000",
       "target": "orig/func/GAP_008000.bin",
       "base": "build/GAP_008000.o",
-      "source_path": "src/GAP_008000.c",
+      "source_path": "asm/GAP_008000.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1214,7 +1544,17 @@
       "name": "GAP_008818",
       "target": "orig/func/GAP_008818.bin",
       "base": "build/GAP_008818.o",
-      "source_path": "src/GAP_008818.c",
+      "source_path": "asm/GAP_008818.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_0088AA",
+      "target": "orig/func/GAP_0088AA.bin",
+      "base": "build/GAP_0088AA.o",
+      "source_path": "src/GAP_0088AA.c",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1224,7 +1564,7 @@
       "name": "GAP_008C28",
       "target": "orig/func/GAP_008C28.bin",
       "base": "build/GAP_008C28.o",
-      "source_path": "src/GAP_008C28.c",
+      "source_path": "asm/GAP_008C28.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1234,7 +1574,7 @@
       "name": "GAP_0090A4",
       "target": "orig/func/GAP_0090A4.bin",
       "base": "build/GAP_0090A4.o",
-      "source_path": "src/GAP_0090A4.c",
+      "source_path": "asm/GAP_0090A4.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1244,7 +1584,7 @@
       "name": "GAP_0090E0",
       "target": "orig/func/GAP_0090E0.bin",
       "base": "build/GAP_0090E0.o",
-      "source_path": "src/GAP_0090E0.c",
+      "source_path": "asm/GAP_0090E0.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1254,7 +1594,7 @@
       "name": "GAP_0095FC",
       "target": "orig/func/GAP_0095FC.bin",
       "base": "build/GAP_0095FC.o",
-      "source_path": "src/GAP_0095FC.c",
+      "source_path": "asm/GAP_0095FC.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1264,7 +1604,7 @@
       "name": "GAP_0098BC",
       "target": "orig/func/GAP_0098BC.bin",
       "base": "build/GAP_0098BC.o",
-      "source_path": "src/GAP_0098BC.c",
+      "source_path": "asm/GAP_0098BC.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1274,7 +1614,7 @@
       "name": "GAP_009BCA",
       "target": "orig/func/GAP_009BCA.bin",
       "base": "build/GAP_009BCA.o",
-      "source_path": "src/GAP_009BCA.c",
+      "source_path": "asm/GAP_009BCA.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1284,7 +1624,7 @@
       "name": "GAP_009FEA",
       "target": "orig/func/GAP_009FEA.bin",
       "base": "build/GAP_009FEA.o",
-      "source_path": "src/GAP_009FEA.c",
+      "source_path": "asm/GAP_009FEA.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1294,7 +1634,7 @@
       "name": "GAP_00A530",
       "target": "orig/func/GAP_00A530.bin",
       "base": "build/GAP_00A530.o",
-      "source_path": "src/GAP_00A530.c",
+      "source_path": "asm/GAP_00A530.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1304,7 +1644,7 @@
       "name": "GAP_00A826",
       "target": "orig/func/GAP_00A826.bin",
       "base": "build/GAP_00A826.o",
-      "source_path": "src/GAP_00A826.c",
+      "source_path": "asm/GAP_00A826.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1314,7 +1654,7 @@
       "name": "GAP_00A952",
       "target": "orig/func/GAP_00A952.bin",
       "base": "build/GAP_00A952.o",
-      "source_path": "src/GAP_00A952.c",
+      "source_path": "asm/GAP_00A952.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1324,7 +1664,7 @@
       "name": "GAP_00AB94",
       "target": "orig/func/GAP_00AB94.bin",
       "base": "build/GAP_00AB94.o",
-      "source_path": "src/GAP_00AB94.c",
+      "source_path": "asm/GAP_00AB94.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1334,7 +1674,7 @@
       "name": "GAP_00AF4E",
       "target": "orig/func/GAP_00AF4E.bin",
       "base": "build/GAP_00AF4E.o",
-      "source_path": "src/GAP_00AF4E.c",
+      "source_path": "asm/GAP_00AF4E.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1344,7 +1684,7 @@
       "name": "GAP_00B1A8",
       "target": "orig/func/GAP_00B1A8.bin",
       "base": "build/GAP_00B1A8.o",
-      "source_path": "src/GAP_00B1A8.c",
+      "source_path": "asm/GAP_00B1A8.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1354,7 +1694,7 @@
       "name": "GAP_00B440",
       "target": "orig/func/GAP_00B440.bin",
       "base": "build/GAP_00B440.o",
-      "source_path": "src/GAP_00B440.c",
+      "source_path": "asm/GAP_00B440.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1364,7 +1704,7 @@
       "name": "GAP_00BDD6",
       "target": "orig/func/GAP_00BDD6.bin",
       "base": "build/GAP_00BDD6.o",
-      "source_path": "src/GAP_00BDD6.c",
+      "source_path": "asm/GAP_00BDD6.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1374,7 +1714,7 @@
       "name": "GAP_00C102",
       "target": "orig/func/GAP_00C102.bin",
       "base": "build/GAP_00C102.o",
-      "source_path": "src/GAP_00C102.c",
+      "source_path": "asm/GAP_00C102.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1384,7 +1724,7 @@
       "name": "GAP_00C5D8",
       "target": "orig/func/GAP_00C5D8.bin",
       "base": "build/GAP_00C5D8.o",
-      "source_path": "src/GAP_00C5D8.c",
+      "source_path": "asm/GAP_00C5D8.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1394,7 +1734,7 @@
       "name": "GAP_00D038",
       "target": "orig/func/GAP_00D038.bin",
       "base": "build/GAP_00D038.o",
-      "source_path": "src/GAP_00D038.c",
+      "source_path": "asm/GAP_00D038.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1404,7 +1744,7 @@
       "name": "GAP_00D2A6",
       "target": "orig/func/GAP_00D2A6.bin",
       "base": "build/GAP_00D2A6.o",
-      "source_path": "src/GAP_00D2A6.c",
+      "source_path": "asm/GAP_00D2A6.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1414,7 +1754,7 @@
       "name": "GAP_00DB78",
       "target": "orig/func/GAP_00DB78.bin",
       "base": "build/GAP_00DB78.o",
-      "source_path": "src/GAP_00DB78.c",
+      "source_path": "asm/GAP_00DB78.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1424,7 +1764,17 @@
       "name": "GAP_013684",
       "target": "orig/func/GAP_013684.bin",
       "base": "build/GAP_013684.o",
-      "source_path": "src/GAP_013684.c",
+      "source_path": "asm/GAP_013684.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_013A0A",
+      "target": "orig/func/GAP_013A0A.bin",
+      "base": "build/GAP_013A0A.o",
+      "source_path": "src/GAP_013A0A.c",
       "complete": false,
       "progress_categories": [
         "code"
