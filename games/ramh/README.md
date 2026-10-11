@@ -32,12 +32,22 @@ Import Ghidra con padding di `0x8000` zeri (`rstar_pad.bin`, solo TEMP).
 - Ghidra: **120 funzioni** (`0x859A`-`0x13B...`), 8 con ref ai custom
   (`INTENA`, `INTREQ`, ...). → `config/units.json` (120 unit), baseline 0%.
 
-## `boot`: loader criptato
+## `boot`: loader criptato (analisi)
 
 `boot` (Hunk, 1 CODE 3676 B, entropia 7.73 dopo i primi 256 B) = stub
-decryptor + payload cifrato ("ROCK lock"?). Niente stringhe/JSR visibili.
-Il decryptor va emulato o analizzato per trovare indirizzo/part di RSTAR.
-Tool nuovo: `tools/m68k_flow.py` (disassembly ricorsivo, segue `$addr`).
+anti-debug + payload cifrato. Meccanismi mappati (non ancora eseguiti):
+
+1. **Trap via vettore `$10`** (istruzione illegale): `PEA $C(PC)` +
+   `MOVE.L (A7)+,$10` installa il vettore, `ILLEGAL @0x0A` → `0x10`;
+   seconda coppia → `$10=0x40`; `dc.w $4E7A @0x1C` (= illegale su 68000)
+   → trap a `0x40`. `tools/m68k_flow.py` segue questi trap (pre-scan
+   PEA→`$10` + self-test).
+2. **`@0x40`: 8 LONG sullo stack** (stato), **`$24` (vettore trace) = SP+6**,
+   **`SR=$A71F`** (supervisor + trace + IPL7). Da `@0x80` il controllo è
+   dinamico (ogni istruzione passa dal trace handler): l'analisi statica è
+   cieca per disegno — serve emulazione (cfr. `m68k/`+`amiga/` di Disk-Utilities).
+3. Base RSTAR `0x8000` resta assunzione di lavoro (forte ma non confermata):
+   stack `$80000`, 593/593 ref in-range, BSS in coda.
 
 ## Chain su RSTAR (fatta)
 
