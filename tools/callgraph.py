@@ -18,13 +18,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 
 def calls_in(code):
-    """Ritorna [target_fileoff] delle call PC-rel/assolute nello slice."""
+    """Ritorna [(kind, value)]: kind 'rel' = offset slice-relativo (PC+2+disp),
+    kind 'abs' = indirizzo assoluto (JSR abs.l)."""
     import m68k_flow
     import struct
-
-    def s32(v):
-        return v - 0x100000000 if v >= 0x80000000 else v
-
     out = []
     for addr, (size, text) in m68k_flow.disasm_recursive(code, 0, [0]).items():
         parts = text.split(None, 1)
@@ -35,12 +32,12 @@ def calls_in(code):
         if m == "bsr":
             disp = struct.unpack(">b", raw[1:2])[0] if size == 2 \
                 else struct.unpack(">h", raw[2:4])[0]
-            out.append(addr + 2 + disp)
+            out.append(("rel", addr + 2 + disp))
         elif m == "jsr":
             if len(raw) >= 4 and raw[0] == 0x4E and raw[1] == 0xBA:  # JSR d16(PC)
-                out.append(addr + 2 + struct.unpack(">h", raw[2:4])[0])
+                out.append(("rel", addr + 2 + struct.unpack(">h", raw[2:4])[0]))
             elif len(raw) >= 6 and raw[0] == 0x4E and raw[1] == 0xB9:  # JSR abs.l
-                out.append(struct.unpack(">I", raw[2:6])[0])
+                out.append(("abs", struct.unpack(">I", raw[2:6])[0]))
     return out
 
 
@@ -62,7 +59,9 @@ def build(symbols_path, func_dir, base):
         data = open(p, "rb").read()
         # il file puo' essere piu' corto del range Ghidra: usa offset relativi
         calls = set()
-        tgts = [f["start"] + t for t in calls_in(data)]
+        tgts = []
+        for kind, v in calls_in(data):
+            tgts.append(v - base if kind == "abs" else f["start"] + v)
         starts = {g["name"]: g["start"] for g in funcs}
         for t in tgts:
             exact = [n for n, s in starts.items() if s == t and n != f["name"]]

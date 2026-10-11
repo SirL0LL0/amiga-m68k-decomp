@@ -11,5 +11,9 @@
   "FUN_00013206": {"name": "BuildSoundTables", "desc": "Trova max in tabella 128B, costruisce 15 ptr, azzera, mute, init vars."},
   "FUN_00013554": {"name": "SoundCmd_Process", "desc": "Processa comando audio via struct A6 (tabelle A3, out A5): setup voci, DMACON, switch $B-$F (slide/copy/flag/motor/select)."},
   "FUN_000133fe": {"name": "SoundTick", "desc": "Tick sonoro: 4 voci via SoundCmd_Process, delay, DMACON=$8000|flags, start voci AUDx, avanza posizione/loop."},
-  "FUN_000132c6": {"name": "IrqWorker?", "desc": "Chiamata da IrqHandler_Ack. DA LEGGERE."}
+  "FUN_000132c6": {"name": "SoundVoices_Update", "desc": "Frame counter $13CEE (mod 6), per le 4 voci attive chiama SoundVoice_Worker.", "conf": "high"},
+  "FUN_0001332c": {"name": "SoundVoice_Worker", "desc": "Worker voce chiamato 4x da SoundVoices_Update. DA LEGGERE.", "conf": "med"},
+  "FUN_00009ea4": {"name": "StateDispatch", "desc": "Dispatcher stato gioco (byte $128A8 + tabella $123D2, JSR assoluta a UtilCluster, far-call, comandi D4). 294B.", "conf": "med"},
+  "FUN_0000a4a2": {"name": "FlagDispatch", "desc": "Dispatcher su flag $123CB + comandi D4 ($70-$73), JSR assoluta a UtilCluster. 116B.", "conf": "med"},
+  "FUN_000138f2": {"name": "UtilCluster", "desc": "Chiamata per indirizzo assoluto dai dispatcher; chiama helper tiny (d340/13a7e/13aa0/13abc). 280B.", "conf": "med"}
 }
