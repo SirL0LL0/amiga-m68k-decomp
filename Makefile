@@ -33,7 +33,7 @@ OBJ_ASM := $(patsubst asm/%,$(BUILD_DIR)/%,$(SRC_ASM))
 OBJ_ASM := $(OBJ_ASM:.s=.o)
 OBJ_ASM := $(OBJ_ASM:.asm=.o)
 
-.PHONY: all build report diff check-tools verify split analyze units decompile agent docker-build clean
+.PHONY: all build report diff check-tools verify split analyze units decompile agent reasm docker-build clean
 
 all: build
 
@@ -96,12 +96,20 @@ decompile:
 agent:
 	$(PYTHON) tools/agent/loop.py --units $(UNITS)
 
+# Riassembla le unit senza sorgenti in asm/*.s byte-identici (vasm nativo).
+# Non tocca mai asm/*.s o src/*.c esistenti (lavoro manuale al sicuro).
+reasm:
+	$(PYTHON) tools/reasm.py --units $(UNITS)
+
 # Verifica senza toolchain: self-test dei tool + layout header col gcc host
 verify:
 	$(PYTHON) tools/diff_m68k.py --self-test
 	$(PYTHON) tools/split_hunk.py --self-test
 	$(PYTHON) tools/symbols_to_units.py --self-test
 	$(PYTHON) tools/agent/loop.py --self-test
+	$(PYTHON) tools/reasm.py --self-test
+	$(PYTHON) tools/m68k_flow.py --self-test
+	$(PYTHON) tools/adf_extract.py --self-test
 	gcc -I include tools/check_hw.c -o $(BUILD_DIR)/check_hw && ./$(BUILD_DIR)/check_hw
 
 docker-build:

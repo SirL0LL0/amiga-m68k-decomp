@@ -159,7 +159,7 @@ def measure_unit(u):
         b = _rstrip_pad(b, len(t))
 
     matched, total, fuzzy = compare_bytes(t, b)
-    full_match = (t == b) and len(t) > 0
+    full_match = (matched == total and total > 0)
     if u["complete"] and t is not None and b is None:
         full_match = True  # convenzione objdiff: complete senza base = 100%
 

@@ -82,6 +82,8 @@ make report   # in Docker: toolchain Amiga reale
 - `tools/symbols_to_units.py` — funzioni -> `config/units.json` + `include/amiga_lvo.h`
 - `tools/ghidra/DecompileFunctions.java` — C del decompilatore -> `decompiled/`
 - `tools/agent/` — loop automatico compile/diff/refine (`loop.py`, `backends.py`, `config.json`)
+- `tools/reasm.py` — riassembla le unit senza sorgenti in `asm/*.s` byte-identici
+- `tools/m68k_flow.py` — disassembly ricorsivo M68k (segue salti + trap `$10`)
 - `docs/decomp-dev.md` — registrazione progetto e contratto artifact
 - `tools/diff_m68k.py` — matching -> `build/report.json` (formato decomp.dev v2)
 - `include/amiga_hardware.h` — registri custom (offset verificati)

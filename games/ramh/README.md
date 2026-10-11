@@ -57,7 +57,15 @@ anti-debug + payload cifrato. Meccanismi mappati (non ancora eseguiti):
    collide con `nome:base` → usare path relativi. Tool: `tools/emu_mem.py`,
    `tools/emu_trace.py`. Per proseguire servirebbe SysBase finto + DOS.
 
-## Chain su RSTAR (fatta)
+## Il resto (112 funzioni): riassemblatore — FATTO 120/120
+
+`python tools/reasm.py --all` genera `asm/*.s` byte-identici per le unit
+senza sorgenti (label per salti in-slice, dc.w per fuori slice/dati),
+con loop di convergenza via listing vasm (max 4 round). Non tocca mai
+`asm/*.s` scritti a mano (né con `--force`, che rispetta i non-generati).
+Poi: `python tools/diff_m68k.py ...` → report. Lavoro manuale dopo:
+rinominare label/funzioni e portare in C dove il decompilatore è fedele.
+Stato: **120/120 func, 100% codice** — le 8 a mano + 112 generate.
 
 1. `python tools/split_hunk.py --raw game-ramh/RSTAR --out-dir orig --manifest orig/manifest-rstar.json --base 0x8000`
 2. Ghidra headless su `rstar_pad.bin` → `game-ramh/symbols-rstar.json`
