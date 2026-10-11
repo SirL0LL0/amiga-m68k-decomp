@@ -78,8 +78,8 @@
     "conf": "high"
   },
   "FUN_0001313c": {
-    "name": "InstallIrqVector",
-    "desc": "Installa IrqHandler_Ack in vettore $6C (salva vecchio in $13302), INTENA $3FF7/$C008/$8020, wait CIA, restore.",
+    "name": "Audio_InitAndStart",
+    "desc": "Init audio: flag 128CE=2, 2AAC2=2, 2AAC5=0, chiama worker, 13CEA=1, INTENA 3FF7/8020/C008, wait CIA BFE001, restore+worker.",
     "loro_addr": "0x1323c",
     "loro_nome": "inizializza_e_avvia_audio",
     "loro_desc": "Inizializza il driver audio, avvia la riproduzione e attende interruzione pattern o pressione tasto fuoco per fermarsi.",
@@ -88,7 +88,7 @@
       "0x13206",
       "0x132a4"
     ],
-    "conf": "high"
+    "conf": "med"
   },
   "FUN_000132a4": {
     "name": "MuteAudio",
@@ -101,28 +101,28 @@
     "conf": "high"
   },
   "FUN_00013206": {
-    "name": "BuildSoundTables",
-    "desc": "Trova max in tabella 128B, costruisce 15 ptr, azzera, mute, init vars.",
+    "name": "Audio_InitDriver",
+    "desc": "Trova max in tabella 128B, costruisce 15 ptr (base+idx*0x400+600), azzera 15 long, mute audio, init vars.",
     "loro_addr": "0x13306",
     "loro_nome": "inizializza_driver_audio",
     "loro_desc": "Inizializza le tabelle dei canali audio e azzera i volumi dei registri Paula.",
     "loro_fonte": "google/gemini-3.5-flash",
     "loro_chiama": [],
-    "conf": "high"
+    "conf": "med"
   },
   "FUN_00013554": {
-    "name": "SoundCmd_Process",
-    "desc": "Processa comando audio via struct A6 (tabelle A3, out A5): setup voci, DMACON, switch $B-$F (slide/copy/flag/motor/select).",
+    "name": "Audio_ChannelCmd",
+    "desc": "Processa comando canale audio via struct A6 (lookup tabelle, far-call, switch B-F: slide/copy/flag/motor/select).",
     "loro_addr": "0x13654",
     "loro_nome": "elabora_comando_canale_audio",
     "loro_desc": "Elabora la nota e i comandi del canale audio configurando i registri Paula.",
     "loro_fonte": "google/gemini-3.5-flash",
     "loro_chiama": [],
-    "conf": "high"
+    "conf": "med"
   },
   "FUN_000133fe": {
-    "name": "SoundTick",
-    "desc": "Tick sonoro: 4 voci via SoundCmd_Process, delay, DMACON=$8000|flags, start voci AUDx, avanza posizione/loop.",
+    "name": "Audio_UpdatePlayback",
+    "desc": "Tick sonoro: 4 voci via Audio_ChannelCmd, delay, DMACON=8000|flags, start voci AUDxLCH/LEN, avanza posizione/loop.",
     "loro_addr": "0x134fe",
     "loro_nome": "aggiorna_riproduzione_audio",
     "loro_desc": "Elabora i 4 canali audio per il tick corrente, aggiorna i puntatori DMA Paula e gestisce il loop del pattern musicale.",
@@ -130,7 +130,7 @@
     "loro_chiama": [
       "0x13554"
     ],
-    "conf": "high"
+    "conf": "med"
   },
   "FUN_000132c6": {
     "name": "SoundVoices_Update",
@@ -2556,17 +2556,64 @@
         "desc": "Copia l'impostazione dei controlli da 129c5 a 129c4 e ripristina i blocchi di memoria associati.",
         "conf": "da-verificare"
       }
-    ]
+    ],
+    "name": "Input_SwapBuffers",
+    "desc": "Swap buffer: D0=6F146, A0=129C5, A1=129C4, chiama helper -0xF5E, rts.",
+    "conf": "low"
   },
-  "CALL_0138A4": {},
-  "FUN_0000aaba": {},
-  "FUN_0000d23c": {},
-  "FUN_0000d814": {},
-  "FUN_0000db44": {},
-  "GAP_0090A4": {},
-  "GAP_009BCA": {},
-  "GAP_00AF4E": {},
-  "GAP_00B1A8": {},
-  "GAP_00B440": {},
-  "GAP_013A0A": {}
+  "CALL_0138A4": {
+    "name": "Input_WaitFireOrBlock",
+    "desc": "ASR D1; se BB64!=0 o D1==0 ritorna subito (polling blocco input).",
+    "conf": "low"
+  },
+  "FUN_0000aaba": {
+    "name": "Str_CopyN",
+    "desc": "Copia N stringhe (D4) da A3 a A0 con terminatore FF; ricorsione interna.",
+    "conf": "low"
+  },
+  "FUN_0000d23c": {
+    "name": "Flag_Set128B1",
+    "desc": "Set flag 128B1=D6, rts.",
+    "conf": "low"
+  },
+  "FUN_0000d814": {
+    "name": "Util_Null",
+    "desc": "Ritorna subito (routine vuota/placeholder).",
+    "conf": "low"
+  },
+  "FUN_0000db44": {
+    "name": "Mem_Copy3Words",
+    "desc": "Copia 3 word (dbra) da A0 a A1 con offset 1F40/3E80/5DC0.",
+    "conf": "low"
+  },
+  "GAP_0090A4": {
+    "name": "Timer_Wait128CD",
+    "desc": "Decrementa 128CD fino a 0 (max 9), rts.",
+    "conf": "low"
+  },
+  "GAP_009BCA": {
+    "name": "Menu_ScrollUpdate",
+    "desc": "Aggiorna scroll menu: confronta 12864/12865 con tabella 120CA, chiama helper.",
+    "conf": "low"
+  },
+  "GAP_00AF4E": {
+    "name": "Audio_ChannelWrite",
+    "desc": "Scrive 2 byte in canale audio (A1), chiama helper 5CC, rts.",
+    "conf": "low"
+  },
+  "GAP_00B1A8": {
+    "name": "Menu_CounterStep",
+    "desc": "Step contatore menu 128C4/128C5 con wrap a 0x14, chiama helper.",
+    "conf": "low"
+  },
+  "GAP_00B440": {
+    "name": "Mem_FillD4",
+    "desc": "Riempi D4 word (0x7CF) con D0, dbra loop, rts.",
+    "conf": "low"
+  },
+  "GAP_013A0A": {
+    "name": "Audio_ChannelStep",
+    "desc": "Step canale audio: aggiorna pitch/volume via helper, gestione 0xAA/0x96.",
+    "conf": "low"
+  }
 }
