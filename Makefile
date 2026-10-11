@@ -18,6 +18,9 @@ TARGET_DIR := orig
 REPORT     := $(BUILD_DIR)/report.json
 SYMBOLS    := symbols.json
 UNITS      := config/units.json
+GAPS       := game-ramh/gaps.json
+EXE        ?= game-ramh/RSTAR
+BASE       ?= 0x8000
 
 # Ghidra headless (solo locale, non in CI). Override: make analyze GHIDRA_DIR=...
 GHIDRA_DIR ?= /opt/ghidra
@@ -33,7 +36,7 @@ OBJ_ASM := $(patsubst asm/%,$(BUILD_DIR)/%,$(SRC_ASM))
 OBJ_ASM := $(OBJ_ASM:.s=.o)
 OBJ_ASM := $(OBJ_ASM:.asm=.o)
 
-.PHONY: all build report diff check-tools verify split analyze units decompile agent reasm docker-build clean
+.PHONY: all build report diff check-tools verify split analyze units decompile agent reasm gaps pipeline docker-build clean
 
 all: build
 
@@ -80,6 +83,10 @@ analyze:
 	  -scriptPath tools/ghidra \
 	  -postScript AnalyzeAmiga.java $(SYMBOLS) tools/ghidra/amiga_data.json
 
+# Trova funzioni nei gap Ghidra (GAP_*) e via target di call (CALL_*).
+gaps:
+	$(PYTHON) tools/find_gaps.py --symbols $(SYMBOLS) --exe $(EXE) --base $(BASE) -o game-ramh/gaps.json
+
 # symbols.json -> unit per-funzione + header LVO (preserva flag complete)
 units:
 	$(PYTHON) tools/symbols_to_units.py --symbols $(SYMBOLS) --orig-dir $(TARGET_DIR)
@@ -100,6 +107,13 @@ agent:
 # Non tocca mai asm/*.s o src/*.c esistenti (lavoro manuale al sicuro).
 reasm:
 	$(PYTHON) tools/reasm.py --units $(UNITS)
+
+# Completa la chain in un comando (nativo, nessun Ghidra/LLM necessario):
+# gaps -> units -> reasm -> build -> report. I build/*.o sono gia' 100%:
+# questo rigenera le unit mancanti e riflette il report.
+pipeline: gaps units
+	$(PYTHON) tools/reasm.py --units $(UNITS)
+	$(PYTHON) tools/diff_m68k.py --target-dir $(TARGET_DIR) --build-dir $(BUILD_DIR) --units $(UNITS) -o $(REPORT)
 
 # Verifica senza toolchain: self-test dei tool + layout header col gcc host
 verify:
