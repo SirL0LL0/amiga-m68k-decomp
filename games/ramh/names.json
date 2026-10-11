@@ -18,5 +18,8 @@
   "FUN_000138f2": {"name": "UtilCluster", "desc": "Chiamata per indirizzo assoluto dai dispatcher; chiama helper tiny (d340/13a7e/13aa0/13abc). 280B.", "conf": "med"},
   "FUN_00009ae4": {"name": "DrawText_Tables", "desc": "Stampa testo/numeri da tabelle ($12087/$120A3, addi $30=ASCII) via helper; ricorsione interna. Chiamato da daac. 174B.", "conf": "low"},
   "FUN_0000d4f4": {"name": "Seq5_Helpers", "desc": "Chiama 5 helper (d538/da48/da8e/db30/d994) alternando flag $1286A/$BB92. 68B.", "conf": "low"},
-  "FUN_000085ec": {"name": "PrintTableCounts", "desc": "Conta tab $123CA, stampa cifre via helper, stessi flag di Seq5. Chiamato da daac. 158B.", "conf": "low"}
+  "FUN_000085ec": {"name": "PrintTableCounts", "desc": "Conta tab $123CA, stampa cifre via helper, stessi flag di Seq5. Chiamato da daac. 158B.", "conf": "low"},
+  "FUN_0000daac": {"name": "DrawDataSeq", "desc": "Setup ptr $5E50A/$707C6 + D0=$45F, chiama 6 helper draw/testo (85ec/9ae4/c054/c52a/da5a/dad6). 42B.", "conf": "low"},
+  "GAP_008000": {"name": "SystemTakeover_Entry", "desc": "ENTRY RSTAR: trap#0, SR=$2700, stack $80000, INTENA/DMACON off, COLOR00, CIA, copper/display init ($82D6/$3981/$1C1/$4200), vettore $68. 470B.", "conf": "high"},
+  "FUN_0000d538": {"name": "ScriptInterp", "desc": "Interprete bytecode via A3 (flag bit D/E/F su opcode word, tabelle, dispatch a d340/d486/d4ca/d4de/d63e/8742). 262B.", "conf": "low"}
 }

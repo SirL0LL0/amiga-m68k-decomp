@@ -4,7 +4,7 @@
       "name": "FUN_0000859a",
       "target": "orig/func/FUN_0000859a.bin",
       "base": "build/FUN_0000859a.o",
-      "source_path": "src/FUN_0000859a.c",
+      "source_path": "asm/FUN_0000859a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -14,7 +14,7 @@
       "name": "FUN_000085e2",
       "target": "orig/func/FUN_000085e2.bin",
       "base": "build/FUN_000085e2.o",
-      "source_path": "src/FUN_000085e2.c",
+      "source_path": "asm/FUN_000085e2.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -24,7 +24,7 @@
       "name": "FUN_000085ec",
       "target": "orig/func/FUN_000085ec.bin",
       "base": "build/FUN_000085ec.o",
-      "source_path": "src/FUN_000085ec.c",
+      "source_path": "asm/FUN_000085ec.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -34,7 +34,7 @@
       "name": "FUN_00008694",
       "target": "orig/func/FUN_00008694.bin",
       "base": "build/FUN_00008694.o",
-      "source_path": "src/FUN_00008694.c",
+      "source_path": "asm/FUN_00008694.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -44,7 +44,7 @@
       "name": "FUN_0000869a",
       "target": "orig/func/FUN_0000869a.bin",
       "base": "build/FUN_0000869a.o",
-      "source_path": "src/FUN_0000869a.c",
+      "source_path": "asm/FUN_0000869a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -54,7 +54,7 @@
       "name": "FUN_000086aa",
       "target": "orig/func/FUN_000086aa.bin",
       "base": "build/FUN_000086aa.o",
-      "source_path": "src/FUN_000086aa.c",
+      "source_path": "asm/FUN_000086aa.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -64,7 +64,7 @@
       "name": "FUN_000086c6",
       "target": "orig/func/FUN_000086c6.bin",
       "base": "build/FUN_000086c6.o",
-      "source_path": "src/FUN_000086c6.c",
+      "source_path": "asm/FUN_000086c6.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -74,7 +74,7 @@
       "name": "FUN_000086ea",
       "target": "orig/func/FUN_000086ea.bin",
       "base": "build/FUN_000086ea.o",
-      "source_path": "src/FUN_000086ea.c",
+      "source_path": "asm/FUN_000086ea.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -84,7 +84,7 @@
       "name": "FUN_00008742",
       "target": "orig/func/FUN_00008742.bin",
       "base": "build/FUN_00008742.o",
-      "source_path": "src/FUN_00008742.c",
+      "source_path": "asm/FUN_00008742.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -94,7 +94,7 @@
       "name": "FUN_000087a8",
       "target": "orig/func/FUN_000087a8.bin",
       "base": "build/FUN_000087a8.o",
-      "source_path": "src/FUN_000087a8.c",
+      "source_path": "asm/FUN_000087a8.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -104,7 +104,7 @@
       "name": "FUN_00008854",
       "target": "orig/func/FUN_00008854.bin",
       "base": "build/FUN_00008854.o",
-      "source_path": "src/FUN_00008854.c",
+      "source_path": "asm/FUN_00008854.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -114,7 +114,7 @@
       "name": "FUN_00008c08",
       "target": "orig/func/FUN_00008c08.bin",
       "base": "build/FUN_00008c08.o",
-      "source_path": "src/FUN_00008c08.c",
+      "source_path": "asm/FUN_00008c08.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -124,7 +124,7 @@
       "name": "FUN_0000908c",
       "target": "orig/func/FUN_0000908c.bin",
       "base": "build/FUN_0000908c.o",
-      "source_path": "src/FUN_0000908c.c",
+      "source_path": "asm/FUN_0000908c.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -134,7 +134,7 @@
       "name": "FUN_000090ce",
       "target": "orig/func/FUN_000090ce.bin",
       "base": "build/FUN_000090ce.o",
-      "source_path": "src/FUN_000090ce.c",
+      "source_path": "asm/FUN_000090ce.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -144,7 +144,7 @@
       "name": "FUN_000095cc",
       "target": "orig/func/FUN_000095cc.bin",
       "base": "build/FUN_000095cc.o",
-      "source_path": "src/FUN_000095cc.c",
+      "source_path": "asm/FUN_000095cc.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -154,7 +154,7 @@
       "name": "FUN_0000983c",
       "target": "orig/func/FUN_0000983c.bin",
       "base": "build/FUN_0000983c.o",
-      "source_path": "src/FUN_0000983c.c",
+      "source_path": "asm/FUN_0000983c.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -164,7 +164,7 @@
       "name": "FUN_00009844",
       "target": "orig/func/FUN_00009844.bin",
       "base": "build/FUN_00009844.o",
-      "source_path": "src/FUN_00009844.c",
+      "source_path": "asm/FUN_00009844.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -174,7 +174,7 @@
       "name": "FUN_0000988e",
       "target": "orig/func/FUN_0000988e.bin",
       "base": "build/FUN_0000988e.o",
-      "source_path": "src/FUN_0000988e.c",
+      "source_path": "asm/FUN_0000988e.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -184,7 +184,7 @@
       "name": "FUN_00009ac8",
       "target": "orig/func/FUN_00009ac8.bin",
       "base": "build/FUN_00009ac8.o",
-      "source_path": "src/FUN_00009ac8.c",
+      "source_path": "asm/FUN_00009ac8.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -194,7 +194,7 @@
       "name": "FUN_00009ae4",
       "target": "orig/func/FUN_00009ae4.bin",
       "base": "build/FUN_00009ae4.o",
-      "source_path": "src/FUN_00009ae4.c",
+      "source_path": "asm/FUN_00009ae4.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -204,7 +204,7 @@
       "name": "FUN_00009b92",
       "target": "orig/func/FUN_00009b92.bin",
       "base": "build/FUN_00009b92.o",
-      "source_path": "src/FUN_00009b92.c",
+      "source_path": "asm/FUN_00009b92.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -214,7 +214,7 @@
       "name": "FUN_00009ea4",
       "target": "orig/func/FUN_00009ea4.bin",
       "base": "build/FUN_00009ea4.o",
-      "source_path": "src/FUN_00009ea4.c",
+      "source_path": "asm/FUN_00009ea4.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -224,7 +224,7 @@
       "name": "FUN_00009fcc",
       "target": "orig/func/FUN_00009fcc.bin",
       "base": "build/FUN_00009fcc.o",
-      "source_path": "src/FUN_00009fcc.c",
+      "source_path": "asm/FUN_00009fcc.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -234,7 +234,7 @@
       "name": "FUN_0000a486",
       "target": "orig/func/FUN_0000a486.bin",
       "base": "build/FUN_0000a486.o",
-      "source_path": "src/FUN_0000a486.c",
+      "source_path": "asm/FUN_0000a486.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -244,7 +244,7 @@
       "name": "FUN_0000a4a2",
       "target": "orig/func/FUN_0000a4a2.bin",
       "base": "build/FUN_0000a4a2.o",
-      "source_path": "src/FUN_0000a4a2.c",
+      "source_path": "asm/FUN_0000a4a2.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -254,7 +254,7 @@
       "name": "FUN_0000a516",
       "target": "orig/func/FUN_0000a516.bin",
       "base": "build/FUN_0000a516.o",
-      "source_path": "src/FUN_0000a516.c",
+      "source_path": "asm/FUN_0000a516.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -264,7 +264,7 @@
       "name": "FUN_0000a800",
       "target": "orig/func/FUN_0000a800.bin",
       "base": "build/FUN_0000a800.o",
-      "source_path": "src/FUN_0000a800.c",
+      "source_path": "asm/FUN_0000a800.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -274,7 +274,7 @@
       "name": "FUN_0000a8cc",
       "target": "orig/func/FUN_0000a8cc.bin",
       "base": "build/FUN_0000a8cc.o",
-      "source_path": "src/FUN_0000a8cc.c",
+      "source_path": "asm/FUN_0000a8cc.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -284,7 +284,7 @@
       "name": "FUN_0000aaba",
       "target": "orig/func/FUN_0000aaba.bin",
       "base": "build/FUN_0000aaba.o",
-      "source_path": "src/FUN_0000aaba.c",
+      "source_path": "asm/FUN_0000aaba.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -294,7 +294,7 @@
       "name": "FUN_0000aafc",
       "target": "orig/func/FUN_0000aafc.bin",
       "base": "build/FUN_0000aafc.o",
-      "source_path": "src/FUN_0000aafc.c",
+      "source_path": "asm/FUN_0000aafc.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -304,7 +304,7 @@
       "name": "FUN_0000ae8a",
       "target": "orig/func/FUN_0000ae8a.bin",
       "base": "build/FUN_0000ae8a.o",
-      "source_path": "src/FUN_0000ae8a.c",
+      "source_path": "asm/FUN_0000ae8a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -314,7 +314,7 @@
       "name": "FUN_0000af24",
       "target": "orig/func/FUN_0000af24.bin",
       "base": "build/FUN_0000af24.o",
-      "source_path": "src/FUN_0000af24.c",
+      "source_path": "asm/FUN_0000af24.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -324,7 +324,7 @@
       "name": "FUN_0000b0f6",
       "target": "orig/func/FUN_0000b0f6.bin",
       "base": "build/FUN_0000b0f6.o",
-      "source_path": "src/FUN_0000b0f6.c",
+      "source_path": "asm/FUN_0000b0f6.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -334,7 +334,7 @@
       "name": "FUN_0000b3a4",
       "target": "orig/func/FUN_0000b3a4.bin",
       "base": "build/FUN_0000b3a4.o",
-      "source_path": "src/FUN_0000b3a4.c",
+      "source_path": "asm/FUN_0000b3a4.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -344,7 +344,7 @@
       "name": "FUN_0000b3be",
       "target": "orig/func/FUN_0000b3be.bin",
       "base": "build/FUN_0000b3be.o",
-      "source_path": "src/FUN_0000b3be.c",
+      "source_path": "asm/FUN_0000b3be.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -354,7 +354,7 @@
       "name": "FUN_0000b3d4",
       "target": "orig/func/FUN_0000b3d4.bin",
       "base": "build/FUN_0000b3d4.o",
-      "source_path": "src/FUN_0000b3d4.c",
+      "source_path": "asm/FUN_0000b3d4.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -364,7 +364,7 @@
       "name": "FUN_0000b432",
       "target": "orig/func/FUN_0000b432.bin",
       "base": "build/FUN_0000b432.o",
-      "source_path": "src/FUN_0000b432.c",
+      "source_path": "asm/FUN_0000b432.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -374,7 +374,7 @@
       "name": "FUN_0000b4a2",
       "target": "orig/func/FUN_0000b4a2.bin",
       "base": "build/FUN_0000b4a2.o",
-      "source_path": "src/FUN_0000b4a2.c",
+      "source_path": "asm/FUN_0000b4a2.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -384,7 +384,7 @@
       "name": "FUN_0000b4b0",
       "target": "orig/func/FUN_0000b4b0.bin",
       "base": "build/FUN_0000b4b0.o",
-      "source_path": "src/FUN_0000b4b0.c",
+      "source_path": "asm/FUN_0000b4b0.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -394,7 +394,7 @@
       "name": "FUN_0000b4ce",
       "target": "orig/func/FUN_0000b4ce.bin",
       "base": "build/FUN_0000b4ce.o",
-      "source_path": "src/FUN_0000b4ce.c",
+      "source_path": "asm/FUN_0000b4ce.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -404,7 +404,7 @@
       "name": "FUN_0000b4d0",
       "target": "orig/func/FUN_0000b4d0.bin",
       "base": "build/FUN_0000b4d0.o",
-      "source_path": "src/FUN_0000b4d0.c",
+      "source_path": "asm/FUN_0000b4d0.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -414,7 +414,7 @@
       "name": "FUN_0000b510",
       "target": "orig/func/FUN_0000b510.bin",
       "base": "build/FUN_0000b510.o",
-      "source_path": "src/FUN_0000b510.c",
+      "source_path": "asm/FUN_0000b510.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -424,7 +424,7 @@
       "name": "FUN_0000b51a",
       "target": "orig/func/FUN_0000b51a.bin",
       "base": "build/FUN_0000b51a.o",
-      "source_path": "src/FUN_0000b51a.c",
+      "source_path": "asm/FUN_0000b51a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -434,7 +434,7 @@
       "name": "FUN_0000b57e",
       "target": "orig/func/FUN_0000b57e.bin",
       "base": "build/FUN_0000b57e.o",
-      "source_path": "src/FUN_0000b57e.c",
+      "source_path": "asm/FUN_0000b57e.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -444,7 +444,7 @@
       "name": "FUN_0000b588",
       "target": "orig/func/FUN_0000b588.bin",
       "base": "build/FUN_0000b588.o",
-      "source_path": "src/FUN_0000b588.c",
+      "source_path": "asm/FUN_0000b588.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -454,7 +454,7 @@
       "name": "FUN_0000b616",
       "target": "orig/func/FUN_0000b616.bin",
       "base": "build/FUN_0000b616.o",
-      "source_path": "src/FUN_0000b616.c",
+      "source_path": "asm/FUN_0000b616.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -464,7 +464,7 @@
       "name": "FUN_0000b68e",
       "target": "orig/func/FUN_0000b68e.bin",
       "base": "build/FUN_0000b68e.o",
-      "source_path": "src/FUN_0000b68e.c",
+      "source_path": "asm/FUN_0000b68e.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -474,7 +474,7 @@
       "name": "FUN_0000b710",
       "target": "orig/func/FUN_0000b710.bin",
       "base": "build/FUN_0000b710.o",
-      "source_path": "src/FUN_0000b710.c",
+      "source_path": "asm/FUN_0000b710.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -484,7 +484,7 @@
       "name": "FUN_0000b782",
       "target": "orig/func/FUN_0000b782.bin",
       "base": "build/FUN_0000b782.o",
-      "source_path": "src/FUN_0000b782.c",
+      "source_path": "asm/FUN_0000b782.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -494,7 +494,7 @@
       "name": "FUN_0000b78a",
       "target": "orig/func/FUN_0000b78a.bin",
       "base": "build/FUN_0000b78a.o",
-      "source_path": "src/FUN_0000b78a.c",
+      "source_path": "asm/FUN_0000b78a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -504,7 +504,7 @@
       "name": "FUN_0000b84a",
       "target": "orig/func/FUN_0000b84a.bin",
       "base": "build/FUN_0000b84a.o",
-      "source_path": "src/FUN_0000b84a.c",
+      "source_path": "asm/FUN_0000b84a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -514,7 +514,7 @@
       "name": "FUN_0000b85a",
       "target": "orig/func/FUN_0000b85a.bin",
       "base": "build/FUN_0000b85a.o",
-      "source_path": "src/FUN_0000b85a.c",
+      "source_path": "asm/FUN_0000b85a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -524,7 +524,7 @@
       "name": "FUN_0000bb76",
       "target": "orig/func/FUN_0000bb76.bin",
       "base": "build/FUN_0000bb76.o",
-      "source_path": "src/FUN_0000bb76.c",
+      "source_path": "asm/FUN_0000bb76.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -534,7 +534,7 @@
       "name": "FUN_0000bc54",
       "target": "orig/func/FUN_0000bc54.bin",
       "base": "build/FUN_0000bc54.o",
-      "source_path": "src/FUN_0000bc54.c",
+      "source_path": "asm/FUN_0000bc54.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -544,7 +544,7 @@
       "name": "FUN_0000bcea",
       "target": "orig/func/FUN_0000bcea.bin",
       "base": "build/FUN_0000bcea.o",
-      "source_path": "src/FUN_0000bcea.c",
+      "source_path": "asm/FUN_0000bcea.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -554,7 +554,7 @@
       "name": "FUN_0000bd5a",
       "target": "orig/func/FUN_0000bd5a.bin",
       "base": "build/FUN_0000bd5a.o",
-      "source_path": "src/FUN_0000bd5a.c",
+      "source_path": "asm/FUN_0000bd5a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -564,7 +564,7 @@
       "name": "FUN_0000bd8e",
       "target": "orig/func/FUN_0000bd8e.bin",
       "base": "build/FUN_0000bd8e.o",
-      "source_path": "src/FUN_0000bd8e.c",
+      "source_path": "asm/FUN_0000bd8e.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -574,7 +574,7 @@
       "name": "FUN_0000bdc4",
       "target": "orig/func/FUN_0000bdc4.bin",
       "base": "build/FUN_0000bdc4.o",
-      "source_path": "src/FUN_0000bdc4.c",
+      "source_path": "asm/FUN_0000bdc4.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -584,7 +584,7 @@
       "name": "FUN_0000be52",
       "target": "orig/func/FUN_0000be52.bin",
       "base": "build/FUN_0000be52.o",
-      "source_path": "src/FUN_0000be52.c",
+      "source_path": "asm/FUN_0000be52.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -594,7 +594,7 @@
       "name": "FUN_0000bf0c",
       "target": "orig/func/FUN_0000bf0c.bin",
       "base": "build/FUN_0000bf0c.o",
-      "source_path": "src/FUN_0000bf0c.c",
+      "source_path": "asm/FUN_0000bf0c.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -604,7 +604,7 @@
       "name": "FUN_0000bf28",
       "target": "orig/func/FUN_0000bf28.bin",
       "base": "build/FUN_0000bf28.o",
-      "source_path": "src/FUN_0000bf28.c",
+      "source_path": "asm/FUN_0000bf28.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -614,7 +614,7 @@
       "name": "FUN_0000c00e",
       "target": "orig/func/FUN_0000c00e.bin",
       "base": "build/FUN_0000c00e.o",
-      "source_path": "src/FUN_0000c00e.c",
+      "source_path": "asm/FUN_0000c00e.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -624,7 +624,7 @@
       "name": "FUN_0000c01c",
       "target": "orig/func/FUN_0000c01c.bin",
       "base": "build/FUN_0000c01c.o",
-      "source_path": "src/FUN_0000c01c.c",
+      "source_path": "asm/FUN_0000c01c.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -634,7 +634,7 @@
       "name": "FUN_0000c020",
       "target": "orig/func/FUN_0000c020.bin",
       "base": "build/FUN_0000c020.o",
-      "source_path": "src/FUN_0000c020.c",
+      "source_path": "asm/FUN_0000c020.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -644,7 +644,7 @@
       "name": "FUN_0000c046",
       "target": "orig/func/FUN_0000c046.bin",
       "base": "build/FUN_0000c046.o",
-      "source_path": "src/FUN_0000c046.c",
+      "source_path": "asm/FUN_0000c046.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -654,7 +654,7 @@
       "name": "FUN_0000c054",
       "target": "orig/func/FUN_0000c054.bin",
       "base": "build/FUN_0000c054.o",
-      "source_path": "src/FUN_0000c054.c",
+      "source_path": "asm/FUN_0000c054.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -664,7 +664,7 @@
       "name": "FUN_0000c464",
       "target": "orig/func/FUN_0000c464.bin",
       "base": "build/FUN_0000c464.o",
-      "source_path": "src/FUN_0000c464.c",
+      "source_path": "asm/FUN_0000c464.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -674,7 +674,7 @@
       "name": "FUN_0000c4cc",
       "target": "orig/func/FUN_0000c4cc.bin",
       "base": "build/FUN_0000c4cc.o",
-      "source_path": "src/FUN_0000c4cc.c",
+      "source_path": "asm/FUN_0000c4cc.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -684,7 +684,7 @@
       "name": "FUN_0000c52a",
       "target": "orig/func/FUN_0000c52a.bin",
       "base": "build/FUN_0000c52a.o",
-      "source_path": "src/FUN_0000c52a.c",
+      "source_path": "asm/FUN_0000c52a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -694,7 +694,7 @@
       "name": "FUN_0000cf84",
       "target": "orig/func/FUN_0000cf84.bin",
       "base": "build/FUN_0000cf84.o",
-      "source_path": "src/FUN_0000cf84.c",
+      "source_path": "asm/FUN_0000cf84.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -704,7 +704,7 @@
       "name": "FUN_0000d024",
       "target": "orig/func/FUN_0000d024.bin",
       "base": "build/FUN_0000d024.o",
-      "source_path": "src/FUN_0000d024.c",
+      "source_path": "asm/FUN_0000d024.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -714,7 +714,7 @@
       "name": "FUN_0000d23a",
       "target": "orig/func/FUN_0000d23a.bin",
       "base": "build/FUN_0000d23a.o",
-      "source_path": "src/FUN_0000d23a.c",
+      "source_path": "asm/FUN_0000d23a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -724,7 +724,7 @@
       "name": "FUN_0000d23c",
       "target": "orig/func/FUN_0000d23c.bin",
       "base": "build/FUN_0000d23c.o",
-      "source_path": "src/FUN_0000d23c.c",
+      "source_path": "asm/FUN_0000d23c.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -734,7 +734,7 @@
       "name": "FUN_0000d244",
       "target": "orig/func/FUN_0000d244.bin",
       "base": "build/FUN_0000d244.o",
-      "source_path": "src/FUN_0000d244.c",
+      "source_path": "asm/FUN_0000d244.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -744,7 +744,7 @@
       "name": "FUN_0000d248",
       "target": "orig/func/FUN_0000d248.bin",
       "base": "build/FUN_0000d248.o",
-      "source_path": "src/FUN_0000d248.c",
+      "source_path": "asm/FUN_0000d248.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -754,7 +754,7 @@
       "name": "FUN_0000d24c",
       "target": "orig/func/FUN_0000d24c.bin",
       "base": "build/FUN_0000d24c.o",
-      "source_path": "src/FUN_0000d24c.c",
+      "source_path": "asm/FUN_0000d24c.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -764,7 +764,7 @@
       "name": "FUN_0000d340",
       "target": "orig/func/FUN_0000d340.bin",
       "base": "build/FUN_0000d340.o",
-      "source_path": "src/FUN_0000d340.c",
+      "source_path": "asm/FUN_0000d340.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -774,7 +774,7 @@
       "name": "FUN_0000d34a",
       "target": "orig/func/FUN_0000d34a.bin",
       "base": "build/FUN_0000d34a.o",
-      "source_path": "src/FUN_0000d34a.c",
+      "source_path": "asm/FUN_0000d34a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -784,7 +784,7 @@
       "name": "FUN_0000d38e",
       "target": "orig/func/FUN_0000d38e.bin",
       "base": "build/FUN_0000d38e.o",
-      "source_path": "src/FUN_0000d38e.c",
+      "source_path": "asm/FUN_0000d38e.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -794,7 +794,7 @@
       "name": "FUN_0000d486",
       "target": "orig/func/FUN_0000d486.bin",
       "base": "build/FUN_0000d486.o",
-      "source_path": "src/FUN_0000d486.c",
+      "source_path": "asm/FUN_0000d486.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -804,7 +804,7 @@
       "name": "FUN_0000d498",
       "target": "orig/func/FUN_0000d498.bin",
       "base": "build/FUN_0000d498.o",
-      "source_path": "src/FUN_0000d498.c",
+      "source_path": "asm/FUN_0000d498.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -814,7 +814,7 @@
       "name": "FUN_0000d4ca",
       "target": "orig/func/FUN_0000d4ca.bin",
       "base": "build/FUN_0000d4ca.o",
-      "source_path": "src/FUN_0000d4ca.c",
+      "source_path": "asm/FUN_0000d4ca.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -824,7 +824,7 @@
       "name": "FUN_0000d4de",
       "target": "orig/func/FUN_0000d4de.bin",
       "base": "build/FUN_0000d4de.o",
-      "source_path": "src/FUN_0000d4de.c",
+      "source_path": "asm/FUN_0000d4de.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -834,7 +834,7 @@
       "name": "FUN_0000d4f4",
       "target": "orig/func/FUN_0000d4f4.bin",
       "base": "build/FUN_0000d4f4.o",
-      "source_path": "src/FUN_0000d4f4.c",
+      "source_path": "asm/FUN_0000d4f4.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -844,7 +844,7 @@
       "name": "FUN_0000d538",
       "target": "orig/func/FUN_0000d538.bin",
       "base": "build/FUN_0000d538.o",
-      "source_path": "src/FUN_0000d538.c",
+      "source_path": "asm/FUN_0000d538.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -854,7 +854,7 @@
       "name": "FUN_0000d63e",
       "target": "orig/func/FUN_0000d63e.bin",
       "base": "build/FUN_0000d63e.o",
-      "source_path": "src/FUN_0000d63e.c",
+      "source_path": "asm/FUN_0000d63e.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -864,7 +864,7 @@
       "name": "FUN_0000d6e4",
       "target": "orig/func/FUN_0000d6e4.bin",
       "base": "build/FUN_0000d6e4.o",
-      "source_path": "src/FUN_0000d6e4.c",
+      "source_path": "asm/FUN_0000d6e4.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -874,7 +874,7 @@
       "name": "FUN_0000d714",
       "target": "orig/func/FUN_0000d714.bin",
       "base": "build/FUN_0000d714.o",
-      "source_path": "src/FUN_0000d714.c",
+      "source_path": "asm/FUN_0000d714.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -884,7 +884,7 @@
       "name": "FUN_0000d716",
       "target": "orig/func/FUN_0000d716.bin",
       "base": "build/FUN_0000d716.o",
-      "source_path": "src/FUN_0000d716.c",
+      "source_path": "asm/FUN_0000d716.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -894,7 +894,7 @@
       "name": "FUN_0000d76c",
       "target": "orig/func/FUN_0000d76c.bin",
       "base": "build/FUN_0000d76c.o",
-      "source_path": "src/FUN_0000d76c.c",
+      "source_path": "asm/FUN_0000d76c.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -904,7 +904,7 @@
       "name": "FUN_0000d814",
       "target": "orig/func/FUN_0000d814.bin",
       "base": "build/FUN_0000d814.o",
-      "source_path": "src/FUN_0000d814.c",
+      "source_path": "asm/FUN_0000d814.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -914,7 +914,7 @@
       "name": "FUN_0000d84a",
       "target": "orig/func/FUN_0000d84a.bin",
       "base": "build/FUN_0000d84a.o",
-      "source_path": "src/FUN_0000d84a.c",
+      "source_path": "asm/FUN_0000d84a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -924,7 +924,7 @@
       "name": "FUN_0000d928",
       "target": "orig/func/FUN_0000d928.bin",
       "base": "build/FUN_0000d928.o",
-      "source_path": "src/FUN_0000d928.c",
+      "source_path": "asm/FUN_0000d928.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -934,7 +934,7 @@
       "name": "FUN_0000d994",
       "target": "orig/func/FUN_0000d994.bin",
       "base": "build/FUN_0000d994.o",
-      "source_path": "src/FUN_0000d994.c",
+      "source_path": "asm/FUN_0000d994.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -944,7 +944,7 @@
       "name": "FUN_0000d9a6",
       "target": "orig/func/FUN_0000d9a6.bin",
       "base": "build/FUN_0000d9a6.o",
-      "source_path": "src/FUN_0000d9a6.c",
+      "source_path": "asm/FUN_0000d9a6.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -954,7 +954,7 @@
       "name": "FUN_0000d9d2",
       "target": "orig/func/FUN_0000d9d2.bin",
       "base": "build/FUN_0000d9d2.o",
-      "source_path": "src/FUN_0000d9d2.c",
+      "source_path": "asm/FUN_0000d9d2.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -964,7 +964,7 @@
       "name": "FUN_0000da48",
       "target": "orig/func/FUN_0000da48.bin",
       "base": "build/FUN_0000da48.o",
-      "source_path": "src/FUN_0000da48.c",
+      "source_path": "asm/FUN_0000da48.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -974,7 +974,7 @@
       "name": "FUN_0000da5a",
       "target": "orig/func/FUN_0000da5a.bin",
       "base": "build/FUN_0000da5a.o",
-      "source_path": "src/FUN_0000da5a.c",
+      "source_path": "asm/FUN_0000da5a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -984,7 +984,7 @@
       "name": "FUN_0000da70",
       "target": "orig/func/FUN_0000da70.bin",
       "base": "build/FUN_0000da70.o",
-      "source_path": "src/FUN_0000da70.c",
+      "source_path": "asm/FUN_0000da70.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -994,7 +994,7 @@
       "name": "FUN_0000da8e",
       "target": "orig/func/FUN_0000da8e.bin",
       "base": "build/FUN_0000da8e.o",
-      "source_path": "src/FUN_0000da8e.c",
+      "source_path": "asm/FUN_0000da8e.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1004,7 +1004,7 @@
       "name": "FUN_0000daac",
       "target": "orig/func/FUN_0000daac.bin",
       "base": "build/FUN_0000daac.o",
-      "source_path": "src/FUN_0000daac.c",
+      "source_path": "asm/FUN_0000daac.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1014,7 +1014,7 @@
       "name": "FUN_0000dad6",
       "target": "orig/func/FUN_0000dad6.bin",
       "base": "build/FUN_0000dad6.o",
-      "source_path": "src/FUN_0000dad6.c",
+      "source_path": "asm/FUN_0000dad6.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1024,7 +1024,7 @@
       "name": "FUN_0000db12",
       "target": "orig/func/FUN_0000db12.bin",
       "base": "build/FUN_0000db12.o",
-      "source_path": "src/FUN_0000db12.c",
+      "source_path": "asm/FUN_0000db12.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1034,7 +1034,7 @@
       "name": "FUN_0000db30",
       "target": "orig/func/FUN_0000db30.bin",
       "base": "build/FUN_0000db30.o",
-      "source_path": "src/FUN_0000db30.c",
+      "source_path": "asm/FUN_0000db30.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1044,7 +1044,7 @@
       "name": "FUN_0000db44",
       "target": "orig/func/FUN_0000db44.bin",
       "base": "build/FUN_0000db44.o",
-      "source_path": "src/FUN_0000db44.c",
+      "source_path": "asm/FUN_0000db44.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1054,7 +1054,7 @@
       "name": "FUN_0000db62",
       "target": "orig/func/FUN_0000db62.bin",
       "base": "build/FUN_0000db62.o",
-      "source_path": "src/FUN_0000db62.c",
+      "source_path": "asm/FUN_0000db62.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1064,7 +1064,7 @@
       "name": "FUN_0000dc2a",
       "target": "orig/func/FUN_0000dc2a.bin",
       "base": "build/FUN_0000dc2a.o",
-      "source_path": "src/FUN_0000dc2a.c",
+      "source_path": "asm/FUN_0000dc2a.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1074,7 +1074,7 @@
       "name": "FUN_0001313c",
       "target": "orig/func/FUN_0001313c.bin",
       "base": "build/FUN_0001313c.o",
-      "source_path": "src/FUN_0001313c.c",
+      "source_path": "asm/FUN_0001313c.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1084,7 +1084,7 @@
       "name": "FUN_000131ea",
       "target": "orig/func/FUN_000131ea.bin",
       "base": "build/FUN_000131ea.o",
-      "source_path": "src/FUN_000131ea.c",
+      "source_path": "asm/FUN_000131ea.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1094,7 +1094,7 @@
       "name": "FUN_00013206",
       "target": "orig/func/FUN_00013206.bin",
       "base": "build/FUN_00013206.o",
-      "source_path": "src/FUN_00013206.c",
+      "source_path": "asm/FUN_00013206.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1104,7 +1104,7 @@
       "name": "FUN_000132a4",
       "target": "orig/func/FUN_000132a4.bin",
       "base": "build/FUN_000132a4.o",
-      "source_path": "src/FUN_000132a4.c",
+      "source_path": "asm/FUN_000132a4.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1114,7 +1114,7 @@
       "name": "FUN_000132c6",
       "target": "orig/func/FUN_000132c6.bin",
       "base": "build/FUN_000132c6.o",
-      "source_path": "src/FUN_000132c6.c",
+      "source_path": "asm/FUN_000132c6.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1124,7 +1124,7 @@
       "name": "FUN_0001332c",
       "target": "orig/func/FUN_0001332c.bin",
       "base": "build/FUN_0001332c.o",
-      "source_path": "src/FUN_0001332c.c",
+      "source_path": "asm/FUN_0001332c.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1134,7 +1134,7 @@
       "name": "FUN_000133fe",
       "target": "orig/func/FUN_000133fe.bin",
       "base": "build/FUN_000133fe.o",
-      "source_path": "src/FUN_000133fe.c",
+      "source_path": "asm/FUN_000133fe.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1144,7 +1144,7 @@
       "name": "FUN_00013554",
       "target": "orig/func/FUN_00013554.bin",
       "base": "build/FUN_00013554.o",
-      "source_path": "src/FUN_00013554.c",
+      "source_path": "asm/FUN_00013554.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1154,7 +1154,7 @@
       "name": "FUN_000138f2",
       "target": "orig/func/FUN_000138f2.bin",
       "base": "build/FUN_000138f2.o",
-      "source_path": "src/FUN_000138f2.c",
+      "source_path": "asm/FUN_000138f2.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1164,7 +1164,7 @@
       "name": "FUN_00013a7e",
       "target": "orig/func/FUN_00013a7e.bin",
       "base": "build/FUN_00013a7e.o",
-      "source_path": "src/FUN_00013a7e.c",
+      "source_path": "asm/FUN_00013a7e.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1174,7 +1174,7 @@
       "name": "FUN_00013aa0",
       "target": "orig/func/FUN_00013aa0.bin",
       "base": "build/FUN_00013aa0.o",
-      "source_path": "src/FUN_00013aa0.c",
+      "source_path": "asm/FUN_00013aa0.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1184,7 +1184,7 @@
       "name": "FUN_00013abc",
       "target": "orig/func/FUN_00013abc.bin",
       "base": "build/FUN_00013abc.o",
-      "source_path": "src/FUN_00013abc.c",
+      "source_path": "asm/FUN_00013abc.s",
       "complete": false,
       "progress_categories": [
         "code"
@@ -1194,7 +1194,237 @@
       "name": "FUN_00013ae6",
       "target": "orig/func/FUN_00013ae6.bin",
       "base": "build/FUN_00013ae6.o",
-      "source_path": "src/FUN_00013ae6.c",
+      "source_path": "asm/FUN_00013ae6.s",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_008000",
+      "target": "orig/func/GAP_008000.bin",
+      "base": "build/GAP_008000.o",
+      "source_path": "src/GAP_008000.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_008818",
+      "target": "orig/func/GAP_008818.bin",
+      "base": "build/GAP_008818.o",
+      "source_path": "src/GAP_008818.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_008C28",
+      "target": "orig/func/GAP_008C28.bin",
+      "base": "build/GAP_008C28.o",
+      "source_path": "src/GAP_008C28.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_0090A4",
+      "target": "orig/func/GAP_0090A4.bin",
+      "base": "build/GAP_0090A4.o",
+      "source_path": "src/GAP_0090A4.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_0090E0",
+      "target": "orig/func/GAP_0090E0.bin",
+      "base": "build/GAP_0090E0.o",
+      "source_path": "src/GAP_0090E0.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_0095FC",
+      "target": "orig/func/GAP_0095FC.bin",
+      "base": "build/GAP_0095FC.o",
+      "source_path": "src/GAP_0095FC.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_0098BC",
+      "target": "orig/func/GAP_0098BC.bin",
+      "base": "build/GAP_0098BC.o",
+      "source_path": "src/GAP_0098BC.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_009BCA",
+      "target": "orig/func/GAP_009BCA.bin",
+      "base": "build/GAP_009BCA.o",
+      "source_path": "src/GAP_009BCA.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_009FEA",
+      "target": "orig/func/GAP_009FEA.bin",
+      "base": "build/GAP_009FEA.o",
+      "source_path": "src/GAP_009FEA.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00A530",
+      "target": "orig/func/GAP_00A530.bin",
+      "base": "build/GAP_00A530.o",
+      "source_path": "src/GAP_00A530.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00A826",
+      "target": "orig/func/GAP_00A826.bin",
+      "base": "build/GAP_00A826.o",
+      "source_path": "src/GAP_00A826.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00A952",
+      "target": "orig/func/GAP_00A952.bin",
+      "base": "build/GAP_00A952.o",
+      "source_path": "src/GAP_00A952.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00AB94",
+      "target": "orig/func/GAP_00AB94.bin",
+      "base": "build/GAP_00AB94.o",
+      "source_path": "src/GAP_00AB94.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00AF4E",
+      "target": "orig/func/GAP_00AF4E.bin",
+      "base": "build/GAP_00AF4E.o",
+      "source_path": "src/GAP_00AF4E.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00B1A8",
+      "target": "orig/func/GAP_00B1A8.bin",
+      "base": "build/GAP_00B1A8.o",
+      "source_path": "src/GAP_00B1A8.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00B440",
+      "target": "orig/func/GAP_00B440.bin",
+      "base": "build/GAP_00B440.o",
+      "source_path": "src/GAP_00B440.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00BDD6",
+      "target": "orig/func/GAP_00BDD6.bin",
+      "base": "build/GAP_00BDD6.o",
+      "source_path": "src/GAP_00BDD6.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00C102",
+      "target": "orig/func/GAP_00C102.bin",
+      "base": "build/GAP_00C102.o",
+      "source_path": "src/GAP_00C102.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00C5D8",
+      "target": "orig/func/GAP_00C5D8.bin",
+      "base": "build/GAP_00C5D8.o",
+      "source_path": "src/GAP_00C5D8.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00D038",
+      "target": "orig/func/GAP_00D038.bin",
+      "base": "build/GAP_00D038.o",
+      "source_path": "src/GAP_00D038.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00D2A6",
+      "target": "orig/func/GAP_00D2A6.bin",
+      "base": "build/GAP_00D2A6.o",
+      "source_path": "src/GAP_00D2A6.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_00DB78",
+      "target": "orig/func/GAP_00DB78.bin",
+      "base": "build/GAP_00DB78.o",
+      "source_path": "src/GAP_00DB78.c",
+      "complete": false,
+      "progress_categories": [
+        "code"
+      ]
+    },
+    {
+      "name": "GAP_013684",
+      "target": "orig/func/GAP_013684.bin",
+      "base": "build/GAP_013684.o",
+      "source_path": "src/GAP_013684.c",
       "complete": false,
       "progress_categories": [
         "code"

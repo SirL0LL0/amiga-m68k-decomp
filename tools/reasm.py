@@ -306,21 +306,26 @@ def main(argv=None):
         units = [u for u in json.load(open(a.units))["units"] if u["name"] == a.func]
     else:
         units = json.load(open(a.units))["units"]
-    done, matched = 0, 0
+    done, matched, skipped = 0, 0, {"sorgente": 0, "target-mancante": 0}
     for u in units:
         name = u["name"]
         asm_p = os.path.join(a.asm_dir, name + ".s")
         if os.path.isfile(os.path.join(a.src_dir, name + ".c")):
+            skipped["sorgente"] += 1
             continue
         if os.path.isfile(asm_p):
             if not a.force:
+                skipped["sorgente"] += 1
                 continue
             head = open(asm_p, encoding="utf-8", errors="replace").read(400)
             if "generato da tools/reasm.py" not in head:
                 print("  %-20s skip-manuale" % name)
+                skipped["sorgente"] += 1
                 continue
         tp = u["target"]
         if not tp or not os.path.isfile(tp):
+            print("  %-20s skip-target-mancante (%s)" % (name, tp))
+            skipped["target-mancante"] += 1
             continue
         st, info = reassemble_unit(name, tp, asm_p,
                                    os.path.join(a.build_dir, name + ".o"), vasm,

@@ -60,7 +60,7 @@ def disasm_recursive(data, org, entries):
     while work:
         pc = work.pop()
         while True:
-            if pc in visited or pc < 0 or pc - org >= len(data):
+            if pc in visited or pc < org or pc - org >= len(data):
                 break
             raw = data[pc - org:pc - org + 16]
             if raw[:2] == b"\x4e\x7a":

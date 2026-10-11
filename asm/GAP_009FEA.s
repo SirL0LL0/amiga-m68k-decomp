@@ -1,0 +1,97 @@
+; GAP_009FEA -- generato da tools/reasm.py, da rinominare/rifattorizzare.
+; 'opt o-' e dc.w garantiscono byte-identicita'; rivedere i dc.w.
+		opt	o-
+
+GAP_009FEA:
+	moveq	#$0,d6
+	dc.w	$41f9,$0001,$28a8
+	move.b	#$0,(a0)
+	dc.w	$47f9,$0001,$28e4
+	moveq	#$10,d4
+	dc.w	$6100,$e69e
+	dc.w	$41f9,$0001,$28f0
+	move.b	#$1,(a0)
+	dc.w	$41f9,$0001,$28e6
+	move.b	#$1,(a0)
+	moveq	#$2e,d4
+	dc.w	$6100,$34da
+	moveq	#$a,d6
+	moveq	#$2f,d4
+	dc.w	$6100,$f822
+	dc.w	$47f9,$0001,$28f4
+	dc.w	$6100,$e66e
+	dc.w	$41f9,$0001,$28ba
+	cmpi.b	#$6,(a0)
+	beq.w	.L014A
+	dc.w	$41f9,$0001,$28cd
+	dc.w	$43f9,$0001,$28c8
+	move.b	(a0),(a1)
+	dc.w	$41f9,$0001,$28ba
+	moveq	#$0,d5
+	dc.w	$47f9,$0001,$1abc
+	move.b	(a0),d5
+	adda.l	d5,a3
+	dc.w	$41f9,$0001,$28a9
+	move.b	(a3),(a0)
+	dc.w	$41f9,$0001,$28ba
+	move.b	(a0),d6
+	lsl.b	#$1,d6
+	moveq	#$0,d5
+	move.b	d6,d5
+	dc.w	$47f9,$0001,$1ac2
+	adda.l	d5,a3
+	dc.w	$41f9,$0001,$28f7
+	move.b	(a3)+,(a0)
+	dc.w	$41f9,$0001,$28f8
+	move.b	(a3),(a0)
+	dc.w	$6100,$e61e
+	dc.w	$6100,$fb02
+	dc.w	$41f9,$0001,$28bd
+	cmpi.b	#$0,(a0)
+	bne.w	.L014A
+	dc.w	$41f9,$0001,$28b5
+	cmpi.b	#$0,(a0)
+	bne.w	.L014A
+	dc.w	$6100,$1382
+	dc.w	$41f9,$0001,$288d
+	move.b	#$4,(a0)
+	dc.w	$6100,$1e4e
+	moveq	#$30,d4
+	dc.w	$6100,$3184
+.L00DC:
+	dc.w	$41f9,$0001,$28a9
+	move.b	(a0),d4
+.L00E4:
+	move.l	d4,-(a7)
+	dc.w	$6100,$fac0
+	move.l	(a7)+,d4
+	dc.w	$41f9,$0001,$28bd
+	cmpi.b	#$0,(a0)
+	bne.w	.L014A
+	dc.w	$41f9,$0001,$28b5
+	cmpi.b	#$0,(a0)
+	bne.w	.L014A
+	subq.b	#$1,d4
+	cmp.b	#$0,d4
+	bne.b	.L00E4
+	moveq	#$24,d4
+	dc.w	$6100,$33f6
+	dc.w	$6100,$fda2
+	dc.w	$41f9,$0001,$28a8
+	cmpi.b	#$a,(a0)
+	bne.b	.L00DC
+	dc.w	$6100,$efbc
+	dc.w	$6100,$efb8
+	dc.w	$6100,$ef72
+	dc.w	$6100,$ef6e
+	moveq	#$31,d4
+	dc.w	$41f9,$0001,$28ab
+	move.b	#$1,(a0)
+	dc.w	$6100,$311a
+	dc.w	$6100,$0370
+.L014A:
+	dc.w	$41f9,$0001,$288d
+	move.b	#$1,(a0)
+	dc.w	$6100,$12f2
+	dc.w	$6100,$1dc8
+	rts

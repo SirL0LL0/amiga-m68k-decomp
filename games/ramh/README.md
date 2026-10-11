@@ -65,7 +65,10 @@ con loop di convergenza via listing vasm (max 4 round). Non tocca mai
 `asm/*.s` scritti a mano (né con `--force`, che rispetta i non-generati).
 Poi: `python tools/diff_m68k.py ...` → report. Lavoro manuale dopo:
 rinominare label/funzioni e portare in C dove il decompilatore è fedele.
-Stato: **120/120 func, 100% codice** — le 8 a mano + 112 generate.
+Stato: **143/143 func, 100% codice** — le 8 a mano + 112 generate + 23 gap.
+Ghidra trova 120 funzioni; `tools/find_gaps.py` ne trova altre 23 nei gap
+(code/data interleaved; bound-check anti-wrap incluso dopo un falso positivo).
+Il resto (data/testi/grafica) non e' codice matchabile.
 
 1. `python tools/split_hunk.py --raw game-ramh/RSTAR --out-dir orig --manifest orig/manifest-rstar.json --base 0x8000`
 2. Ghidra headless su `rstar_pad.bin` → `game-ramh/symbols-rstar.json`

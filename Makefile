@@ -110,6 +110,8 @@ verify:
 	$(PYTHON) tools/reasm.py --self-test
 	$(PYTHON) tools/m68k_flow.py --self-test
 	$(PYTHON) tools/adf_extract.py --self-test
+	$(PYTHON) tools/find_gaps.py --self-test
+	$(PYTHON) tools/callgraph.py --self-test
 	gcc -I include tools/check_hw.c -o $(BUILD_DIR)/check_hw && ./$(BUILD_DIR)/check_hw
 
 docker-build:
