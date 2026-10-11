@@ -114,6 +114,11 @@ reasm:
 pipeline: gaps units
 	$(PYTHON) tools/reasm.py --units $(UNITS)
 	$(PYTHON) tools/diff_m68k.py --target-dir $(TARGET_DIR) --build-dir $(BUILD_DIR) --units $(UNITS) -o $(REPORT)
+
+# Call graph statico (archi + disasm) per orientarsi tra le unit.
+callgraph:
+	$(PYTHON) tools/callgraph.py --symbols $(SYMBOLS) --func-dir $(TARGET_DIR)/func --base $(BASE) -o $(BUILD_DIR)/callgraph.json
+	$(PYTHON) tools/callgraph.py --symbols $(SYMBOLS) --func-dir $(TARGET_DIR)/func --base $(BASE)
 # Verifica senza toolchain: self-test dei tool + layout header col gcc host
 verify:
 	$(PYTHON) tools/diff_m68k.py --self-test

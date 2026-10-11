@@ -1276,7 +1276,9 @@
     "loro_chiama": [],
     "name": "pausa_ciclo_d6",
     "desc": "Esegue un breve ciclo di ritardo decrementando il registro D6.",
-    "conf": "low"
+    "conf": "low",
+    "c_best_pct": 0.0,
+    "c_best_src": "agent/work/FUN_00009fcc/cand.c"
   },
   "FUN_0000a486": {
     "loro_addr": "0x0a586",
@@ -1406,7 +1408,9 @@
     ],
     "name": "calcola_indirizzo_video",
     "desc": "Funzione wrapper che calcola l'indirizzo di memoria video corrispondente alle coordinate sullo schermo.",
-    "conf": "low"
+    "conf": "low",
+    "c_best_pct": 6.67,
+    "c_best_src": "agent/work/FUN_0000b4b0/cand.c"
   },
   "FUN_0000b4ce": {
     "loro_addr": "0x0b5ce",
@@ -1640,7 +1644,9 @@
     ],
     "name": "renderizza_schermo_completo_con_colori",
     "desc": "Renderizza schermo completo: copia grafica, scena, interfaccia, buffer, colori copper",
-    "conf": "low"
+    "conf": "low",
+    "c_best_pct": 3.57,
+    "c_best_src": "agent/work/FUN_0000bf0c/cand.c"
   },
   "FUN_0000bf28": {
     "loro_addr": "0x0c028",
@@ -2165,7 +2171,9 @@
     "loro_chiama": [],
     "name": "pausa_cicli_d6",
     "desc": "Esegue un breve ciclo di attesa a vuoto in base al valore del registro D6.",
-    "conf": "low"
+    "conf": "low",
+    "c_best_pct": 14.29,
+    "c_best_src": "agent/work/FUN_00013aa0/cand.c"
   },
   "FUN_00013abc": {
     "loro_addr": "0x13bbc",

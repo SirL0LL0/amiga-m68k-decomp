@@ -65,10 +65,34 @@ con loop di convergenza via listing vasm (max 4 round). Non tocca mai
 `asm/*.s` scritti a mano (né con `--force`, che rispetta i non-generati).
 Poi: `python tools/diff_m68k.py ...` → report. Lavoro manuale dopo:
 rinominare label/funzioni e portare in C dove il decompilatore è fedele.
-Stato: **143/143 func, 100% codice** — le 8 a mano + 112 generate + 23 gap.
+Stato: **178/178 func, 100% codice** — le 8 a mano + 112 generate + 23 gap.
 Ghidra trova 120 funzioni; `tools/find_gaps.py` ne trova altre 23 nei gap
 (code/data interleaved; bound-check anti-wrap incluso dopo un falso positivo).
 Il resto (data/testi/grafica) non e' codice matchabile.
+
+## Limiti C vs vbcc (verificati, non ipotizzati)
+
+10 funzioni provate in C (seed loro riscritti + varianti), tutte compilano ma
+restano a 0-60% dei byte. Cause strutturali:
+- vbcc non emette `dbra` (loop scritto a mano -> `subq/cmp/bne`)
+- assoluto C -> relocation/indirizzo, mai `lea $imm,An` o `movea #imm`
+- backend scegli sempre registri/codegen diversi dall'asm scritto a mano
+- `__reg` su locali ignorato; prologue `movem` disallinea tutto
+
+Conclusione di metodo: **C non e' per la copertura** (serve troppo sforzo per
+poco), ma per la comprensione — 10/10 seed hanno descrizione confermata dai
+byte. La copertura resta sugli `asm/*.s` byte-identici; i C danno il
+significato. Tenere entrambi: `names.json` con `conf` + `c_best_pct` +
+`c_best_src` racconta entrambi i livelli.
+
+## Stato
+
+- **178/178 unit, 100% codice** (21726 byte): 8 a mano + 112 + 23 gap riassemblate
+  (niente `src/*.c` o `asm/*.s` esistenti sovrascritti).
+- 20 funzioni con nome verificato a byte-level; 143 con nome da seed
+  (10 med + 113 low + 20 da-verificare).
+- 10 seed C provati: 0-60% byte, descrizioni confermate. Tetto strutturale vbcc.
+- `make pipeline` = gaps -> units -> reasm -> report (tutto nativo).
 
 1. `python tools/split_hunk.py --raw game-ramh/RSTAR --out-dir orig --manifest orig/manifest-rstar.json --base 0x8000`
 2. Ghidra headless su `rstar_pad.bin` → `game-ramh/symbols-rstar.json`
