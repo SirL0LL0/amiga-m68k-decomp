@@ -158,6 +158,28 @@ def self_test():
     print("ALL SELF-TESTS PASSED")
 
 
+def wrap_raw(raw_path, out_dir, manifest_path=None, base_addr=0x0, name="rstar_CODE.bin"):
+    """Binario raw (trackloader, gia' decrittato) -> finto hunk CODE + manifest.
+
+    Gli indirizzi Ghidra (= base + offset file) si mappano con load_base.
+    """
+    with open(raw_path, "rb") as f:
+        data = f.read()
+    os.makedirs(out_dir, exist_ok=True)
+    path = os.path.join(out_dir, name)
+    with open(path, "wb") as f:
+        f.write(data)
+    manifest = {"exe": raw_path, "load_base": "0x%x" % base_addr,
+                "hunks": [{"hunk": 0, "type": "CODE", "file": path,
+                           "size": len(data), "base": "0x%x" % base_addr}]}
+    if manifest_path:
+        with open(manifest_path, "w", encoding="utf-8") as f:
+            json.dump(manifest, f, indent=2)
+        print("manifest: " + manifest_path)
+    print("  raw %d bytes base=0x%x -> %s" % (len(data), base_addr, path))
+    return manifest
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Split eseguibile Amiga Hunk in orig/")
     ap.add_argument("exe", nargs="?", help="eseguibile Amiga (formato Hunk)")
@@ -166,13 +188,19 @@ def main(argv=None):
                     help="scrive manifest JSON (basi di caricamento hunk)")
     ap.add_argument("--base", default="0x0",
                     help="indirizzo di caricamento hunk0 (default 0x0)")
+    ap.add_argument("--raw", default=None, metavar="FILE",
+                    help="invece di Hunk: wrappa un binario raw (trackloader) con --base")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args(argv)
     if a.self_test:
         self_test()
         return 0
+    if a.raw:
+        wrap_raw(a.raw, a.out_dir, manifest_path=a.manifest,
+                 base_addr=int(a.base, 16))
+        return 0
     if not a.exe:
-        ap.error("serve un file .exe Hunk (o --self-test)")
+        ap.error("serve un file .exe Hunk (o --raw FILE, o --self-test)")
     split_to_dir(a.exe, a.out_dir, manifest_path=a.manifest,
                  base_addr=int(a.base, 16))
     return 0

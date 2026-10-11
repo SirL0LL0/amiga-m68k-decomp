@@ -7,7 +7,8 @@ bin/
 *.o
 *.exe
 
-# Originali (il gioco vero non va committato: solo split locali)
+# Estrazione gioco locale (IPF/ADF/bin, mai committare)
+game-*/
 orig/
 *.adf
 
