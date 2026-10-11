@@ -1,0 +1,21 @@
+# Build
+build/
+bin/
+*.o
+*.exe
+
+# Originali (il gioco vero non va committato: solo split locali)
+orig/
+*.adf
+
+# Python
+__pycache__/
+*.pyc
+
+# Derivati locali Ghidra (rigenerabili con make analyze/units)
+symbols.json
+
+# decomp.dev locale
+config.yml
+db.sqlite
+jobs.sqlite

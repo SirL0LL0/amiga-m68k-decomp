@@ -1,0 +1,45 @@
+{
+  "$comment": "Unica fonte di verita' per mappa memoria, registri custom e LVO Exec. Letto da tools/ghidra/analyze_amiga.py (etichette Ghidra) e da tools/symbols_to_units.py (genera include/amiga_lvo.h). Tabella LVO verificata 40/40 contro NDK: data/fd/exec_lib.fd dell'estensione ghidra-amiga (Bartman/Abyss).",
+  "memory_map": [
+    {"name": "CHIP", "base": "0x000000", "size": "0x080000", "comment": "Chip RAM 512K (Agnus/Denise/Paula)"},
+    {"name": "RANGER", "base": "0x00C00000", "size": "0x040000", "comment": "Slow/Ranger mem (se presente)"},
+    {"name": "CUSTOM", "base": "0x00DFF000", "size": "0x001000", "comment": "Custom chips"},
+    {"name": "CIA", "base": "0x00BFE000", "size": "0x002000", "comment": "CIA-A/B, RTC"},
+    {"name": "KICK", "base": "0x00F80000", "size": "0x080000", "comment": "Kickstart ROM"},
+    {"name": "SYSBASE_PTR", "base": "0x000004", "size": "0x4", "comment": "Puntatore a ExecBase (SysBase)"}
+  ],
+  "custom_regs": {
+    "0x000": "bltddat", "0x002": "dmaconr", "0x004": "vposr", "0x006": "vhposr",
+    "0x008": "dskdatr", "0x00A": "joy0dat", "0x00C": "joy1dat", "0x00E": "clxdat",
+    "0x010": "adkconr", "0x012": "pot0dat", "0x014": "pot1dat", "0x016": "potinp",
+    "0x018": "serdatr", "0x01A": "dskbytr", "0x01C": "intenar", "0x01E": "intreqr",
+    "0x020": "dskpth", "0x022": "dskptl", "0x024": "dsklen", "0x026": "dskdat",
+    "0x028": "refptr", "0x02A": "vposw", "0x02C": "vhposw", "0x02E": "copcon",
+    "0x030": "serdat", "0x032": "serper", "0x034": "potgo",
+    "0x040": "bltcon0", "0x042": "bltcon1", "0x044": "bltafwm", "0x046": "bltalwm",
+    "0x058": "bltsize", "0x060": "bltcmod", "0x062": "bltbmod",
+    "0x064": "bltamod", "0x066": "bltdmod",
+    "0x080": "cop1lch", "0x082": "cop1lcl", "0x084": "cop2lch", "0x086": "cop2lcl",
+    "0x088": "copjmp1", "0x08A": "copjmp2",
+    "0x08E": "diwstrt", "0x090": "diwstop", "0x092": "ddfstrt", "0x094": "ddfstop",
+    "0x096": "dmacon", "0x098": "clxcon", "0x09A": "intena", "0x09C": "intreq",
+    "0x09E": "adkcon", "0x180": "color00"
+  },
+  "color_count": 32,
+  "color_base": "0x180",
+  "exec_lvo": {
+    "Supervisor": -30,
+    "Disable": -120, "Enable": -126, "Forbid": -132, "Permit": -138,
+    "AllocMem": -198, "FreeMem": -210, "AvailMem": -216,
+    "AddHead": -240, "AddTail": -246, "Remove": -252,
+    "RemHead": -258, "RemTail": -264, "Enqueue": -270, "FindName": -276,
+    "FindTask": -294, "SetSignal": -306, "SetExcept": -312,
+    "Wait": -318, "Signal": -324, "AllocSignal": -330, "FreeSignal": -336,
+    "AddPort": -354, "RemPort": -360, "PutMsg": -366, "GetMsg": -372,
+    "ReplyMsg": -378, "WaitPort": -384, "FindPort": -390,
+    "OldOpenLibrary": -408, "CloseLibrary": -414,
+    "OpenDevice": -444, "CloseDevice": -450, "DoIO": -456,
+    "SendIO": -462, "CheckIO": -468, "WaitIO": -474, "AbortIO": -480,
+    "RawDoFmt": -522, "OpenLibrary": -552
+  }
+}

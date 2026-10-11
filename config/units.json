@@ -1,0 +1,20 @@
+{
+  "$comment": "Unita' di matching per tools/diff_m68k.py. Rigenera questo file dopo lo split del gioco reale: ogni hunk/oggetto in orig/ ha una entry. Se il file manca, il tool accoppia automaticamente build/<x> con orig/<x>.",
+  "units": [
+    {
+      "name": "hunk0_CODE",
+      "target": "orig/hunk0_CODE.bin",
+      "base": "build/hunk0_CODE.bin",
+      "source_path": "src/main.c",
+      "complete": false,
+      "progress_categories": ["code"]
+    },
+    {
+      "name": "hunk1_DATA",
+      "target": "orig/hunk1_DATA.bin",
+      "base": "build/hunk1_DATA.bin",
+      "complete": false,
+      "progress_categories": ["code"]
+    }
+  ]
+}
