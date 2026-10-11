@@ -114,7 +114,6 @@ reasm:
 pipeline: gaps units
 	$(PYTHON) tools/reasm.py --units $(UNITS)
 	$(PYTHON) tools/diff_m68k.py --target-dir $(TARGET_DIR) --build-dir $(BUILD_DIR) --units $(UNITS) -o $(REPORT)
-
 # Verifica senza toolchain: self-test dei tool + layout header col gcc host
 verify:
 	$(PYTHON) tools/diff_m68k.py --self-test

@@ -1086,7 +1086,9 @@
     "loro_chiama": [],
     "name": "sottrai_soldi_gestisci_underflow",
     "desc": "Sottrae una quantita BCD e se il saldo diventa negativo attiva il flag e azzera.",
-    "conf": "low"
+    "conf": "low",
+    "c_best_pct": 14.29,
+    "c_best_src": "agent/work/FUN_000086aa/cand.c"
   },
   "FUN_000086c6": {
     "loro_addr": "0x087c6",
@@ -1284,7 +1286,9 @@
     "loro_chiama": [],
     "name": "somma_valore_tabella_128ba",
     "desc": "Somma alla variabile 128be un valore letto dalla tabella 128ba all'offset A3.",
-    "conf": "low"
+    "conf": "low",
+    "c_best_pct": 3.57,
+    "c_best_src": "agent/work/FUN_0000a486/cand.c"
   },
   "FUN_0000a516": {
     "loro_addr": "0x0a616",
@@ -1297,7 +1301,9 @@
     ],
     "name": "addebita_somma_con_underflow",
     "desc": "Azzera il buffer temporaneo, attiva il flag e sottrae una somma in BCD gestendo l'eventuale underflow.",
-    "conf": "low"
+    "conf": "low",
+    "c_best_pct": 15.38,
+    "c_best_src": "agent/work/FUN_0000a516/cand.c"
   },
   "FUN_0000a800": {
     "loro_addr": "0x0a900",
@@ -2127,7 +2133,9 @@
     "loro_chiama": [],
     "name": "copia_schermo_intero_in_buffer",
     "desc": "Copia l'intero schermo di 4000 word per bitplane dalla memoria video al buffer.",
-    "conf": "low"
+    "conf": "low",
+    "c_best_pct": 9.09,
+    "c_best_src": "agent/work/FUN_0000db62/cand.c"
   },
   "FUN_0000dc2a": {
     "loro_addr": "0x0dd2a",
