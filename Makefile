@@ -23,6 +23,8 @@ UNITS      := config/units.json
 GHIDRA_DIR ?= /opt/ghidra
 GHIDRA_PROJDIR ?= $(HOME)/ghidra_projects/amiga
 GHIDRA_PROJ ?= game
+GHIDRA_PROG ?= game.bin
+AGENT_WORK ?= agent/work
 
 SRC_C   := $(wildcard src/*.c)
 SRC_ASM := $(wildcard asm/*.s asm/*.asm)
@@ -31,7 +33,7 @@ OBJ_ASM := $(patsubst asm/%,$(BUILD_DIR)/%,$(SRC_ASM))
 OBJ_ASM := $(OBJ_ASM:.s=.o)
 OBJ_ASM := $(OBJ_ASM:.asm=.o)
 
-.PHONY: all build report diff check-tools verify split analyze units docker-build clean
+.PHONY: all build report diff check-tools verify split analyze units decompile agent docker-build clean
 
 all: build
 
@@ -82,11 +84,24 @@ analyze:
 units:
 	$(PYTHON) tools/symbols_to_units.py --symbols $(SYMBOLS) --orig-dir $(TARGET_DIR)
 
+# C del decompilatore Ghidra -> decompiled/*.c (locale, best-effort).
+# Richiede programma gia' importato (vedi analyze); GHIDRA_PROG = nome in progetto.
+decompile:
+	"$(GHIDRA_DIR)/support/analyzeHeadless" $(GHIDRA_PROJDIR) $(GHIDRA_PROJ) \
+	  -process $(GHIDRA_PROG) -noanalysis -scriptPath tools/ghidra \
+	  -postScript DecompileFunctions.java decompiled
+
+# Agent automatico: varianti C -> compile -> diff -> tiene il meglio.
+# Backend default da tools/agent/config.json (heuristic; llm con OPENAI_API_KEY).
+agent:
+	$(PYTHON) tools/agent/loop.py --units $(UNITS)
+
 # Verifica senza toolchain: self-test dei tool + layout header col gcc host
 verify:
 	$(PYTHON) tools/diff_m68k.py --self-test
 	$(PYTHON) tools/split_hunk.py --self-test
 	$(PYTHON) tools/symbols_to_units.py --self-test
+	$(PYTHON) tools/agent/loop.py --self-test
 	gcc -I include tools/check_hw.c -o $(BUILD_DIR)/check_hw && ./$(BUILD_DIR)/check_hw
 
 docker-build:

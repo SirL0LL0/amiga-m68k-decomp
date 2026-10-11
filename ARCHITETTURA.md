@@ -103,5 +103,23 @@ docker run --rm -v $PWD:/workspace amiga-decomp-toolchain make report
 
 ## Prossimo (Fase 3, non ancora fatto)
 
+## Fase 3: decomp.dev + agent automatico (FATTO, verificato)
+
+- **decomp.dev** (`docs/decomp-dev.md`): contratto artifact verificato nel
+  sorgente — nome `^(versione)[_-]report`, zip con `report.json`, parse+migrate.
+  Il nostro `m68k-report` → versione `m68k` ✓. CI invariata (già conforme).
+  Progetto nascosto sotto 0.5% di match (normale all'inizio).
+- **DecompileFunctions.java**: export C del decompilatore per funzione in
+  `decompiled/`. Verificato live su 68000: `entry` → `void entry(void)` con
+  `in_D0w` → `_CUSTOM_color00` (semantica corretta). Richiede `-process`.
+- **Agent** (`tools/agent/loop.py` + `backends.py`, config in
+  `tools/agent/config.json`): per ogni unit genera varianti
+  (flag-sweep × toggle volatile, +LLM OpenAI-compatible se `OPENAI_API_KEY`),
+  compila col toolchain, tiene solo miglioramenti (mai regressioni, stato in
+  `agent/work/state.json`). Uso: `make agent`, `make agent ONLY=...`? no:
+  `python tools/agent/loop.py --only <nome>`.
+- Verifiche: agent self-test 6/6 (convergenza 0→100%, idempotenza,
+  no-regression, fallback LLM senza chiave, 4 varianti euristiche).
+
 - Deploy decomp.dev (`config.yml`, `/manage/new`) puntato a questo repo/CI.
 - Agente di decompilazione (Ghidra decompiler -> C -> vbcc -> diff -> refine).

@@ -42,7 +42,11 @@ make analyze GHIDRA_DIR="/path/Ghidra" EXE=orig/hunk0_CODE.bin
 # 3. funzioni -> unit di matching + header LVO
 make units
 
-# 4. scrivi src/<funzione>.c o asm/<funzione>.s, poi:
+# 4. C di partenza dal decompilatore (locale, opzionale)
+make decompile GHIDRA_DIR="/path/Ghidra" GHIDRA_PROG=game.bin
+
+# 5. scrivi src/<funzione>.c o lancia l'agent automatico, poi:
+make agent    # varianti -> compile -> diff, tiene il meglio
 make report   # in Docker: toolchain Amiga reale
 ```
 
@@ -53,6 +57,9 @@ make report   # in Docker: toolchain Amiga reale
 - `tools/ghidra/AnalyzeAmiga.java` — export funzioni/simboli/LVO da Ghidra
 - `tools/ghidra/amiga_data.json` — mappa memoria, registri custom, LVO Exec (verificati vs NDK)
 - `tools/symbols_to_units.py` — funzioni -> `config/units.json` + `include/amiga_lvo.h`
+- `tools/ghidra/DecompileFunctions.java` — C del decompilatore -> `decompiled/`
+- `tools/agent/` — loop automatico compile/diff/refine (`loop.py`, `backends.py`, `config.json`)
+- `docs/decomp-dev.md` — registrazione progetto e contratto artifact
 - `tools/diff_m68k.py` — matching -> `build/report.json` (formato decomp.dev v2)
 - `include/amiga_hardware.h` — registri custom (offset verificati)
 - `.github/workflows/build.yml` — CI: build + report + artifact per decomp.dev
