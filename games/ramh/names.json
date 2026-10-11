@@ -1,0 +1,15 @@
+{
+  "$comment": "Mappa FUN_xxx -> nomi/desc. Gli ID FUN_ restano stabili ovunque (file, unit, Ghidra); qui il livello umano. Verificati byte-level salvo nota.",
+  "FUN_0000b3be": {"name": "WaitRaster0", "desc": "Attende riga raster 0 (VHPOSR basso==0), base CUSTOM in A5."},
+  "FUN_0000b3a4": {"name": "Delay6Frames", "desc": "6x bsr a WaitRaster0 (0x1A oltre slice): delay ~6 frame."},
+  "FUN_0000b3d4": {"name": "CopperFadeStep", "desc": "Step fade palette su copper list: nibble alto -0x10, basso -1, per 16 colori."},
+  "FUN_0000b432": {"name": "FadeStepWait", "desc": "Chiama CopperFadeStep, setup A0/D0, cade in WaitRaster0 (no RTS). Frammento 14B."},
+  "FUN_0000b85a": {"name": "IrqHandler_Keyboard", "desc": "Handler IRQ livello 3: test INTENAR/INTREQR, delay, ack INTREQ=$8, decode scancode CIA, matrice $BB66, menu keys, RTE. 508B."},
+  "FUN_000131ea": {"name": "IrqHandler_Ack", "desc": "Handler IRQ: salva tutto, chiama worker, ack INTREQ=$74, RTE."},
+  "FUN_0001313c": {"name": "InstallIrqVector", "desc": "Installa IrqHandler_Ack in vettore $6C (salva vecchio in $13302), INTENA $3FF7/$C008/$8020, wait CIA, restore."},
+  "FUN_000132a4": {"name": "MuteAudio", "desc": "Volumi audio a 0 + DMACON=$F (ferma DMA audio)."},
+  "FUN_00013206": {"name": "BuildSoundTables", "desc": "Trova max in tabella 128B, costruisce 15 ptr, azzera, mute, init vars."},
+  "FUN_00013554": {"name": "SoundCmd_Process", "desc": "Processa comando audio via struct A6 (tabelle A3, out A5): setup voci, DMACON, switch $B-$F (slide/copy/flag/motor/select)."},
+  "FUN_000133fe": {"name": "SoundTick", "desc": "Tick sonoro: 4 voci via SoundCmd_Process, delay, DMACON=$8000|flags, start voci AUDx, avanza posizione/loop."},
+  "FUN_000132c6": {"name": "IrqWorker?", "desc": "Chiamata da IrqHandler_Ack. DA LEGGERE."}
+}
